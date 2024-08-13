@@ -1,7 +1,7 @@
 
 # Student Registration System
 
-The system is aimed for students attending new acadmic year to manage the registration process digitally, thereby eliminating the need for paperwork and reduing time.
+The system is aimed for students attending new acadmic year to manage the registration process digitally, thereby eliminating the need for paperwork and reducing time.
 
 
 
