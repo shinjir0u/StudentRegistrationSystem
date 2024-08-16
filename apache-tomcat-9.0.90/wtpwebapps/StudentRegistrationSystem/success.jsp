@@ -5,11 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Index</title>
+<title>Success</title>
 </head>
 <body>
-	<s:form action="example">
-		<s:submit></s:submit>
-	</s:form>
+	<h2>Success!!</h2>
 </body>
 </html>

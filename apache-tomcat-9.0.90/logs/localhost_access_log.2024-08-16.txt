@@ -1,0 +1,7 @@
+127.0.0.1 - - [16/Aug/2024:14:48:43 +0630] "GET / HTTP/1.1" 200 11230
+127.0.0.1 - - [16/Aug/2024:14:48:43 +0630] "GET /StudentRegistrationSystem/ HTTP/1.1" 200 52
+127.0.0.1 - - [16/Aug/2024:14:48:43 +0630] "GET /favicon.ico HTTP/1.1" 200 21630
+127.0.0.1 - - [16/Aug/2024:19:11:27 +0630] "GET / HTTP/1.1" 200 11230
+127.0.0.1 - - [16/Aug/2024:19:11:30 +0630] "GET /StudentRegistrationSystem/ HTTP/1.1" 200 431
+127.0.0.1 - - [16/Aug/2024:19:11:34 +0630] "POST /StudentRegistrationSystem/example.action;jsessionid=2B382DCF7671B0DC028EBBCF5B41C700 HTTP/1.1" 404 741
+127.0.0.1 - - [16/Aug/2024:19:11:43 +0630] "POST /StudentRegistrationSystem/example.action;jsessionid=2B382DCF7671B0DC028EBBCF5B41C700 HTTP/1.1" 200 139
