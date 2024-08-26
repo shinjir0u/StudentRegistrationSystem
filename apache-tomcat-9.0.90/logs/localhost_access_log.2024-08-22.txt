@@ -1,0 +1,10 @@
+127.0.0.1 - - [22/Aug/2024:18:13:37 +0630] "GET / HTTP/1.1" 200 11230
+127.0.0.1 - - [22/Aug/2024:18:13:38 +0630] "GET /StudentRegistrationSystem/viewPages/StudentEnroll.jsp HTTP/1.1" 500 3798
+127.0.0.1 - - [22/Aug/2024:18:14:34 +0630] "GET /StudentRegistrationSystem/viewPages/StudentEnroll.jsp HTTP/1.1" 200 5829
+127.0.0.1 - - [22/Aug/2024:18:16:58 +0630] "GET /StudentRegistrationSystem/viewPages/StudentEnroll.jsp HTTP/1.1" 200 8745
+127.0.0.1 - - [22/Aug/2024:18:21:09 +0630] "GET /StudentRegistrationSystem/viewPages/StudentEnroll.jsp HTTP/1.1" 200 8341
+127.0.0.1 - - [22/Aug/2024:18:21:09 +0630] "GET /StudentRegistrationSystem/viewPages/StudentEnroll.jsp HTTP/1.1" 200 8341
+127.0.0.1 - - [22/Aug/2024:18:23:12 +0630] "GET /StudentRegistrationSystem/viewPages/test.jsp HTTP/1.1" 200 239
+127.0.0.1 - - [22/Aug/2024:18:24:09 +0630] "GET /StudentRegistrationSystem/viewPages/StudentEnroll.jsp HTTP/1.1" 200 5829
+127.0.0.1 - - [22/Aug/2024:18:24:23 +0630] "GET /StudentRegistrationSystem/viewPages/StudentEnroll.jsp HTTP/1.1" 200 5829
+127.0.0.1 - - [22/Aug/2024:18:24:24 +0630] "GET /StudentRegistrationSystem/viewPages/StudentEnroll.jsp HTTP/1.1" 200 5829
