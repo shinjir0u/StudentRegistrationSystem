@@ -9,7 +9,7 @@
 </head>
 <body>
 	<s:form action="example">
-		<s:submit></s:submit>
+		<button type="submit">Hello</button>
 	</s:form>
 </body>
 </html>
