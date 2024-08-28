@@ -110,23 +110,14 @@
         <div class="panel">
             <div class="menu">
                 <s:form action="checkAction" method="post">
-                    <button type="submit">Check</button>
+                    <button type="submit">View</button>
                 </s:form>
                 <s:form action="insertAction" method="post">
-                    <button type="submit">Insert</button>
+                    <button type="submit">Enroll</button>
                 </s:form>
                 <s:form action="searchAction" method="post">
-                    <button type="submit">Search</button>
-                </s:form>
-                <s:form action="searchAction" method="post">
-                    <button type="submit">Upload News</button>
-                </s:form>
-                <s:form action="searchAction" method="post">
-                    <button type="submit">Settings</button>
-                </s:form>
-                <s:form action="searchAction" method="post">
-                    <button type="submit">Logout</button>
-                </s:form>
+                    <button type="submit">Contact</button>
+                </s:form>             
             </div>
             <div class="content">
                 <!-- This is where the content for each action would be displayed -->
