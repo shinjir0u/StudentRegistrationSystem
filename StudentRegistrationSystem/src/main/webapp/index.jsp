@@ -12,8 +12,8 @@
 		<s:textfield name="user.id"></s:textfield>
 		<s:textfield name="user.name"></s:textfield>
 		<s:textfield name="user.email"></s:textfield>
-		<s:submit value="add" name="add"></s:submit>
-		<s:submit value="show" name="show"></s:submit>
+		<s:submit value="add" name="action"></s:submit>
+		<s:submit value="show" name="action"></s:submit>
 	</s:form>
 </body>
 </html>

@@ -4,9 +4,17 @@
 	"http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
     <package name="StudentRegistration" extends="struts-default">
-        <action name="example" class="example.Action" method="execute">
+        <!--  <action name="example" class="example.Action" method="execute">
             <result name="success">success.jsp</result>
             <result name="input">index.jsp</result>
+        </action> -->
+        <action name="databaseTest" class="example.Action">
+        	<result name="success">databaseSuccess.jsp</result>
+            <result name="input">databaseTest.jsp</result>
+        </action>
+        
+        <action name="studentEnroll" class="student.controller.StudentAction" method="addStudentToHashmap">
+        	<result name="success">/databaseSuccess.jsp</result>
         </action>
     </package>
 </struts>
