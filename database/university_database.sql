@@ -808,9 +808,6 @@ COPY public.academic_record (student_id, academic_year_id, roll_no) FROM stdin;
 --
 
 COPY public.academic_years (academic_year_id, academic_year) FROM stdin;
-1	2022-2023
-2	2023-2024
-3	2024-2025
 \.
 
 
@@ -827,9 +824,6 @@ COPY public.genders (gender_id, gender_name) FROM stdin;
 --
 
 COPY public.majors (major_id, major_name, description) FROM stdin;
-1	Computer Science	Study of computation and information processing
-2	Mechanical Engineering	Study of mechanical systems
-3	Business Administration	Study of business management
 \.
 
 
@@ -854,12 +848,6 @@ COPY public.matriculation_marks (matriculation_id, subject_id, mark) FROM stdin;
 --
 
 COPY public.matriculation_subjects (subject_id, subject_name) FROM stdin;
-1	Mathematics
-2	Physics
-3	Chemistry
-4	Biology
-5	History
-6	Geography
 \.
 
 
@@ -908,8 +896,6 @@ COPY public.nrc_state_number (nrc_state_number_id, nrc_state_number) FROM stdin;
 --
 
 COPY public.relative_types (relative_type_id, relative_type) FROM stdin;
-1	Father
-2	Mother
 \.
 
 
@@ -934,8 +920,6 @@ COPY public.religions (religion_id, religion_name) FROM stdin;
 --
 
 COPY public.states (state_id, state_name) FROM stdin;
-1	State1
-2	State2
 \.
 
 
@@ -944,8 +928,6 @@ COPY public.states (state_id, state_name) FROM stdin;
 --
 
 COPY public.student_types (student_type_id, student_type_name) FROM stdin;
-1	Full-time
-2	Part-time
 \.
 
 
@@ -991,7 +973,7 @@ SELECT pg_catalog.setval('public.genders_gender_id_seq', 1, false);
 -- Name: majors_major_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.majors_major_id_seq', 1, false);
+SELECT pg_catalog.setval('public.majors_major_id_seq', 2, true);
 
 
 --
@@ -1213,6 +1195,14 @@ ALTER TABLE ONLY public.nrc_nationality
 
 
 --
+-- Name: nrc_nationality nrc_nationality_unique_key; Type: CONSTRAINT; Schema: public; Owner: shinji
+--
+
+ALTER TABLE ONLY public.nrc_nationality
+    ADD CONSTRAINT nrc_nationality_unique_key UNIQUE (nrc_nationality);
+
+
+--
 -- Name: nrc nrc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1237,11 +1227,27 @@ ALTER TABLE ONLY public.nrc
 
 
 --
+-- Name: nrc_state_number nrc_state_number_unique_key; Type: CONSTRAINT; Schema: public; Owner: shinji
+--
+
+ALTER TABLE ONLY public.nrc_state_number
+    ADD CONSTRAINT nrc_state_number_unique_key UNIQUE (nrc_state_number);
+
+
+--
 -- Name: nrc_state nrc_state_pkey; Type: CONSTRAINT; Schema: public; Owner: shinji
 --
 
 ALTER TABLE ONLY public.nrc_state
     ADD CONSTRAINT nrc_state_pkey PRIMARY KEY (nrc_state_id);
+
+
+--
+-- Name: nrc_state nrc_state_unique_key; Type: CONSTRAINT; Schema: public; Owner: shinji
+--
+
+ALTER TABLE ONLY public.nrc_state
+    ADD CONSTRAINT nrc_state_unique_key UNIQUE (nrc_state);
 
 
 --
