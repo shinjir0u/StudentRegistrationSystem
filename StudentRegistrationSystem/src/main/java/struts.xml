@@ -9,7 +9,7 @@
             <result name="input">index.jsp</result>
         </action> -->
         <action name="databaseTest" class="example.Action">
-        	<result name="success">databaseSuccess.jsp</result>
+        	<result name="success">userSuccess.jsp</result>
             <result name="input">databaseTest.jsp</result>
         </action>
         

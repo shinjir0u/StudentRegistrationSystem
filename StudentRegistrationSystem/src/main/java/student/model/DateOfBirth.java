@@ -1,9 +1,18 @@
 package student.model;
 
-public class DateOfBirth {
+import java.io.Serializable;
+
+public class DateOfBirth implements Serializable {
 	private String day;
 	private String month;
 	private String year;
+	
+	public DateOfBirth(String day, String month, String year) {
+		super();
+		this.day = day;
+		this.month = month;
+		this.year = year;
+	}
 	
 	public String getDay() {
 		return day;

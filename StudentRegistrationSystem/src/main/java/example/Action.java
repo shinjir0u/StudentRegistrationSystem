@@ -50,26 +50,34 @@ public class Action extends ActionSupport {
 //		} catch (ClassNotFoundException | SQLException e) {
 //			e.printStackTrace();
 //		}
-		users = new HashMap<Integer, User>();
-		users.put(1, user);
+		loadUser();
+		users.put(generateHashKey(), user);
+		saveUser();
 		return SUCCESS;
 	}
 
-//	public void loadUser() {
-//		try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filename))) {
-//			users = (HashMap<Integer, User>) objectInputStream.readObject();
-//		} catch(ClassNotFoundException | IOException e) {
-//			users = new HashMap<Integer, User>();
-//		}
-//	}
-//	
-//	public void saveUser() {
-//		try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filename))) {
-//			objectOutputStream.writeObject(users);
-//		} catch(IOException e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
+	public void loadUser() {
+		try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filename))) {
+			users = (HashMap<Integer, User>) objectInputStream.readObject();
+		} catch(ClassNotFoundException | IOException e) {
+			users = new HashMap<Integer, User>();
+		}
+	}
+	
+	public void saveUser() {
+		try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filename))) {
+			objectOutputStream.writeObject(users);
+		} catch(IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	private int generateHashKey() {
+		int i = 1;
+		while (users.containsKey(i))
+			i++;
+		return i;
+	}
 	
 	public String getFilename() {
 		return filename;

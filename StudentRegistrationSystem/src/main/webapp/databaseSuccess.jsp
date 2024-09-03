@@ -27,44 +27,51 @@ hell
 	<tr>
 		<td>
 	</tr>
-	<s:iterator value="students">         			
+	<s:iterator value="students">         		
+	<s:set var="student" value="value"></s:set>	
+	<s:set var="studentDate" value="#student.dateOfBirth"></s:set>
+	<s:set var="studentNrc" value="#student.nrc"></s:set>
+	<s:set var="guardian" value="#student.guardian"></s:set>
+	<s:set var="guaridanNrc" value="#guardian.nrc"></s:set>
+	<s:set var="guardianDate" value="#guardian.dateOfBirth"></s:set>
 		<tr>
-			<td><s:property value="student.name" />
-			<td><s:property value="student.cardId" />
-			<td><s:property value="student.rollNo" />
-			<td><s:property value="student.major" />
-			<td><s:property value="student.currentYear" />
-			<td><s:property value="student.academicYear" />
-			<td><s:property value="student.phoneNumber" />
-			<td><s:property value="student.email" />
-			<td><s:property value="student.gender" />
-			<td><s:property value="student.township" />
-			<td><s:property value="student.address" />
-			<td><s:property value="student.dateOfBirth.day" />
-			<td><s:property value="student.dateOfBirth.month" />
-			<td><s:property value="student.dateOfBirth.year" />
-			<td><s:property value="student.religion" />
-			<td><s:property value="student.nationality" />
-			<td><s:property value="student.nrc.stateNumber" />
-			<td><s:property value="student.nrc.nationality" />
-			<td><s:property value="student.nrc.township" />
-			<td><s:property value="student.nrc.number" />
-			<td><s:property value="student.guardian.name" />
-			<td><s:property value="student.guardian.type" />
-			<td><s:property value="student.guardian.phoneNumber" />
-			<td><s:property value="student.guardian.email" />
-			<td><s:property value="student.guardian.gender" />
-			<td><s:property value="student.guardian.township" />
-			<td><s:property value="student.guardian.address" />
-			<td><s:property value="student.guardian.religion" />
-			<td><s:property value="student.guardian.nationality" />
-			<td><s:property value="student.guardian.nrc.stateNumber" />
-			<td><s:property value="student.guardian.nrc.nationality" />
-			<td><s:property value="student.guardian.nrc.township" />
-			<td><s:property value="student.guardian.nrc.number" />
-			<td><s:property value="student.guardian.dateOfBirth.day" />
-			<td><s:property value="student.guardian.dateOfBirth.month" />
-			<td><s:property value="student.guardian.dateOfBirth.year" />
+			<td><s:property value="key"/>
+			<td><s:property value="#student.name" />
+			<td><s:property value="#student.cardId" />
+			<td><s:property value="#student.rollNo" />
+			<td><s:property value="#student.major" />
+			<td><s:property value="#student.currentYear" />
+			<td><s:property value="#student.academicYear" />
+			<td><s:property value="#student.phoneNumber" />
+			<td><s:property value="#student.email" />
+			<td><s:property value="#student.gender" />
+			<td><s:property value="#student.township" />
+			<td><s:property value="#student.address" />
+			<td><s:property value="#studentDate.day" />
+			<td><s:property value="#studentDate.month" />
+			<td><s:property value="#studentDate.year" />
+			<td><s:property value="#student.religion" />
+			<td><s:property value="#student.nationality" />
+			<td><s:property value="#studentNrc.stateNumber" />
+			<td><s:property value="#studentNrc.nationality" />
+			<td><s:property value="#studentNrc.township" />
+			<td><s:property value="#studentNrc.number" />
+			<td><s:property value="#guardian.name" />
+			<td><s:property value="#guardian.type" />
+			<td><s:property value="#guardian.phoneNumber" />
+			<td><s:property value="#guardian.email" />
+			<td><s:property value="#guardian.gender" />
+			<td><s:property value="#guardian.township" />
+			<td><s:property value="#guardian.address" />
+			<td><s:property value="#guardian.religion" />
+			<td><s:property value="#guardian.nationality" />
+			<td><s:property value="#guardianNrc.stateNumber" />
+			<td><s:property value="#guardianNrc.nationality" />
+			<td><s:property value="#guardianNrc.township" />
+			<td><s:property value="#guardianNrc.number" />
+			<td><s:property value="#guardianDate.day" />
+			<td><s:property value="#guardianDate.month" />
+			<td><s:property value="#guardianDate.year" />
 		</tr>
 	</s:iterator> 
 </table>

@@ -1,10 +1,20 @@
 package student.model;
 
-public class Nrc {
+import java.io.Serializable;
+
+public class Nrc implements Serializable {
 	private String stateNumber;
 	private String township;
 	private String nationality;
 	private int number;
+	
+	public Nrc(String stateNumber, String township, String nationality, int number) {
+		super();
+		this.stateNumber = stateNumber;
+		this.township = township;
+		this.nationality = nationality;
+		this.number = number;
+	}
 	
 	public String getStateNumber() {
 		return stateNumber;
