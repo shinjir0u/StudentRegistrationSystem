@@ -34,9 +34,9 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.academic_record (
-    student_id integer,
-    academic_year_id integer,
-    roll_no character varying(15)
+    student_id integer NOT NULL,
+    academic_year_id integer NOT NULL,
+    roll_no character varying(15) NOT NULL
 );
 
 
@@ -48,11 +48,52 @@ ALTER TABLE public.academic_record OWNER TO postgres;
 
 CREATE TABLE public.academic_years (
     academic_year_id integer NOT NULL,
-    academic_year character varying(50)
+    academic_year character varying(50) NOT NULL
 );
 
 
 ALTER TABLE public.academic_years OWNER TO postgres;
+
+--
+-- Name: students; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.students (
+    student_id integer NOT NULL,
+    major integer NOT NULL,
+    township integer NOT NULL,
+    student_type integer NOT NULL,
+    student_name character varying(100) NOT NULL,
+    date_of_birth date NOT NULL,
+    phone_number integer NOT NULL,
+    email character varying(50) NOT NULL,
+    student_card_id character varying(20) NOT NULL,
+    nrc integer NOT NULL,
+    gender integer NOT NULL,
+    nationality integer NOT NULL,
+    religion integer NOT NULL,
+    photo character varying(100) NOT NULL,
+    address character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.students OWNER TO postgres;
+
+--
+-- Name: academic_record_view; Type: VIEW; Schema: public; Owner: shinji
+--
+
+CREATE VIEW public.academic_record_view AS
+ SELECT s.student_id,
+    a.academic_year,
+    ar.roll_no
+   FROM public.students s,
+    public.academic_years a,
+    public.academic_record ar
+  WHERE ((s.student_id = ar.student_id) AND (a.academic_year_id = ar.academic_year_id));
+
+
+ALTER VIEW public.academic_record_view OWNER TO shinji;
 
 --
 -- Name: academic_years_academic_year_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -82,7 +123,7 @@ ALTER SEQUENCE public.academic_years_academic_year_id_seq OWNED BY public.academ
 
 CREATE TABLE public.genders (
     gender_id integer NOT NULL,
-    gender_name character varying(15)
+    gender_name character varying(15) NOT NULL
 );
 
 
@@ -116,7 +157,7 @@ ALTER SEQUENCE public.genders_gender_id_seq OWNED BY public.genders.gender_id;
 
 CREATE TABLE public.majors (
     major_id integer NOT NULL,
-    major_name character varying(50),
+    major_name character varying(50) NOT NULL,
     description character varying(200)
 );
 
@@ -151,10 +192,10 @@ ALTER SEQUENCE public.majors_major_id_seq OWNED BY public.majors.major_id;
 
 CREATE TABLE public.matriculation (
     matriculation_id integer NOT NULL,
-    student_id integer,
-    place character varying(50),
-    roll_no character varying(15),
-    year date
+    student_id integer NOT NULL,
+    place character varying(50) NOT NULL,
+    roll_no character varying(15) NOT NULL,
+    year integer NOT NULL
 );
 
 
@@ -165,13 +206,41 @@ ALTER TABLE public.matriculation OWNER TO postgres;
 --
 
 CREATE TABLE public.matriculation_marks (
-    matriculation_id integer,
-    subject_id integer,
-    mark integer
+    matriculation_id integer NOT NULL,
+    subject_id integer NOT NULL,
+    mark integer NOT NULL
 );
 
 
 ALTER TABLE public.matriculation_marks OWNER TO postgres;
+
+--
+-- Name: matriculation_subjects; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.matriculation_subjects (
+    subject_id integer NOT NULL,
+    subject_name character varying(25) NOT NULL
+);
+
+
+ALTER TABLE public.matriculation_subjects OWNER TO postgres;
+
+--
+-- Name: matriculation_marks_view; Type: VIEW; Schema: public; Owner: shinji
+--
+
+CREATE VIEW public.matriculation_marks_view AS
+ SELECT m.student_id,
+    ms.subject_name,
+    mm.mark
+   FROM public.matriculation m,
+    public.matriculation_marks mm,
+    public.matriculation_subjects ms
+  WHERE ((m.matriculation_id = mm.matriculation_id) AND (ms.subject_id = mm.subject_id));
+
+
+ALTER VIEW public.matriculation_marks_view OWNER TO shinji;
 
 --
 -- Name: matriculation_matriculation_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -194,18 +263,6 @@ ALTER SEQUENCE public.matriculation_matriculation_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE public.matriculation_matriculation_id_seq OWNED BY public.matriculation.matriculation_id;
 
-
---
--- Name: matriculation_subjects; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.matriculation_subjects (
-    subject_id integer NOT NULL,
-    subject_name character varying(25)
-);
-
-
-ALTER TABLE public.matriculation_subjects OWNER TO postgres;
 
 --
 -- Name: matriculation_subjects_subject_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -235,7 +292,7 @@ ALTER SEQUENCE public.matriculation_subjects_subject_id_seq OWNED BY public.matr
 
 CREATE TABLE public.nationalities (
     nationality_id integer NOT NULL,
-    nationality_name character varying(50)
+    nationality_name character varying(50) NOT NULL
 );
 
 
@@ -269,10 +326,9 @@ ALTER SEQUENCE public.nationalities_nationality_id_seq OWNED BY public.nationali
 
 CREATE TABLE public.nrc (
     nrc_id integer NOT NULL,
-    state_number integer,
-    state integer,
-    nationality integer,
-    number integer
+    state integer NOT NULL,
+    nationality integer NOT NULL,
+    number integer NOT NULL
 );
 
 
@@ -284,7 +340,7 @@ ALTER TABLE public.nrc OWNER TO postgres;
 
 CREATE TABLE public.nrc_nationality (
     nrc_nationality_id integer NOT NULL,
-    nrc_nationality character varying(3)
+    nrc_nationality character varying(3) NOT NULL
 );
 
 
@@ -340,7 +396,8 @@ ALTER SEQUENCE public.nrc_nrc_id_seq OWNED BY public.nrc.nrc_id;
 
 CREATE TABLE public.nrc_state (
     nrc_state_id integer NOT NULL,
-    nrc_state character varying(5)
+    nrc_state character varying(6) NOT NULL,
+    nrc_state_number integer NOT NULL
 );
 
 
@@ -374,7 +431,7 @@ ALTER SEQUENCE public.nrc_state_nrc_state_id_seq OWNED BY public.nrc_state.nrc_s
 
 CREATE TABLE public.nrc_state_number (
     nrc_state_number_id integer NOT NULL,
-    nrc_state_number integer
+    nrc_state_number character varying(5) NOT NULL
 );
 
 
@@ -408,11 +465,60 @@ ALTER SEQUENCE public.nrc_state_number_nrc_state_number_id_seq OWNED BY public.n
 
 CREATE TABLE public.relative_types (
     relative_type_id integer NOT NULL,
-    relative_type character varying(20)
+    relative_type character varying(20) NOT NULL
 );
 
 
 ALTER TABLE public.relative_types OWNER TO postgres;
+
+--
+-- Name: relatives; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.relatives (
+    relative_id integer NOT NULL,
+    student_id integer NOT NULL,
+    relative_name character varying(50) NOT NULL,
+    phone_number integer NOT NULL,
+    email character varying(50) NOT NULL,
+    nrc integer NOT NULL,
+    township integer NOT NULL,
+    gender integer NOT NULL,
+    address character varying(100) NOT NULL,
+    nationality integer NOT NULL,
+    religion integer NOT NULL,
+    date_of_birth date NOT NULL
+);
+
+
+ALTER TABLE public.relatives OWNER TO postgres;
+
+--
+-- Name: type_of_relation; Type: TABLE; Schema: public; Owner: shinji
+--
+
+CREATE TABLE public.type_of_relation (
+    relative_id integer NOT NULL,
+    relative_type_id integer NOT NULL
+);
+
+
+ALTER TABLE public.type_of_relation OWNER TO shinji;
+
+--
+-- Name: relative_type_view; Type: VIEW; Schema: public; Owner: shinji
+--
+
+CREATE VIEW public.relative_type_view AS
+ SELECT r.relative_id,
+    rt.relative_type
+   FROM public.relatives r,
+    public.relative_types rt,
+    public.type_of_relation t
+  WHERE ((r.relative_id = t.relative_id) AND (rt.relative_type_id = t.relative_type_id));
+
+
+ALTER VIEW public.relative_type_view OWNER TO shinji;
 
 --
 -- Name: relative_types_relative_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -435,28 +541,6 @@ ALTER SEQUENCE public.relative_types_relative_type_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE public.relative_types_relative_type_id_seq OWNED BY public.relative_types.relative_type_id;
 
-
---
--- Name: relatives; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.relatives (
-    relative_id integer NOT NULL,
-    student_id integer,
-    relative_name character varying(50),
-    phone_number integer,
-    email character varying(50),
-    nrc integer,
-    township integer,
-    gender integer,
-    address character varying(100),
-    nationality integer,
-    religion integer,
-    date_of_birth date
-);
-
-
-ALTER TABLE public.relatives OWNER TO postgres;
 
 --
 -- Name: relatives_relative_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -486,7 +570,7 @@ ALTER SEQUENCE public.relatives_relative_id_seq OWNED BY public.relatives.relati
 
 CREATE TABLE public.religions (
     religion_id integer NOT NULL,
-    religion_name character varying(50)
+    religion_name character varying(50) NOT NULL
 );
 
 
@@ -520,7 +604,7 @@ ALTER SEQUENCE public.religions_religion_id_seq OWNED BY public.religions.religi
 
 CREATE TABLE public.states (
     state_id integer NOT NULL,
-    state_name character varying(50)
+    state_name character varying(50) NOT NULL
 );
 
 
@@ -554,7 +638,7 @@ ALTER SEQUENCE public.states_state_id_seq OWNED BY public.states.state_id;
 
 CREATE TABLE public.student_types (
     student_type_id integer NOT NULL,
-    student_type_name character varying(20)
+    student_type_name character varying(20) NOT NULL
 );
 
 
@@ -581,31 +665,6 @@ ALTER SEQUENCE public.student_types_student_type_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE public.student_types_student_type_id_seq OWNED BY public.student_types.student_type_id;
 
-
---
--- Name: students; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.students (
-    student_id integer NOT NULL,
-    major integer,
-    township integer,
-    student_type integer,
-    student_name character varying(100),
-    date_of_birth date,
-    phone_number integer,
-    email character varying(50),
-    student_card_id character varying(20),
-    nrc integer,
-    gender integer,
-    nationality integer,
-    religion integer,
-    photo character varying(100),
-    address character varying(100)
-);
-
-
-ALTER TABLE public.students OWNER TO postgres;
 
 --
 -- Name: students_student_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -635,8 +694,8 @@ ALTER SEQUENCE public.students_student_id_seq OWNED BY public.students.student_i
 
 CREATE TABLE public.townships (
     township_id integer NOT NULL,
-    state integer,
-    township_name character varying(50)
+    state integer NOT NULL,
+    township_name character varying(50) NOT NULL
 );
 
 
@@ -663,18 +722,6 @@ ALTER SEQUENCE public.townships_township_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE public.townships_township_id_seq OWNED BY public.townships.township_id;
 
-
---
--- Name: type_of_relation; Type: TABLE; Schema: public; Owner: shinji
---
-
-CREATE TABLE public.type_of_relation (
-    relative_id integer,
-    relative_type_id integer
-);
-
-
-ALTER TABLE public.type_of_relation OWNER TO shinji;
 
 --
 -- Name: academic_years academic_year_id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -863,7 +910,7 @@ COPY public.nationalities (nationality_id, nationality_name) FROM stdin;
 -- Data for Name: nrc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.nrc (nrc_id, state_number, state, nationality, number) FROM stdin;
+COPY public.nrc (nrc_id, state, nationality, number) FROM stdin;
 \.
 
 
@@ -879,7 +926,7 @@ COPY public.nrc_nationality (nrc_nationality_id, nrc_nationality) FROM stdin;
 -- Data for Name: nrc_state; Type: TABLE DATA; Schema: public; Owner: shinji
 --
 
-COPY public.nrc_state (nrc_state_id, nrc_state) FROM stdin;
+COPY public.nrc_state (nrc_state_id, nrc_state, nrc_state_number) FROM stdin;
 \.
 
 
@@ -1075,11 +1122,11 @@ SELECT pg_catalog.setval('public.townships_township_id_seq', 1, false);
 
 
 --
--- Name: academic_record academic_record_student_id_academic_year_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: academic_record academic_record_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.academic_record
-    ADD CONSTRAINT academic_record_student_id_academic_year_id_key UNIQUE (student_id, academic_year_id);
+    ADD CONSTRAINT academic_record_pkey PRIMARY KEY (student_id, academic_year_id);
 
 
 --
@@ -1131,11 +1178,11 @@ ALTER TABLE ONLY public.majors
 
 
 --
--- Name: matriculation_marks matriculation_marks_matriculation_id_subject_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: matriculation_marks matriculation_marks_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.matriculation_marks
-    ADD CONSTRAINT matriculation_marks_matriculation_id_subject_id_key UNIQUE (matriculation_id, subject_id);
+    ADD CONSTRAINT matriculation_marks_pkey PRIMARY KEY (matriculation_id, subject_id);
 
 
 --
@@ -1147,11 +1194,11 @@ ALTER TABLE ONLY public.matriculation
 
 
 --
--- Name: matriculation matriculation_place_roll_no_year_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: matriculation matriculation_student_id_place_roll_no_year_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.matriculation
-    ADD CONSTRAINT matriculation_place_roll_no_year_key UNIQUE (place, roll_no, year);
+    ADD CONSTRAINT matriculation_student_id_place_roll_no_year_key UNIQUE (student_id, place, roll_no, year);
 
 
 --
@@ -1211,6 +1258,30 @@ ALTER TABLE ONLY public.nrc
 
 
 --
+-- Name: nrc nrc_state_nationality_number_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nrc
+    ADD CONSTRAINT nrc_state_nationality_number_key UNIQUE (state, nationality, number);
+
+
+--
+-- Name: nrc_state nrc_state_nrc_state_nrc_state_number_key; Type: CONSTRAINT; Schema: public; Owner: shinji
+--
+
+ALTER TABLE ONLY public.nrc_state
+    ADD CONSTRAINT nrc_state_nrc_state_nrc_state_number_key UNIQUE (nrc_state, nrc_state_number);
+
+
+--
+-- Name: nrc_state_number nrc_state_number_nrc_state_number_key; Type: CONSTRAINT; Schema: public; Owner: shinji
+--
+
+ALTER TABLE ONLY public.nrc_state_number
+    ADD CONSTRAINT nrc_state_number_nrc_state_number_key UNIQUE (nrc_state_number);
+
+
+--
 -- Name: nrc_state_number nrc_state_number_pkey; Type: CONSTRAINT; Schema: public; Owner: shinji
 --
 
@@ -1219,35 +1290,11 @@ ALTER TABLE ONLY public.nrc_state_number
 
 
 --
--- Name: nrc nrc_state_number_state_nationality_number; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.nrc
-    ADD CONSTRAINT nrc_state_number_state_nationality_number UNIQUE (state_number, state, nationality, number);
-
-
---
--- Name: nrc_state_number nrc_state_number_unique_key; Type: CONSTRAINT; Schema: public; Owner: shinji
---
-
-ALTER TABLE ONLY public.nrc_state_number
-    ADD CONSTRAINT nrc_state_number_unique_key UNIQUE (nrc_state_number);
-
-
---
 -- Name: nrc_state nrc_state_pkey; Type: CONSTRAINT; Schema: public; Owner: shinji
 --
 
 ALTER TABLE ONLY public.nrc_state
     ADD CONSTRAINT nrc_state_pkey PRIMARY KEY (nrc_state_id);
-
-
---
--- Name: nrc_state nrc_state_unique_key; Type: CONSTRAINT; Schema: public; Owner: shinji
---
-
-ALTER TABLE ONLY public.nrc_state
-    ADD CONSTRAINT nrc_state_unique_key UNIQUE (nrc_state);
 
 
 --
@@ -1331,6 +1378,14 @@ ALTER TABLE ONLY public.students
 
 
 --
+-- Name: students students_student_card_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.students
+    ADD CONSTRAINT students_student_card_id_key UNIQUE (student_card_id);
+
+
+--
 -- Name: townships townships_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1339,19 +1394,19 @@ ALTER TABLE ONLY public.townships
 
 
 --
--- Name: townships townships_township_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: townships townships_state_township_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.townships
-    ADD CONSTRAINT townships_township_name_key UNIQUE (township_name);
+    ADD CONSTRAINT townships_state_township_name_key UNIQUE (state, township_name);
 
 
 --
--- Name: type_of_relation type_of_relation_relative_id_relative_type_id_key; Type: CONSTRAINT; Schema: public; Owner: shinji
+-- Name: type_of_relation type_of_relation_pkey; Type: CONSTRAINT; Schema: public; Owner: shinji
 --
 
 ALTER TABLE ONLY public.type_of_relation
-    ADD CONSTRAINT type_of_relation_relative_id_relative_type_id_key UNIQUE (relative_id, relative_type_id);
+    ADD CONSTRAINT type_of_relation_pkey PRIMARY KEY (relative_id, relative_type_id);
 
 
 --
@@ -1411,11 +1466,11 @@ ALTER TABLE ONLY public.nrc
 
 
 --
--- Name: nrc nrc_state_number_key; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: nrc_state nrc_state_nrc_state_number_fkey; Type: FK CONSTRAINT; Schema: public; Owner: shinji
 --
 
-ALTER TABLE ONLY public.nrc
-    ADD CONSTRAINT nrc_state_number_key FOREIGN KEY (state_number) REFERENCES public.nrc_state_number(nrc_state_number_id);
+ALTER TABLE ONLY public.nrc_state
+    ADD CONSTRAINT nrc_state_nrc_state_number_fkey FOREIGN KEY (nrc_state_number) REFERENCES public.nrc_state_number(nrc_state_number_id);
 
 
 --
