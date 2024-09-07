@@ -6,9 +6,16 @@ public class Student extends Person {
 	private String major;
 	private String currentYear;
 	private String academicYear;
+	private String photo;
 	private Guardian guardian;
+	private Matriculation matriculation;
 	
-	
+	public Matriculation getMatriculation() {
+		return matriculation;
+	}
+	public void setMatriculation(Matriculation matriculation) {
+		this.matriculation = matriculation;
+	}
 	public Guardian getGuardian() {
 		return guardian;
 	}
@@ -44,5 +51,11 @@ public class Student extends Person {
 	}
 	public void setAcademicYear(String academicYear) {
 		this.academicYear = academicYear;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 }

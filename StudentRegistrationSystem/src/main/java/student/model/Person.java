@@ -14,6 +14,7 @@ public class Person implements Serializable {
 	private String nationality;
 	private Nrc nrc;
 	private DateOfBirth dateOfBirth;
+	private String type;
 	
 	public int getId() {
 		return id;
@@ -80,5 +81,11 @@ public class Person implements Serializable {
 	}
 	public void setNrc(Nrc nrc) {
 		this.nrc = nrc;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 }

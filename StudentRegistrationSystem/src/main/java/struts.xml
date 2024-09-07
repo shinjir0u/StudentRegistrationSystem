@@ -5,6 +5,10 @@
 <struts>
     <package name="StudentRegistration" extends="struts-default">
         <action name="studentEnroll" class="student.controller.StudentAction" method="addStudentToHashmap">
+        	<result name="success">/hashMapSuccess.jsp</result>
+        </action>
+        
+        <action name="adminEnroll" class="student.controller.StudentAction" method="addStudentToDatabase">
         	<result name="success">/databaseSuccess.jsp</result>
         </action>
     </package>

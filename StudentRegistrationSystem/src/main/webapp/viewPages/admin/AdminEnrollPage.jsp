@@ -130,7 +130,7 @@
             </div>
             <div class="content">
                 <!-- This is where the content for each action would be displayed -->
-                <s:form action="enroll" method="post">
+                <s:form action="adminEnroll" method="post">
 	
        			    <s:div class="form-group">
             		    <s:select name="studentType" label="Student Type to Insert" list="#{'1':'old', '2':'new' }"/>
@@ -147,28 +147,28 @@
            			</s:div>
 	
 		            <s:div class="form-group">
-		                <s:textfield name="rollNo" label="Roll No"/>
+		                <s:textfield name="studentRollNo" label="Roll No"/>
 		            </s:div>
 
 		            <s:div class="form-group">
-		                <s:select name="major" list="#{'CS':'Computer Science', 'ENG':'Engineering', 'SCI':'Science'}" label="Major" />
+		                <s:select name="studentMajor" list="#{'CS':'Computer Science', 'ENG':'Engineering', 'SCI':'Science'}" label="Major" />
 		            </s:div>
 
         		    <s:div class="form-group">
-            		    <s:select name="currentYear" list="#{'1':'1st Year', '2':'2nd Year', '3':'3rd Year', '4':'4th Year'}" label="Current Year"/>
+            		    <s:select name="studentCurrentYear" list="#{'1':'1st Year', '2':'2nd Year', '3':'3rd Year', '4':'4th Year'}" label="Current Year"/>
       				</s:div>
 
         		    <s:div class="form-group">
-        		        <s:select name="academicYear" list="#{'2023':'2023', '2024':'2024'}" label="Academic Year"/>
+        		        <s:select name="studentAcademicYear" list="#{'2023':'2023', '2024':'2024'}" label="Academic Year"/>
     		        </s:div>
 					 
 	    		    <tr class="section-title"><td colspan="2">Personal Information</td></tr>
             
         		    <s:div class="form-group">
-        		        <s:select label= "NRC" name="nrcStateNumber" list="#{'1':'1', '2':'2'}" />
-        		        <s:select name="nrcState" list="#{'1':'1', '2':'2'}" />
-        		        <s:select name="nrcNationality" list="#{'1':'1', '2':'2'}" />
-		                <s:textfield name="nrcNumber" ></s:textfield>
+        		        <s:select label= "NRC" name="studentNrcStateNumber" list="#{'1':'1', '2':'2'}" />
+        		        <s:select name="studentNrcTownship" list="#{'1':'1', '2':'2'}" />
+        		        <s:select name="studentNrcNationality" list="#{'1':'1', '2':'2'}" />
+		                <s:textfield name="studentNrcNumber" ></s:textfield>
        			    </s:div>
 
      		       	<s:div class="form-group">
@@ -176,37 +176,37 @@
         		    </s:div>
 
        			    <s:div class="form-group">
-            		    <s:select name="township" list="#{'Township1':'Township 1', 'Township2':'Township 2'}" label="Township"/>
+            		    <s:select name="studentTownship" list="#{'Township1':'Township 1', 'Township2':'Township 2'}" label="Township"/>
             		</s:div>
 
             		<s:div class="form-group">
-                		<s:textarea name="address" label="Address"/>
+                		<s:textarea name="studentAddress" label="Address"/>
 		            </s:div>
 
         		    <s:div class="form-group gender-options">
-            		    <s:radio name="gender" list="#{'Male':'Male', 'Female':'Female'}" label="Gender" />
+            		    <s:radio name="studentGender" list="#{'Male':'Male', 'Female':'Female'}" label="Gender" />
            			</s:div>
 
            			<s:div class="form-group">
-           			    <s:textfield name="phoneNumber" label="Phone Number" value="9292"/>
+           			    <s:textfield name="studentPhoneNumber" label="Phone Number" value="9292"/>
            			</s:div>
 		
            			<s:div class="form-group">
-                		<s:textfield name="email" label="Email" value="htoo@gmail.com"/>
+                		<s:textfield name="studentEmail" label="Email" value="htoo@gmail.com"/>
 		            </s:div>
 
         		    <s:div class="form-group">
-            		    <s:select name="dateOfBirthDay" label="Date of Birth" list="#{'1':'1', '2':'2'}" />
-            		    <s:select name="dateoOfBirthMonth" list="#{'1':'1', '2':'2'}" />
-         		       	<s:select name="dateOfBirthYear" list="#{'1':'1', '2':'2'}" />
+            		    <s:select name="studentDateOfBirthDay" label="Date of Birth" list="#{'1':'1', '2':'2'}" />
+            		    <s:select name="studentDateoOfBirthMonth" list="#{'1':'1', '2':'2'}" />
+         		       	<s:select name="studentDateOfBirthYear" list="#{'1':'1', '2':'2'}" />
          		   	</s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="religion" list="#{'Religion1':'Religion 1', 'Religion2':'Religion 2'}" label="Religion"/>
+		                <s:select name="studentReligion" list="#{'Religion1':'Religion 1', 'Religion2':'Religion 2'}" label="Religion"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="nationality" list="#{'Nationality1':'Nationality 1', 'Nationality2':'Nationality 2'}" label="Nationality" />
+		                <s:select name="studentNationality" list="#{'Nationality1':'Nationality 1', 'Nationality2':'Nationality 2'}" label="Nationality" />
 		            </s:div>
 		
 		           	<tr class="section-title"><td colspan="2">Guardian Information</td></tr>
@@ -216,12 +216,20 @@
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="relativeType" list="#{'Parent':'Parent', 'Sibling':'Sibling'}" label="Relative Type"/>
+		                <s:select name="guardianType" list="#{'Parent':'Parent', 'Sibling':'Sibling'}" label="Relative Type"/>
+		            </s:div>
+		
+		            <s:div class="form-group">
+           			    <s:textfield name="guardianPhoneNumber" label="Phone Number" value="9292"/>
+           			</s:div>
+		
+           			<s:div class="form-group">
+                		<s:textfield name="guardianEmail" label="Email" value="htoo@gmail.com"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
 		                 <s:select label= "Guardian NRC" name="guardianNrcStateNumber" list="#{'1':'1', '2':'2'}"/>
-		                <s:select name="guardianNrcState" list="#{'1':'1', '2':'2'}"/>
+		                <s:select name="guardianNrcTownship" list="#{'1':'1', '2':'2'}"/>
 		                <s:select name="guardianNrcNationality" list="#{'1':'1', '2':'2'}"/>
 		                <s:textfield name="guardianNrcNumber"></s:textfield>
 		            </s:div>
@@ -233,10 +241,17 @@
 		            <s:div class="form-group">
 		                <s:select name="guardianTownship" list="#{'Township1':'Township 1', 'Township2':'Township 2'}" label="Guardian Township"/>
 		            </s:div>
+		            
 		
 		            <s:div class="form-group">
 		                <s:textarea name="guardianAddress" label="Guardian Address"/>
 		            </s:div>
+		            
+		             <s:div class="form-group">
+            		    <s:select name="guardianDateOfBirthDay" label="Date of Birth" list="#{'1':'1', '2':'2'}" />
+            		    <s:select name="guardianDateOfBirthMonth" list="#{'1':'1', '2':'2'}" />
+         		       	<s:select name="guardianDateOfBirthYear" list="#{'1':'1', '2':'2'}" />
+         		   	</s:div>
 		
 		            <tr class="section-title"><td colspan="2">Academic Record</td></tr>
 		
