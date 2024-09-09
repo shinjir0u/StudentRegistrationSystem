@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-=======
 <%@ taglib uri="/struts-tags" prefix="s" %>
->>>>>>> main
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
-
-=======
 hell
 
 <!--  <table>
@@ -82,6 +77,5 @@ hell
 	</s:iterator> 
 </table>
                 	
->>>>>>> main
 </body>
 </html>

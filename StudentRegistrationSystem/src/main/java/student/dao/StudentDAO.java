@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map.Entry;
+
 import student.model.Student;
 
 public class StudentDAO {
@@ -15,6 +17,7 @@ public class StudentDAO {
 	private final String username = "shinji";
 	private final String password = "pass";
 	private Connection connection;
+	private HashMap<Integer, String> matriculationSubjects;
 	
 	private Statement connectDatabase() {
 		try {
@@ -35,7 +38,7 @@ public class StudentDAO {
 		}
 	}
 	
-	public ResultSet retriveStudentFromDatabase(String sql) {
+	public ResultSet retriveDataFromDatabase(String sql) {
 		try {
 			return connectDatabase().executeQuery(sql);
 		} catch(SQLException e) {
@@ -69,9 +72,6 @@ public class StudentDAO {
 	}
 	
 	public int generateHashKey(HashMap<Integer, Student> students) {
-		int i = 1;
-		while (students.containsKey(i))
-			i++;
-		return i;
+		return (students.size()==0) ? 1 : students.size()+1;
 	}
 }

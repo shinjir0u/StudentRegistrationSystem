@@ -158,7 +158,7 @@
        			    </s:div>
 
      		       	<s:div class="form-group">
-     		           	<s:select name="state" list="#{'State1':'State 1', 'State2':'State 2'}" label="State" />
+     		           	<s:select name="studentState" list="#{'State1':'State 1', 'State2':'State 2'}" label="State" />
         		    </s:div>
 
        			    <s:div class="form-group">

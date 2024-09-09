@@ -9,6 +9,7 @@ public class Person implements Serializable {
 	private String email;
 	private String gender;
 	private String township;
+	private String state;
 	private String address;
 	private String religion;
 	private String nationality;
@@ -16,6 +17,12 @@ public class Person implements Serializable {
 	private DateOfBirth dateOfBirth;
 	private String type;
 	
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	public int getId() {
 		return id;
 	}

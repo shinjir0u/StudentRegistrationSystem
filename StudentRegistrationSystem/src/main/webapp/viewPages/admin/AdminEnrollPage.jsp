@@ -172,7 +172,7 @@
        			    </s:div>
 
      		       	<s:div class="form-group">
-     		           	<s:select name="state" list="#{'State1':'State 1', 'State2':'State 2'}" label="State" />
+     		           	<s:select name="studentState" list="#{'State1':'State 1', 'State2':'State 2'}" label="State" />
         		    </s:div>
 
        			    <s:div class="form-group">
@@ -268,28 +268,41 @@
 		           	
 		           	<table>
 		           		<tr class="section-title"><td colspan="2">Matriculation Record</td></tr>
-		           	</table>
 		           	
+		           	
+		           	 <s:div class="form-group">
+		                <s:textfield name="matriculationPlace" label="Matriculation Place"/>
+		            </s:div>
+		            
+		             <s:div class="form-group">
+		                <s:textfield name="matriculationRollNo" label="Matriculation Roll No"/>
+		            </s:div>
+		            
+		             <s:div class="form-group">
+		                <s:textfield name="matriculationYear" label="Matriculation Year"/>
+		            </s:div>
+		            </table><br>
+		        
 		           	<table border="1px solid black" style="width: 300px; margin-left: auto; margin-right: auto">
 		           		<tr style="font-weight:bold">
 		           			<td style="text-align:center">Subject</td>
 		           			<td style="text-align:center">Marks</td>
 		           		</tr>
-		          		<s:textfield name="subject1" label="Myanmar"></s:textfield>
-		          		<s:textfield name="subject2" label="English"></s:textfield>
-		          		<s:textfield name="subject3" label="Mathematics"></s:textfield>
-		          		<s:textfield name="subject4" label="Physics"></s:textfield>
-		          		<s:textfield name="subject5" label="Chemistry"></s:textfield>
+		          		<s:textfield name="matriculationSubject1" label="Myanmar"></s:textfield>
+		          		<s:textfield name="matriculationSubject2" label="English"></s:textfield>
+		          		<s:textfield name="matriculationSubject3" label="Mathematics"></s:textfield>
+		          		<s:textfield name="matriculationSubject4" label="Physics"></s:textfield>
+		          		<s:textfield name="matriculationSubject5" label="Chemistry"></s:textfield>
 		          		<tr>
 		          			<td>
-		          				<select name="car">
+		          				<select name="subject6">
 		          					<option value="hi">hi</option>
 		          					<option value="hig">hig</option>
 		          					<option value="hige">hige</option>	
 		          				</select>
 		          			</td>
 		          			<td>
-		          				<input type="text" name="subject6">
+		          				<input type="text" name="matriculationSubject6">
 		          			</td>
 		          		</tr>
 		           	</table>		    
