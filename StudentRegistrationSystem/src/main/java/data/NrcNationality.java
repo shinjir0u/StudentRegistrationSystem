@@ -1,11 +1,10 @@
 package data;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
-public class NrcStateNumber extends Data {
+public class NrcNationality extends Data {
 
-	public NrcStateNumber() {
+	public NrcNationality() {
 		// TODO Auto-generated constructor stub
 		super();
 	}
@@ -15,8 +14,9 @@ public class NrcStateNumber extends Data {
 		// TODO Auto-generated method stub
 		dataMap = new HashMap<Integer, String>();
 		
-		for (int i = 1; i <= 14; i++) 
-			dataMap.put(i, i+"/");
+		dataMap.put(1, "(N)");
+		dataMap.put(2, "(E)");
+		dataMap.put(3, "(P)");
 	}
 
 }

@@ -13,11 +13,10 @@ import student.model.Student;
 
 public class StudentDAO {
 	private final String filename = "student.ser";
-	private final String url = "jdbc:psql://localhost/univeristy_database";
+	private final String url = "jdbc:postgresql://localhost/university_database";
 	private final String username = "shinji";
 	private final String password = "pass";
 	private Connection connection;
-	private HashMap<Integer, String> matriculationSubjects;
 	
 	private Statement connectDatabase() {
 		try {
@@ -33,9 +32,7 @@ public class StudentDAO {
 			connectDatabase().executeUpdate(sql);
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
-		} finally {
-			closeDatabaseAction();
-		}
+		} 
 	}
 	
 	public ResultSet retriveDataFromDatabase(String sql) {
@@ -43,9 +40,7 @@ public class StudentDAO {
 			return connectDatabase().executeQuery(sql);
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
-		} finally {
-			closeDatabaseAction();
-		}
+		} 
 	}
 	public void closeDatabaseAction() {
 		try {

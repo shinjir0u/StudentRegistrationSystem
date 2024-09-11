@@ -8,6 +8,9 @@
         	<result name="success">/hashMapSuccess.jsp</result>
         </action>
         
+        <action name="adminEnrollTest" class="student.controller.StudentAddAction">
+        	<result name="success">/viewPages/admin/AdminEnrollPage.jsp</result>
+        </action> 
         <action name="adminEnroll" class="student.controller.StudentAddAction" method="addStudentToDatabase">
         	<result name="success">/databaseSuccess.jsp</result>
         </action>

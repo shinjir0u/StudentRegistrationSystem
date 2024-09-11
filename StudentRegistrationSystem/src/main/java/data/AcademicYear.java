@@ -30,5 +30,4 @@ public class AcademicYear extends Data {
         dataMap.put(13, "2024-2025");
         dataMap.put(14, "2025-2026");
 	}
-
 }

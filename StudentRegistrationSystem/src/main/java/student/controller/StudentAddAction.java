@@ -7,15 +7,25 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.management.relation.RelationType;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import com.opensymphony.xwork2.ActionSupport;
 
+import data.AcademicYear;
+import data.DateOfBirthDay;
+import data.DateOfBirthMonth;
+import data.DateOfBirthYear;
 import data.Gender;
 import data.Major;
 import data.MatriculationSubject;
 import data.Nationality;
+import data.NrcNationality;
+import data.NrcState;
+import data.NrcStateNumber;
+import data.RelativeType;
 import data.Religion;
+import data.State;
 import data.StudentType;
 import data.Township;
 import student.dao.StudentDAO;
@@ -25,7 +35,14 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 	private HashMap<Integer, Student> students;
 	private HttpServletRequest request;
 	private StudentDAO studentDAO = new StudentDAO();
+	private HashMap<Integer, HashMap<Integer, String>> data = new HashMap<Integer, HashMap<Integer,String>>();
 
+	public String execute() {
+		setDataValues();
+		System.out.println(data);
+		return SUCCESS;
+	}
+	
 	public String addStudentToHashmap() {
 		students = studentDAO.loadFile();
  		students.put(studentDAO.generateHashKey(students), setStudentValuesFromRequest());
@@ -44,16 +61,17 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		List<MatriculationSubject> subjects = matriculation.getSubjects();
 		String subject = "";
 		for (MatriculationSubject matriculationSubject : subjects) {
-			subject = subject + "((SELECT matriculation_id FROM new_matriculation_marks),"
+			subject = subject + "((SELECT matriculation_id FROM new_matriculation),"
 					+ matriculationSubject.getId() + ", " + matriculationSubject.getMark() + "),";
 		}
 		subject = subject.substring(0, (subject.length()-1)) + "),";
 		
+		
 		String sql = "WITH new_nrc AS ("
-				+ "  INSERT INTO nrc (state, nationality, nrc_number)  "
+				+ "  INSERT INTO nrc (state, nationality, number)  "
 				+ "  VALUES ( " 
-				+ "'" + studentNrc.getTownship() + "', " 
-				+ "'" + studentNrc.getNationality() + "', " 
+				+ "" + studentNrc.getTownship() + ", " 
+				+ "" + studentNrc.getNationality() + ", " 
 				+ studentNrc.getNumber() 
 				+ ") RETURNING nrc_id ), "
 				+ "  new_student AS ("
@@ -61,12 +79,12 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 				+ "                        student_name, date_of_birth, phone_number, email, address, "
 				+ "                        student_card_id, photo) VALUES "
 				+ "                        ((SELECT nrc_id FROM new_nrc),"
-				+ "" + new Gender().getIdByValue(student.getGender()) + ", "
-				+ "" + new Nationality().getIdByValue(student.getNationality()) + ", "
-				+ "" + new Religion().getIdByValue(student.getReligion()) + ", "
-				+ "" + new Township().getIdByValue(student.getTownship()) + ", "
-				+ "" + new Major().getIdByValue(student.getMajor()) + ", "
-				+ "" + new StudentType().getIdByValue(student.getType()) + ", "
+				+ "" + student.getGender() + ", "
+				+ "" + student.getNationality() + ", "
+				+ "" + student.getReligion() + ", "
+				+ "" + student.getTownship() + ", "
+				+ "" + student.getMajor() + ", "
+				+ "" + student.getType() + ", "
 				+ "'" + student.getName() + "', "
 				+ "'" + studentDateOfBirth.getYear() + "-" + studentDateOfBirth.getMonth() + "-" + studentDateOfBirth.getDay() + "', "
 				+ student.getPhoneNumber() + ", "
@@ -80,8 +98,8 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 				+ "'" + matriculation.getPlace() + "', "
 				+ "'" + matriculation.getRollNo() + "', "
 				+ matriculation.getYear() + ") RETURNING matriculation_id),"
-				+ " new_marticulation_marks AS ("
-				+ " INSERT INTO matriculation_marks(matriculation_id, subject_id, mark) VALUES ("
+				+ " new_matriculation_marks AS ("
+				+ " INSERT INTO matriculation_marks(matriculation_id, subject_id, mark) VALUES "
 				+ subject
 				+ " guardian_nrc AS ("
 				+ " INSERT INTO nrc (state, nationality, number)"
@@ -89,27 +107,26 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 				+ "'" + guardianNrc.getTownship() + "', "
 				+ "'" + guardianNrc.getNationality() + "', "
 				+ guardianNrc.getNumber()
-				+ ") RETURING nrc_id ),"
+				+ ") RETURNING nrc_id ),"
 				+ "	new_relative AS ( "
-				+ " INSERT INTO relatives (nrc, gender, nationaltiy, religion, township, "
+				+ " INSERT INTO relatives (nrc, nationality, religion, township, "
 				+ "							student_id, relative_name, phone_number, email,"
 				+ "							address, date_of_birth) "
 				+ " VALUES ("
 				+ " (SELECT nrc_id FROM guardian_nrc), "
-				+ "'" + guardian.getGender() + "', "
-				+ "'" + guardian.getNationality() + "', "
-				+ "'" + guardian.getReligion() + "', "
-				+ "'" + guardian.getTownship() + "', "
+				+ "" + guardian.getNationality() + ", "
+				+ "" + guardian.getReligion() + ", "
+				+ "" + guardian.getTownship() + ", "
 				+ " (SELECT student_id FROM new_student), "
 				+ "'" + guardian.getName() + "', "
 				+ guardian.getPhoneNumber() + ", "
 				+ "'" + guardian.getEmail() + "', "
 				+ "'" + guardian.getAddress() + "', "
 				+ "'" + guardianDateOfBirth.getYear() + "-" + guardianDateOfBirth.getMonth() + "-" + guardianDateOfBirth.getDay() 
-				+ "') RETURNING relative_id),"
-				+ " INSERT INTO type_of_relation VALUES ("
+				+ "') RETURNING relative_id)"
+				+ " INSERT INTO type_of_relation (relative_id, relative_type_id) VALUES ("
 				+ "(SELECT relative_id FROM new_relative),"
-				+ "'" + guardian.getType() + ");";
+				+ "" + guardian.getType() + ");";
 		studentDAO.addStudentToDatabase(sql);
 		return SUCCESS;
 	}
@@ -132,7 +149,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		student.setState(request.getParameter("studentState"));
 		student.setAddress(request.getParameter("studentAddress"));
 		student.setGender(request.getParameter("studentGender"));
-		student.setPhoneNumber(Integer.parseInt(request.getParameter("studentPhoneNumber")));
+		student.setPhoneNumber(request.getParameter("studentPhoneNumber"));
 		student.setEmail(request.getParameter("studentEmail"));
 		student.setDateOfBirth(new DateOfBirth(
 				request.getParameter("studentDateOfBirthDay"),
@@ -143,6 +160,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		student.setNationality(request.getParameter("studentNationality"));
 		student.setGuardian(setGuardianValuesFromRequest());
 		student.setMatriculation(setMatriculationValuesFromRequest());
+		student.setType(request.getParameter("studentType"));
 		return student;
 	}
 	
@@ -150,7 +168,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		Guardian guardian = new Guardian();
 		guardian.setName(request.getParameter("guardianName"));
 		guardian.setType(request.getParameter("guardianType"));
-		guardian.setPhoneNumber(Integer.parseInt(request.getParameter("guardianPhoneNumber")));
+		guardian.setPhoneNumber(request.getParameter("guardianPhoneNumber"));
 		guardian.setEmail(request.getParameter("guardianEmail"));
 		guardian.setNrc(new Nrc(
 				request.getParameter("guardianNrcStateNumber"), 
@@ -166,6 +184,8 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 				request.getParameter("guardianDateOfBirthMonth"),
 				request.getParameter("guardianDateOfBirthYear")
 				));
+		guardian.setReligion(request.getParameter("guardianReligion"));
+		guardian.setNationality(request.getParameter("guardianNationality"));
 		return guardian;
 	}
 	
@@ -187,6 +207,26 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		matriculation.setSubjects(subjects);
 		return matriculation;
 	}
+	
+	private void setDataValues() {
+		data.put(1, new AcademicYear().getDataMap());
+		data.put(2, new Gender().getDataMap());
+		data.put(3, new Major().getDataMap());
+		data.put(4, new MatriculationSubject().getDataMap());
+		data.put(5, new Nationality().getDataMap());
+		data.put(6, new NrcState().getDataMap());
+		data.put(7, new NrcStateNumber().getDataMap());
+		data.put(8, new RelativeType().getDataMap());
+		data.put(9, new Religion().getDataMap());
+		data.put(10, new State().getDataMap());
+		data.put(11, new StudentType().getDataMap());
+		data.put(12, new Township().getDataMap());
+		data.put(13, new NrcNationality().getDataMap());
+		data.put(14, new DateOfBirthDay().getDataMap());
+		data.put(15, new DateOfBirthMonth().getDataMap());
+		data.put(16, new DateOfBirthYear().getDataMap());
+		
+	}
 
 	public void setStudents(HashMap<Integer, Student> students) {
 		this.students = students;
@@ -196,5 +236,17 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 	public void setServletRequest(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		this.request = request;
+	}
+	
+	public HashMap<Integer, Student> getStudents() {
+		return students;
+	}
+
+	public HashMap<Integer, HashMap<Integer, String>> getData() {
+		return data;
+	}
+
+	public void setData(HashMap<Integer, HashMap<Integer, String>> data) {
+		this.data = data;
 	}
 }

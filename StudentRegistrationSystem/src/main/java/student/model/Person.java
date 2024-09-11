@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Person implements Serializable {
 	private int id;
 	private String name;
-	private int phoneNumber;
+	private String phoneNumber;
 	private String email;
 	private String gender;
 	private String township;
@@ -35,10 +35,10 @@ public class Person implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	public String getEmail() {

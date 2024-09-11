@@ -47,7 +47,7 @@ public class StudentRetrieveAction extends ActionSupport {
 			student.setId(resultSet.getInt(1));
 			student.setName(resultSet.getString(2));
 			student.setDateOfBirth(new DateOfBirth(dateOfBirth[2], dateOfBirth[1], dateOfBirth[0]));
-			student.setPhoneNumber(resultSet.getInt(4));
+			student.setPhoneNumber(resultSet.getString(4));
 			student.setEmail(resultSet.getString(5));
 			student.setTownship(resultSet.getString(6));
 			student.setState(resultSet.getString(7));

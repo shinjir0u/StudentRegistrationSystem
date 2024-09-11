@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Admin Student Enrollment Form</title>
-    <link type="text/css" rel="stylesheet" href="../../css/baseTemplate.css">
+    <link type="text/css" rel="stylesheet" href="./css/baseTemplate.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -131,9 +131,9 @@
             <div class="content">
                 <!-- This is where the content for each action would be displayed -->
                 <s:form action="adminEnroll" method="post">
-	
        			    <s:div class="form-group">
-            		    <s:select name="studentType" label="Student Type to Insert" list="#{'1':'old', '2':'new' }"/>
+            		    <s:select name="studentType" label="Student Type to Insert" list="data[11]" 
+            		    			listKey="key" listValue="value" headerKey="0" headerValue="select student type"/>
            			</s:div>
 
 					<tr class="section-title"><td  colspan="2">Academic Information</tr>
@@ -151,32 +151,42 @@
 		            </s:div>
 
 		            <s:div class="form-group">
-		                <s:select name="studentMajor" list="#{'CS':'Computer Science', 'ENG':'Engineering', 'SCI':'Science'}" label="Major" />
+		                <s:select name="studentMajor" list="data[3]" label="Major" 
+		                		listKey="key" listValue="value" headerKey="0" headerValue=""/>
 		            </s:div>
 
         		    <s:div class="form-group">
-            		    <s:select name="studentCurrentYear" list="#{'1':'1st Year', '2':'2nd Year', '3':'3rd Year', '4':'4th Year'}" label="Current Year"/>
+            		    <s:select name="studentCurrentYear" list="#{'1':'1st Year', '2':'2nd Year', '3':'3rd Year', '4':'4th Year', '5':'5th Year', '6':'Final Year' }" label="Current Year"
+            		    		headerKey="0" headerValue=""/>
       				</s:div>
 
         		    <s:div class="form-group">
-        		        <s:select name="studentAcademicYear" list="#{'2023':'2023', '2024':'2024'}" label="Academic Year"/>
+        		        <s:select name="studentAcademicYear" list="data[1]" label="Academic Year"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue=""/>
     		        </s:div>
 					 
 	    		    <tr class="section-title"><td colspan="2">Personal Information</td></tr>
             
         		    <s:div class="form-group">
-        		        <s:select label= "NRC" name="studentNrcStateNumber" list="#{'1':'1', '2':'2'}" />
-        		        <s:select name="studentNrcTownship" list="#{'1':'1', '2':'2'}" />
-        		        <s:select name="studentNrcNationality" list="#{'1':'1', '2':'2'}" />
+        		        <s:select label= "NRC" name="studentNrcStateNumber" list="data[7]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
+        		        <s:select name="studentNrcTownship" list="data[6]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
+        		        <s:select name="studentNrcNationality" list="data[13]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
 		                <s:textfield name="studentNrcNumber" ></s:textfield>
        			    </s:div>
 
      		       	<s:div class="form-group">
-     		           	<s:select name="studentState" list="#{'State1':'State 1', 'State2':'State 2'}" label="State" />
+     		           	<s:select name="studentState" list="data[10]"
+        		        		listKey="key" listValue="value" 
+        		        		headerKey="0" headerValue="" label="State" />
         		    </s:div>
 
        			    <s:div class="form-group">
-            		    <s:select name="studentTownship" list="#{'Township1':'Township 1', 'Township2':'Township 2'}" label="Township"/>
+            		    <s:select name="studentTownship" list="data[12]"
+        		        		listKey="key" listValue="value" 
+        		        		headerKey="0" headerValue="" label="Township"/>
             		</s:div>
 
             		<s:div class="form-group">
@@ -184,29 +194,34 @@
 		            </s:div>
 
         		    <s:div class="form-group gender-options">
-            		    <s:radio name="studentGender" list="#{'Male':'Male', 'Female':'Female'}" label="Gender" />
+            		    <s:radio name="studentGender" label="Gender" list="#{'1':'Male', '2':'Female' }"/>
            			</s:div>
 
            			<s:div class="form-group">
-           			    <s:textfield name="studentPhoneNumber" label="Phone Number" value="9292"/>
+           			    <s:textfield name="studentPhoneNumber" label="Phone Number"/>
            			</s:div>
 		
            			<s:div class="form-group">
-                		<s:textfield name="studentEmail" label="Email" value="htoo@gmail.com"/>
+                		<s:textfield name="studentEmail" label="Email"/>
 		            </s:div>
 
         		    <s:div class="form-group">
-            		    <s:select name="studentDateOfBirthDay" label="Date of Birth" list="#{'1':'1', '2':'2'}" />
-            		    <s:select name="studentDateoOfBirthMonth" list="#{'1':'1', '2':'2'}" />
-         		       	<s:select name="studentDateOfBirthYear" list="#{'1':'1', '2':'2'}" />
+        		    	<s:select name="studentDateOfBirthYear" list="data[16]" label="Date of Birth"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue=""  />
+            		    <s:select name="studentDateOfBirthMonth" list="data[15]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue=""  />
+         		       	<s:select name="studentDateOfBirthDay" list="data[14]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue=""  />
          		   	</s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="studentReligion" list="#{'Religion1':'Religion 1', 'Religion2':'Religion 2'}" label="Religion"/>
+		                <s:select name="studentReligion" label="Religion" list="data[9]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="studentNationality" list="#{'Nationality1':'Nationality 1', 'Nationality2':'Nationality 2'}" label="Nationality" />
+		                <s:select name="studentNationality" label="Nationality" list="data[5]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
 		            </s:div>
 		
 		           	<tr class="section-title"><td colspan="2">Guardian Information</td></tr>
@@ -216,42 +231,63 @@
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="guardianType" list="#{'Parent':'Parent', 'Sibling':'Sibling'}" label="Relative Type"/>
+		                <s:select name="guardianType" label="Relative Type" list="data[8]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
 		            </s:div>
 		
 		            <s:div class="form-group">
-           			    <s:textfield name="guardianPhoneNumber" label="Phone Number" value="9292"/>
+           			    <s:textfield name="guardianPhoneNumber" label="Phone Number"/>
            			</s:div>
 		
            			<s:div class="form-group">
-                		<s:textfield name="guardianEmail" label="Email" value="htoo@gmail.com"/>
+                		<s:textfield name="guardianEmail" label="Email"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                 <s:select label= "Guardian NRC" name="guardianNrcStateNumber" list="#{'1':'1', '2':'2'}"/>
-		                <s:select name="guardianNrcTownship" list="#{'1':'1', '2':'2'}"/>
-		                <s:select name="guardianNrcNationality" list="#{'1':'1', '2':'2'}"/>
+		                <s:select label= "NRC" name="guardianNrcStateNumber" list="data[7]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
+		                <s:select name="guardianNrcTownship" list="data[6]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue=""/>
+		                <s:select name="guardianNrcNationality" list="data[13]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue=""/>
 		                <s:textfield name="guardianNrcNumber"></s:textfield>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="guardianState" list="#{'State1':'State 1', 'State2':'State 2'}" label="Guardian State"/>
+		                <s:select name="guardianState" label="State" list="data[10]"
+        		        		listKey="key" listValue="value" 
+        		        		headerKey="0" headerValue="" />
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="guardianTownship" list="#{'Township1':'Township 1', 'Township2':'Township 2'}" label="Guardian Township"/>
+		                <s:select name="guardianTownship" label="Township" list="data[12]"
+        		        		listKey="key" listValue="value" 
+        		        		headerKey="0" headerValue=""/>
 		            </s:div>
 		            
 		
 		            <s:div class="form-group">
-		                <s:textarea name="guardianAddress" label="Guardian Address"/>
+		                <s:textarea name="guardianAddress" label="Address"/>
 		            </s:div>
 		            
 		             <s:div class="form-group">
-            		    <s:select name="guardianDateOfBirthDay" label="Date of Birth" list="#{'1':'1', '2':'2'}" />
-            		    <s:select name="guardianDateOfBirthMonth" list="#{'1':'1', '2':'2'}" />
-         		       	<s:select name="guardianDateOfBirthYear" list="#{'1':'1', '2':'2'}" />
+            		    <s:select name="guardianDateOfBirthYear" list="data[16]" label="Date of Birth"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
+            		    <s:select name="guardianDateOfBirthMonth" list="data[15]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue=""  />
+         		     	<s:select name="guardianDateOfBirthDay" list="data[14]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue="" />  	
          		   	</s:div>
+         		   	
+         		   	<s:div class="form-group">
+		                <s:select name="guardianReligion" label="Religion" list="data[9]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
+		            </s:div>
+		
+		            <s:div class="form-group">
+		                <s:select name="guardianNationality" label="Nationality" list="data[5]"
+        		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
+		            </s:div>
 		
 		            <tr class="section-title"><td colspan="2">Academic Record</td></tr>
 		
@@ -296,9 +332,11 @@
 		          		<tr>
 		          			<td>
 		          				<select name="subject6">
-		          					<option value="hi">hi</option>
-		          					<option value="hig">hig</option>
-		          					<option value="hige">hige</option>	
+		          					<option value="0"></option>
+		          					<option value="6">Biology</option>
+		          					<option value="7">Economics</option>
+		          					<option value="8">History</option>
+		          					<option value="9">Geography</option>
 		          				</select>
 		          			</td>
 		          			<td>
