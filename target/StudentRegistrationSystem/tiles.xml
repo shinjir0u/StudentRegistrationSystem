@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+   <definition name="mainTemplate" template="/viewPages/layout/AdminMasterPage.jsp">
+      <put-attribute name="title"  value=""/>
+      <put-attribute name="header" value="/viewPages/layout/header.jsp"/>
+      <put-attribute name="masterCss" value="css/master.css" type="string"/>
+      <put-attribute name="body"   value=""/>
+      <put-attribute name="footer"   value="/viewPages/layout/footer.jsp"/>
+   </definition>
+   
+   <definition name="login" extends="mainTemplate">
+      <put-attribute name="title"  value="Login page"/>
+      <put-attribute name="header" value=""/>
+      <put-attribute name="body"   value="/viewPages/admin/login.jsp"/>
+      <put-attribute name="footer"   value=""/>     
+   	</definition>
+   	
+	<definition name="home" extends="mainTemplate">
+      <put-attribute name="title"  value="Admin Home Page"/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminHomePage.jsp"/>      
+   	</definition>
+   
+   <definition name="checkAll" extends="mainTemplate">
+      <put-attribute name="title"  value="Check All Students"/>
+      <put-attribute name="pageCss" value="css/check.css"/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminCheckAllStuPage.jsp"/>      
+   </definition>
+   <definition name="checkOneStu" extends="mainTemplate">
+      <put-attribute name="title"  value="Check One Student"/>
+      <put-attribute name="pageCss" value="css/check.css"/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminCheckOneStuPage.jsp"/>      
+   </definition>
+   <definition name="search" extends="mainTemplate">
+      <put-attribute name="title"  value="Enter the fields you want to search"/>
+      <put-attribute name="pageCss" value=""/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminSearchPage.jsp"/>      
+   </definition>
+   <definition name="filter" extends="mainTemplate">
+      <put-attribute name="title"  value="Your search result"/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminFilterResultPagination.jsp"/>      
+   </definition>
+</tiles-definitions>

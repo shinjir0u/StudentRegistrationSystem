@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+   <definition name="mainTemplate" template="/viewPages/layout/AdminMasterPage.jsp">
+      <put-attribute name="title"  value=""/>
+      <put-attribute name="header" value="/viewPages/layout/header.jsp"/>
+      <put-attribute name="masterCss" value="css/master.css" type="string"/>
+      <put-attribute name="body"   value=""/>
+      <put-attribute name="footer"   value="/viewPages/layout/footer.jsp"/>
+   </definition>
+   
+   <definition name="login" extends="mainTemplate">
+      <put-attribute name="title"  value="Login page"/>
+      <put-attribute name="header" value=""/>
+      <put-attribute name="body"   value="/viewPages/admin/login.jsp"/>
+      <put-attribute name="footer"   value=""/>     
+   	</definition>
+   	
+	<definition name="home" extends="mainTemplate">
+      <put-attribute name="title"  value="Admin Home Page"/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminHomePage.jsp"/>      
+   	</definition>
+   	
+   	<definition name="check" extends="mainTemplate">
+      <put-attribute name="title"  value="Admin Views Enrolled Student Page"/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminCheck.jsp"/>      
+   	</definition>
+   	
+   	<definition name="show_details" extends="mainTemplate">
+      <put-attribute name="title"  value="Student details"/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminShowDetails.jsp"/>      
+   	</definition>
+   	
+   	<definition name="insert" extends="mainTemplate">
+      <put-attribute name="title"  value="Admin Enroll Page"/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminEnrollPage.jsp"/>      
+   	</definition>
+   	
+   	<definition name="search" extends="mainTemplate">
+      <put-attribute name="title"  value="Admin Search Page"/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminSearchPage.jsp"/>      
+   	</definition>
+   	
+   	<definition name="filter_result" extends="mainTemplate">
+      <put-attribute name="title"  value="Results"/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminFilterResultPagination.jsp"/>      
+   	</definition>
+   	
+</tiles-definitions>

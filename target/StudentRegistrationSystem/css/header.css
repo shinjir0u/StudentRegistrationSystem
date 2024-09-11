@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppings:wght@300;400;500;600;700;800;900;&display=swap');
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppings', sans-serif;
+}
+
+.myHeader{
+	width: 100%;
+	min-height: 50vh;
+	background: #d9d5d9;
+}
+.myHeader .section{
+	width: auto;
+	height: auto;
+	background: #ffffff;
+}
+
+.myHeader .section img{
+	max-width: 90%;
+	max-height: 90%;
+}
+
+nav{
+	background: #c0c0c0;
+	width: 100%;
+	height: auto;
+	padding: 25px 10%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: absolute;
+}
+
+.user-pic{
+	width: 50px;
+	border-radius: 50%;
+	cursor: pointer;
+	margin-left: 30px;
+}
+
+nav ul{
+	width: 100%;
+	text-align: right;
+}
+
+nav ul li{
+	display: inline-block;
+	list-style: none;
+	margin: 30 10 px;
+}
+
+nav ul li .btn{
+	width: 120px;
+	height: 50px;
+	background: #ffffff;
+	border: none;
+	outline: none;
+	border-radius: 50px;
+	box-shadow: 0 2px 5px rgba(0,0,0,.5);
+	cursor: pointer;
+	font-size: 16px;
+	color: #222;
+	font-weight: 600;
+	transition-duration: 0.4s;
+}
+
+nav ul li .btn:hover {
+  background: #ff8000;
+}
+
+.sub-menu-wrap{
+	position: absolute;
+	top: 100%;
+	right: 10%;
+	width: 320px;
+	max-height: 0px;
+	overflow: hidden;
+	transition: max-height 0.5s;
+}
+/* .sub-menu-wrap.open-menu{
+	max-height: 400px;	
+} */
+
+.sub-menu{
+	max-height: 400px;	
+	background: #ff00ff;
+	padding: 20px;
+	margin: 10px;
+}
+
+.user-info{
+	display: flex;
+	align-items: center;
+}
+
+.user-info h2{
+	font-weight: 500;
+}
+
+.user-info img{
+	width: 60px;
+	border-radius: 50%;
+	margin-right: 15px;
+}
+
+.open-menu hr{
+	border: 0;
+	height: 1px;
+	width: 100%;
+	background: #ccc;
+	margin: 15px 0 10px;
+}
+	
+.sub-menu-link{
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: #525252;
+	margin: 12px 0;
+}
+
+.sub-menu-link img{
+	width: 40px;
+	background: #e5e5e5;
+	border-radius: 50%;
+	padding: 8px;
+	margin-right: 15px;
+}
+.sub-menu-link p{
+	width: 100%
+}
+
+.sub-menu-link span{
+	font-size: 22px;
+	transition: transform 0.5s;
+}
+
+.sub-menu-link:hover span{
+	transform: translateX(5px);
+}
+
+.sub-menu-link:hover p{
+	font-weight: 600;
+}

@@ -1,0 +1,5 @@
+action\AdminCheckOneStuAction.class
+example\Action.class
+action\AdminSearchAction.class
+action\AdminCheckAllStuAction.class
+action\LoginAction.class
