@@ -152,7 +152,7 @@
 
 		            <s:div class="form-group">
 		                <s:select name="studentMajor" list="data[3]" label="Major" 
-		                		listKey="key" listValue="value" headerKey="0" headerValue=""/>
+		                		listKey="key" listValue="value" headerKey="0" headerValue="" />
 		            </s:div>
 
         		    <s:div class="form-group">

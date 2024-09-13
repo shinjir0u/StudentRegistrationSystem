@@ -35,10 +35,18 @@
             font-weight: normal;
         }
 
-        input[type="text"], input[type="email"], input[type="date"], label, select {
+        input[type="text"], input[type="email"], input[type="date"], select {
             flex: 2;
             width: 100%;
             padding: 8px;
+           
+        }
+        
+        input:disabled {
+        	background-color: rgba(128, 128, 128, 0.3);
+        	border: none;
+        	opacity: 1;
+        	color: black;
         }
 
         input[type="radio"] {
@@ -113,102 +121,125 @@
             	Say something here
                 <!-- This is where the content for each action would be displayed -->
                 <s:form action="enroll" method="post">
+                	<s:set value="student.dateOfBirth" var="studentDate"/>
+                	<s:set value="student.guardian" var="guardian"/>
+                	<s:set value="student.nrc" var="studentNrc"/>     
+                	<s:set value="#guardian.nrc" var="guardianNrc"/>        
+                	<s:set value="#guardian.dateOfBirth" var="guardianDate"/>   	
 
 					<tr class="section-title"><td  colspan="2">Academic Information</tr>
 
     		        <s:div class="form-group">
-        		        <s:label name="studentName" label="Student Name" />
+        		        <s:textfield disabled="true" name="studentName" label="Student Name" value="%{student.name}"/>
             		</s:div>
 	
 					<s:div class="form-group">
-            		    <s:label name="studentCardId" label="Student Card ID"/>
+            		    <s:textfield disabled="true" name="studentCardId" label="Student Card ID" value="%{student.cardId}"/>
            			</s:div>
            			
 		            <s:div class="form-group">
-		                <s:label name="rollNo" label="Roll No"/>
+		                <s:textfield disabled="true" name="rollNo" label="Roll No" value="%{student.rollNo}"/>
 		            </s:div>
 
 		            <s:div class="form-group">
-		                <s:label name="major" label="Major" />
+		                <s:textfield disabled="true" name="major" label="Major" value="%{student.major}"/>
 		            </s:div>
 
         		    <s:div class="form-group">
-            		    <s:label name="currentYear" label="Current Year"/>
+            		    <s:textfield disabled="true" name="currentYear" label="Current Year" />
       				</s:div>
 
         		    <s:div class="form-group">
-        		        <s:label name="academicYear" label="Academic Year"/>
+        		        <s:textfield disabled="true" name="academicYear" label="Academic Year"/>
     		        </s:div>
 					 
 	    		    <tr class="section-title"><td colspan="2">Personal Information</td></tr>
             
         		    <s:div class="form-group">
-        		        <s:label label="NRC" name="nrcStateNumber" />
+        		        <s:textfield disabled="true" label="NRC" name="nrcStateNumber" value="%{#studentNrc.stateNumber + '/' + #studentNrc.township + '(' +  #studentNrc.nationality + ')' + #studentNrc.number}"/>
        			    </s:div>
 
      		       	<s:div class="form-group">
-     		           	<s:label name="state" label="State" />
+     		           	<s:textfield disabled="true" name="state" label="State" value="%{student.state}"/>
         		    </s:div>
 
        			    <s:div class="form-group">
-            		    <s:label name="township" label="Township"/>
+            		    <s:textfield disabled="true" name="township" label="Township" value="%{student.township}"/>
             		</s:div>
 
             		<s:div class="form-group">
-                		<s:label name="address" label="Address"/>
+                		<s:textfield disabled="true" name="address" label="Address" value="%{student.address}"/>
 		            </s:div>
 
         		    <s:div class="form-group gender-options">
-            		    <s:label name="gender" label="Gender" />
+            		    <s:textfield disabled="true" name="gender" label="Gender" value="%{student.gender}"/>
            			</s:div>
 
            			<s:div class="form-group">
-           			    <s:label name="phoneNumber" label="Phone Number"/>
+           			    <s:textfield disabled="true" name="phoneNumber" label="Phone Number" value="%{student.phoneNumber}"/>
            			</s:div>
 		
            			<s:div class="form-group">
-                		<s:label name="email" label="Email"/>
+                		<s:textfield disabled="true" name="email" label="Email" value="%{student.email}"/>
 		            </s:div>
 
         		    <s:div class="form-group">
-            		    <s:label name="dateOfBirth" label="Date of Birth" />
+            		    <s:textfield disabled="true" name="dateOfBirth" label="Date of Birth" value="%{#studentDate.day + '-' + #studentDate.month + '-' +  #studentDate.year}"/>
          		   	</s:div>
 		
 		            <s:div class="form-group">
-		                <s:label name="religion" label="Religion"/>
+		                <s:textfield disabled="true" name="religion" label="Religion" value="%{student.religion}"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:label name="nationality" label="Nationality" />
+		                <s:textfield disabled="true" name="nationality" label="Nationality" value="%{student.nationality}"/>
 		            </s:div>
 		
 		           	<tr class="section-title"><td colspan="2">Guardian Information</td></tr>
 		
 		            <s:div class="form-group">
-		                <s:label name="guardianName" label="Guardian Name"/>
+		                <s:textfield disabled="true" name="guardianName" label="Guardian Name" value="%{#guardian.name}"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:label name="relativeType" label="Relative Type"/>
+		                <s:textfield disabled="true" name="relativeType" label="Relative Type" value="%{#guardian.type}"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:label label= "Guardian NRC" name="guardianNrcStateNumber"/>
+		                <s:textfield disabled="true" label= "Guardian NRC" name="guardianNrcStateNumber" value="%{#guardianNrc.stateNumber + '/' + #guardianNrc.township + '(' + #guardianNrc.nationality + ')' + #guardianNrc.number}"/>
+		            </s:div>
+		
+		            <s:div class="form-group">
+		                <s:textfield disabled="true" name="guardianState" label="Guardian State" value="%{#guardian.state}"/>
+		            </s:div>
+		
+		            <s:div class="form-group">
+		                <s:textfield disabled="true" name="guardianTownship" label="Guardian Township" value="%{#guardian.township}"/>
+		            </s:div> 
+		
+		            <s:div class="form-group">
+		                <s:textfield disabled="true"  name="guardianAddress" label="Guardian Address" value="%{#guardian.address}"/>
+		            </s:div>
+		
+					<s:div class="form-group">
+           			    <s:textfield disabled="true" name="phoneNumber" label="Phone Number" value="%{#guardian.phoneNumber}"/>
+           			</s:div>
+		
+           			<s:div class="form-group">
+                		<s:textfield disabled="true" name="email" label="Email" value="%{#guardian.email}"/>
+		            </s:div>
 
+        		    <s:div class="form-group">
+            		    <s:textfield disabled="true" name="dateOfBirth" label="Date of Birth" value="%{#guardianDate.day + '-' + #guardianDate.month + '-' +  #guardianDate.year}"/>
+         		   	</s:div>
+		
+		            <s:div class="form-group">
+		                <s:textfield disabled="true" name="religion" label="Religion" value="%{student.religion}"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:label name="guardianState" label="Guardian State"/>
+		                <s:textfield disabled="true" name="nationality" label="Nationality" value="%{student.nationality}"/>
 		            </s:div>
-		
-		            <s:div class="form-group">
-		                <s:label name="guardianTownship" label="Guardian Township"/>
-		            </s:div>
-		
-		            <s:div class="form-group">
-		                <s:label name="guardianAddress" label="Guardian Address"/>
-		            </s:div>
-		
 		            <tr class="section-title"><td colspan="2">Academic Record</td></tr>
 		
 					<table border="1px solid black" style="width: 300px; margin-left: auto; margin-right: auto">

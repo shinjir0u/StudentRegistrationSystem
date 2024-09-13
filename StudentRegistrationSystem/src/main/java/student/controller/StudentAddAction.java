@@ -1,33 +1,10 @@
 package student.controller;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.management.relation.RelationType;
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import com.opensymphony.xwork2.ActionSupport;
-
-import data.AcademicYear;
-import data.DateOfBirthDay;
-import data.DateOfBirthMonth;
-import data.DateOfBirthYear;
-import data.Gender;
-import data.Major;
-import data.MatriculationSubject;
-import data.Nationality;
-import data.NrcNationality;
-import data.NrcState;
-import data.NrcStateNumber;
-import data.RelativeType;
-import data.Religion;
-import data.State;
-import data.StudentType;
-import data.Township;
+import data.*;
 import student.dao.StudentDAO;
 import student.model.*;
 

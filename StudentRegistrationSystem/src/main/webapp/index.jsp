@@ -8,7 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<s:url action="adminEnr	ollTest" var="admin"></s:url>
+	<s:url action="adminEnrollTest" var="admin"></s:url>
 	<s:a href="%{admin}" label="Admin Enroll">Admin Enroll</s:a>
+	
+	<s:url action="adminRetrieveTest" var="retrieve"></s:url>
+	<s:a href="%{retrieve}">Retrieve</s:a>
 </body>
 </html>

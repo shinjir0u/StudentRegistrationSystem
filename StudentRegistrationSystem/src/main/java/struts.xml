@@ -14,5 +14,9 @@
         <action name="adminEnroll" class="student.controller.StudentAddAction" method="addStudentToDatabase">
         	<result name="success">/databaseSuccess.jsp</result>
         </action>
+        
+        <action name="adminRetrieveTest" class="student.controller.StudentRetrieveAction" method="retrieveStudent">
+        	<result name="success">/viewPages/admin/AdminStudentCheckPage.jsp</result>
+        </action>
     </package>
 </struts>

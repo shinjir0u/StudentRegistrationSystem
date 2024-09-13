@@ -1,6 +1,7 @@
 package student.model;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Student extends Person {
 	private String cardId;
@@ -11,13 +12,14 @@ public class Student extends Person {
 	private String photo;
 	private Guardian guardian;
 	private Matriculation matriculation;
-	private HashMap<String, String> academicRecord;
+	private List<AcademicRecord> academicRecords;
 	
-	public HashMap<String, String> getAcademicRecord() {
-		return academicRecord;
+	
+	public List<AcademicRecord> getAcademicRecords() {
+		return academicRecords;
 	}
-	public void setAcademicRecord(HashMap<String, String> academicRecord) {
-		this.academicRecord = academicRecord;
+	public void setAcademicRecords(List<AcademicRecord> academicRecords) {
+		this.academicRecords = academicRecords;
 	}
 	public Matriculation getMatriculation() {
 		return matriculation;
