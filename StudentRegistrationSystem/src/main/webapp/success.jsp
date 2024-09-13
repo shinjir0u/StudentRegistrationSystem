@@ -1,13 +1,13 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>index</title>
+<title>Success</title>
 </head>
 <body>
-    <tiles:insertDefinition name="login"/>
+	<h2>Success!!</h2>
 </body>
 </html>
