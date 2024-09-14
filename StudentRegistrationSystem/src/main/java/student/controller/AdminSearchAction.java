@@ -1,4 +1,4 @@
-package action;
+package student.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;

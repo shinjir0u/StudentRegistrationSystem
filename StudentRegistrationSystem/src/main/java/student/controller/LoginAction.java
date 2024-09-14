@@ -1,14 +1,13 @@
-package action;
+package student.controller;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class AdminEnrollStudentAction extends ActionSupport{
+public class LoginAction extends ActionSupport {
 
 	@Override
 	public String execute() throws Exception {
-		// TODO Auto-generated method stub
+		System.out.println("hello login aciton");
 		return SUCCESS;
 	}
 	
 }
-

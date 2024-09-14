@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Admin Student Enrollment Form</title>
-    <link type="text/css" rel="stylesheet" href="../../css/form.css">
+    <link type="text/css" rel="stylesheet" href="./css/form.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -108,26 +108,6 @@
      <div class="container">
         <h1>Home</h1>
         <div class="panel">
-            <div class="menu">
-                <s:form action="checkAction" method="post">
-                    <button type="submit">Check</button>
-                </s:form>
-                <s:form action="insertAction" method="post">
-                    <button type="submit">Insert</button>
-                </s:form>
-                <s:form action="searchAction" method="post">
-                    <button type="submit">Search</button>
-                </s:form>
-                <s:form action="searchAction" method="post">
-                    <button type="submit">Upload News</button>
-                </s:form>
-                <s:form action="searchAction" method="post">
-                    <button type="submit">Settings</button>
-                </s:form>
-                <s:form action="searchAction" method="post">
-                    <button type="submit">Logout</button>
-                </s:form>
-            </div>
             <div class="content">
                 <!-- This is where the content for each action would be displayed -->
                 <s:form action="adminEnroll" method="post">

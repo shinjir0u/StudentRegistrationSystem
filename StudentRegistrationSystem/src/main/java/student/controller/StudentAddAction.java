@@ -16,7 +16,6 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 
 	public String execute() {
 		setDataValues();
-		System.out.println(data);
 		return SUCCESS;
 	}
 	

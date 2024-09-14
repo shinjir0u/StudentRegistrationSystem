@@ -23,22 +23,22 @@
         	<result name="success">/viewPages/admin/AdminStudentCheckPage.jsp</result>
         </action>
 		
-		<action name="login" class="action.LoginAction" method="execute">
+		<action name="login" class="student.controller.LoginAction" method="execute">
             <result name="success" type="tiles">home</result>
         </action>
-        <action name="check" class="action.AdminCheckAction" method="execute">
+        <action name="check" class="student.controller.AdminCheckAction" method="execute">
             <result name="success" type="tiles">check</result>
         </action>
-        <action name="showDetails" class="action.AdminCheckAction" method="showStudentDetails">
+        <action name="showDetails" class="student.controller.AdminCheckAction" method="showStudentDetails">
             <result name="success" type="tiles">show_details</result>
         </action>
-        <action name="insert" class="action.AdminEnrollStudentAction" method="execute">
+        <action name="insert" class="student.controller.StudentAddAction" method="execute">
             <result name="success" type="tiles">insert</result>
         </action>
-        <action name="search" class="action.AdminSearchAction" method="display">
+        <action name="search" class="student.controller.AdminSearchAction" method="display">
             <result name="success" type="tiles">search</result>
         </action>
-        <action name="filter" class="action.AdminSearchAction" method="execute">
+        <action name="filter" class="student.controller.AdminSearchAction" method="execute">
             <result name="success" type="tiles">filter_result</result>
         </action>
         <action name="studentEnroll" class="student.controller.StudentAddAction" method="addStudentToHashmap">
