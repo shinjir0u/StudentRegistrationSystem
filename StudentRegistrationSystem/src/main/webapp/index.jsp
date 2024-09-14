@@ -1,13 +1,9 @@
-<<<<<<< HEAD
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
-=======
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="s" uri="/struts-tags" %>
->>>>>>> 6f81c8e1a5862aa5a4a72d115e6638d71506bcc8
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +12,6 @@
 	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-<<<<<<< HEAD
-    <!-- <tiles:insertDefinition name="login"/> -->
-    <s:url action="adminRetrieveTest" var="retrieve"></s:url>
-    <s:a href="%{retrieve}">Retrieve</s:a>
-=======
 		<center>
 			<img src="resources\images\logo.PNG" 
 			width="80" height="75">
@@ -51,6 +42,6 @@
 						</a>
 					</p>
 		</div>
->>>>>>> 6f81c8e1a5862aa5a4a72d115e6638d71506bcc8
+
 </body>
 </html>
