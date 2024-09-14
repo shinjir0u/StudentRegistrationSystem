@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Admin Student Check Page</title>
-    <link type="text/css" rel="stylesheet" href="../../css/baseTemplate.css">
+    <link type="text/css" rel="stylesheet" href="./css/baseTemplate.css">
     <style>
         body {
             font-family: Arial, sans-serif;
