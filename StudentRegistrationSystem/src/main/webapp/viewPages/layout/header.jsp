@@ -5,22 +5,13 @@
 <head>
 	<title>Header</title>
 	<link rel="stylesheet" href="../../css/header.css">
-	<!-- <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> -->
-	<!-- <script>
-		let subMenu= document.getElementById("subMenu");
-
-		functin toggleMenu(){
-			subMenu.classList.toggle("open-menu");
-		}
-	</script> -->
 </head>
 <body>
 	<div class="myHeader">
 		<div class="section">
-			<img src="D:\j2ee-Year4-Sem2-workspace-ett\StudentRegistrationSystem_TestingTiles\
-			src\main\webapp\resources\images\logo.PNG" 
-			class="logo"/>
-		</div>
+			<img src="resources/images/header.PNG" 
+			/>
+	</div>
 		<nav>
 			<ul>
 				<li>
@@ -44,41 +35,46 @@
 					</form>
 				</li>
 			</ul>
-			<img src="D:\j2ee-Year4-Sem2-workspace-ett\StudentRegistrationSystem_TestingTiles\
-			src\main\webapp\resources\images\user.png" 
-			class="user-pic" onClick="toggleMenu()">
 			
-			<div class="sub-menu-wrap" id="subMenu">
+				<img src="resources/images/user.png" 
+					class="user-pic" onClick="togglemenu()">
+			
+			<div class="sub-menu-wrap" id="sub-menu-wrap">
 			<div class="sub-menu">
 				<div class="user-info">
-					<img src="D:\j2ee-Year4-Sem2-workspace-ett\StudentRegistrationSystem_TestingTiles\src\main\webapp\resources\images\user.png">
-					<h2>Eaint Thet Tun</h2>
+					<img src="resources/images/user.png">
+					<p>Eaint Thet Tun</p>
 				</div>
 				<hr>
 				
 				<a href="#" class="sub-menu-link">
-					<img src="D:\j2ee-Year4-Sem2-workspace-ett\StudentRegistrationSystem_TestingTiles\src\main\webapp\resources\images\profile.png">
-					<p>Edit Profile</p>
+					<img src="resources/images/profile.png">
+					Edit Profile
 					<span>></span>
 				</a>
 				<a href="#" class="sub-menu-link">
-					<img src="D:\j2ee-Year4-Sem2-workspace-ett\StudentRegistrationSystem_TestingTiles\src\main\webapp\resources\images\setting.png">
-					<p>Settings & Privacy</p>
+					<img src="resources/images/setting.png">
+					Settings & Privacy
 					<span>></span>
 				</a>
 				<a href="#" class="sub-menu-link">
-					<img src="D:\j2ee-Year4-Sem2-workspace-ett\StudentRegistrationSystem_TestingTiles\src\main\webapp\resources\images\help.png">
-					<p>Help & Support</p>
+					<img src="resources/images/help.png">
+					Help & Support
 					<span>></span>
 				</a>
 				<a href="#" class="sub-menu-link">
-					<img src="D:\j2ee-Year4-Sem2-workspace-ett\StudentRegistrationSystem_TestingTiles\src\main\webapp\resources\images\logout.png">
-					<p>Logout</p>
+					<img src="resources/images/logout.png">
+					Logout
 					<span>></span>
 				</a>
 			</div>
 			</div>
-		</nav>
-	</div>
+	</nav>
+	<script>
+		let submenu=document.getElementById("sub-menu-wrap");
+		function togglemenu(){
+			submenu.classList.toggle("open-class");
+		}
+	</script>
 </body>
 </html>

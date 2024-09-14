@@ -1,4 +1,8 @@
-<%@ taglib prefix="s" uri="/struts-tags" %>   
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" href="../../css/form.css">
+</head>   
         	<h1>Enter fields you want to search</h1>
         	<div class="container">
         	<div class="border">
