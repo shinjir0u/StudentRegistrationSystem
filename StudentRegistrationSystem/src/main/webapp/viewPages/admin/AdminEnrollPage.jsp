@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Admin Student Enrollment Form</title>
-    <link type="text/css" rel="stylesheet" href="./css/baseTemplate.css">
+    <link type="text/css" rel="stylesheet" href="../../css/form.css">
     <style>
         body {
             font-family: Arial, sans-serif;
