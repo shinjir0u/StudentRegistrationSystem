@@ -1,4 +1,4 @@
-package action;
+package admin.action;
 
 import java.util.ArrayList;
 import java.util.Arrays;

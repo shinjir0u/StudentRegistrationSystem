@@ -15,6 +15,7 @@
 <body>
     	<ul>
 			<li><tiles:insertAttribute name="header"/><br></li>
+			<li><tiles:insertAttribute name="navBar" /></li>
 			<li><tiles:insertAttribute name="body" /></li>
 			<li><tiles:insertAttribute name="footer" /></li>
     	</ul>
