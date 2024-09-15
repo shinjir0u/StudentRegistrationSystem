@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:StudentRegistrationSystem/src/main/java/admin/action/AdminSearchAction.java
-package admin.action;
-========
 package student.controller;
->>>>>>>> 50d5ce762d307bba80a288839a6a11c278cff9a9:StudentRegistrationSystem/src/main/java/student/controller/AdminSearchAction.java
 
 import java.util.ArrayList;
 import java.util.Arrays;
