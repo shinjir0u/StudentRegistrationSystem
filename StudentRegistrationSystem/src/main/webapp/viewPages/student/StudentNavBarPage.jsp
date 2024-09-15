@@ -6,38 +6,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../../css/student_nav_bar.css">
 </head>
 <body>
 		<nav>
 			<ul>
 				<li>
-					<s:form action="studentViewProfile" method="post">
+					<s:form action="view" method="post">
 						<button type="submit" class="btn">View Profile</button>
 					</s:form>
 				</li>
 				<li>
-					<s:form action="studentEnroll" method="post">
+					<s:form action="enroll" method="post">
 						<button type="submit" class="btn">Enroll</button>
 					</s:form>
 				</li>
 				<li>
-					<s:form action="studentContact" method="post">
+					<s:form action="contact" method="post">
 						<button type="submit" class="btn">Contact</button>
 					</s:form>
 				</li>
-				<li>
-					<s:form action="logout" method="post">
-						<button type="submit" class="btn">Logout</button>
-					</s:form>
-				</li>
 			</ul>
+			<img src="resources/images/student-profile-pic.jpg" 
+					class="user-pic" onClick="togglemenu()">
 			
-			
-			<%-- <div class="sub-menu-wrap" id="sub-menu-wrap">
+			<div class="sub-menu-wrap" id="sub-menu-wrap">
 			<div class="sub-menu">
 				<div class="user-info">
-					<img src="resources/images/user.png">
-					<p>Eaint Thet Tun</p>
+					<img src="resources/images/student-profile-pic.jpg">
+					<p>Victoria</p>
 				</div>
 				<hr>
 				
@@ -69,6 +66,6 @@
 		function togglemenu(){
 			submenu.classList.toggle("open-class");
 		}
-	</script> --%>
+	</script>
 </body>
 </html>

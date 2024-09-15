@@ -14,6 +14,12 @@ public class StudentRetrieveAction extends ActionSupport {
 	private StudentDAO studentDAO = new StudentDAO();
 	HashMap<Integer, Student> students;
 	Student student = new Student();
+	
+	@Override
+	public String execute() throws Exception {
+		System.out.println("hello retrieve");
+		return SUCCESS;
+	}
 
 	public String retrieveStudentFromDatabase() {
 		setStudentValuesFromDatabase();

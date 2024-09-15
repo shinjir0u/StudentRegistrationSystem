@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../../css/admin_nav_bar.css">
 </head>
 <body>
 		<nav>
@@ -32,7 +33,7 @@
 				</li>
 			</ul>
 			
-				<img src="resources/images/user.png" 
+			<img src="resources/images/user.png" 
 					class="user-pic" onClick="togglemenu()">
 			
 			<div class="sub-menu-wrap" id="sub-menu-wrap">

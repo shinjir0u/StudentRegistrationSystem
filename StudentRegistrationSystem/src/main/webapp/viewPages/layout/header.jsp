@@ -7,11 +7,11 @@
 	<link rel="stylesheet" href="../../css/header.css">
 </head>
 <body>
-	<div class="myHeader">
+		<div class="myHeader">
 		<div class="section">
 			<img src="resources/images/header.PNG" 
-			/>
+			class="logo"/>
 		</div>
-	</div>
+		</div>
 </body>
 </html>

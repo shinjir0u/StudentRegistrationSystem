@@ -1,4 +1,11 @@
 @charset "UTF-8";
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppings', sans-serif;
+}
+
 nav{
 	background: #d4d4d4;
 	width: 100%;

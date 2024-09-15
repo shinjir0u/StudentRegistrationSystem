@@ -6,11 +6,10 @@
 	box-sizing: border-box;
 	font-family: 'Poppings', sans-serif;
 }
-
 .myHeader{
 	width: 100%;
-	min-height: 50vh;
-	background: #d9d5d9;
+	min-height: 25vh;
+	background: #ffffff;
 }
 .myHeader .section{
 	width: auto;

@@ -74,4 +74,9 @@
       <put-attribute name="body"   value="/viewPages/student/StudentContactPage.jsp"/>      
    	</definition>
    	
+   	<definition name="student_academic_records" extends="mainTemplate">
+      <put-attribute name="title"  value="Student Academic Records"/>
+      <put-attribute name="navBar"   value="/viewPages/student/StudentNavBarPage.jsp"/>
+      <put-attribute name="body"   value="/viewPages/student/StudentAcademicRecordsPage.jsp"/>      
+   	</definition>
 </tiles-definitions>
