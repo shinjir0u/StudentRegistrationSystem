@@ -65,7 +65,7 @@ CREATE TABLE public.students (
     student_type integer NOT NULL,
     student_name character varying(100) NOT NULL,
     date_of_birth date NOT NULL,
-    phone_number text NOT NULL,
+    phone_number character varying(15) NOT NULL,
     email character varying(50) NOT NULL,
     student_card_id character varying(20),
     nrc integer NOT NULL,
@@ -232,6 +232,7 @@ ALTER TABLE public.matriculation_subjects OWNER TO postgres;
 
 CREATE VIEW public.matriculation_marks_view AS
  SELECT m.student_id,
+    ms.subject_id,
     ms.subject_name,
     mm.mark
    FROM public.matriculation m,
@@ -479,11 +480,10 @@ CREATE TABLE public.relatives (
     relative_id integer NOT NULL,
     student_id integer NOT NULL,
     relative_name character varying(50) NOT NULL,
-    phone_number text NOT NULL,
+    phone_number character varying(15) NOT NULL,
     email character varying(50) NOT NULL,
     nrc integer NOT NULL,
     township integer NOT NULL,
-    gender integer NOT NULL,
     address character varying(100) NOT NULL,
     nationality integer NOT NULL,
     religion integer NOT NULL,
@@ -590,20 +590,18 @@ CREATE VIEW public.relative_view AS
     r.date_of_birth,
     r.phone_number,
     r.email,
-    t.township_name,
+    w.township_name,
     sta.state_name,
     r.address,
     concat(nsn.nrc_state_number, ns.nrc_state, '(', nn.nrc_nationality, ')', n.number) AS nrc,
-    g.gender_name,
     nat.nationality_name,
     rel.religion_name,
     rt.relative_type
    FROM public.students s,
     public.states sta,
-    public.townships t,
+    public.townships w,
     public.religions rel,
     public.nationalities nat,
-    public.genders g,
     public.nrc n,
     public.nrc_state_number nsn,
     public.nrc_state ns,
@@ -611,7 +609,7 @@ CREATE VIEW public.relative_view AS
     public.relative_types rt,
     public.type_of_relation tor,
     public.relatives r
-  WHERE ((s.student_type = r.student_id) AND (sta.state_id = t.state_id) AND (r.township = t.township_id) AND (r.religion = rel.religion_id) AND (r.nationality = nat.nationality_id) AND (r.gender = g.gender_id) AND (r.nrc = n.nrc_id) AND (n.state = ns.nrc_state_id) AND (n.nationality = nn.nrc_nationality_id) AND (ns.nrc_state_number = nsn.nrc_state_number_id) AND (r.relative_id = tor.relative_id) AND (rt.relative_type_id = tor.relative_type_id));
+  WHERE ((sta.state_id = w.state_id) AND (r.township = w.township_id) AND (r.religion = rel.religion_id) AND (r.nationality = nat.nationality_id) AND (r.nrc = n.nrc_id) AND (n.state = ns.nrc_state_id) AND (n.nationality = nn.nrc_nationality_id) AND (ns.nrc_state_number = nsn.nrc_state_number_id) AND (r.relative_id = tor.relative_id) AND (rt.relative_type_id = tor.relative_type_id) AND (s.student_id = r.student_id));
 
 
 ALTER VIEW public.relative_view OWNER TO shinji;
@@ -988,6 +986,9 @@ COPY public.majors (major_id, major_name, description) FROM stdin;
 --
 
 COPY public.matriculation (matriculation_id, student_id, place, roll_no, year) FROM stdin;
+1	3	Mandalay	kj-3829	2028
+2	6	Mandalay	kj-3829	2028
+3	7	fdf	fdf	4343
 \.
 
 
@@ -996,6 +997,24 @@ COPY public.matriculation (matriculation_id, student_id, place, roll_no, year) F
 --
 
 COPY public.matriculation_marks (matriculation_id, subject_id, mark) FROM stdin;
+1	1	76
+1	2	87
+1	3	65
+1	4	43
+1	5	78
+1	6	75
+2	1	76
+2	2	87
+2	3	65
+2	4	43
+2	5	78
+2	6	75
+3	1	54
+3	2	677
+3	3	53
+3	4	57
+3	5	53
+3	9	67
 \.
 
 
@@ -1039,6 +1058,12 @@ COPY public.nationalities (nationality_id, nationality_name) FROM stdin;
 --
 
 COPY public.nrc (nrc_id, state, nationality, number) FROM stdin;
+5	2	1	434554
+6	23	1	424344
+10	12	1	434554
+11	16	1	424344
+12	4	1	32343
+13	22	1	545454
 \.
 
 
@@ -1527,7 +1552,10 @@ COPY public.relative_types (relative_type_id, relative_type) FROM stdin;
 -- Data for Name: relatives; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.relatives (relative_id, student_id, relative_name, phone_number, email, nrc, township, gender, address, nationality, religion, date_of_birth) FROM stdin;
+COPY public.relatives (relative_id, student_id, relative_name, phone_number, email, nrc, township, address, nationality, religion, date_of_birth) FROM stdin;
+3	3	May May	9377483748	maymay@gmail.cm	6	25	adr2	2	1	2007-02-06
+6	6	May May	9377483748	maymay@gmail.cm	11	25	adr2	2	1	2007-02-06
+7	7	mama	9573748573	mama@gmail.com	13	18	adf2	8	4	1980-08-24
 \.
 
 
@@ -1585,6 +1613,9 @@ COPY public.student_types (student_type_id, student_type_name) FROM stdin;
 --
 
 COPY public.students (student_id, major, township, student_type, student_name, date_of_birth, phone_number, email, student_card_id, nrc, gender, nationality, religion, photo, address) FROM stdin;
+3	2	20	2	Htoo Aung Wai	1986-02-04	9475837395	htoo@gmail.com	18/288393	5	1	2	2	null	adr
+6	3	20	2	Htoo	1986-03-04	9475837395	htoo@gmail.com	18/2883	10	1	2	2	null	adr
+7	5	18	2	Thant	1981-11-24	654554545	thant@gmail.com	383298	12	2	7	2	null	adfdf
 \.
 
 
@@ -2023,6 +2054,9 @@ COPY public.townships (township_id, state_id, township_name) FROM stdin;
 --
 
 COPY public.type_of_relation (relative_id, relative_type_id) FROM stdin;
+3	2
+6	2
+7	8
 \.
 
 
@@ -2051,7 +2085,7 @@ SELECT pg_catalog.setval('public.majors_major_id_seq', 2, true);
 -- Name: matriculation_matriculation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.matriculation_matriculation_id_seq', 1, false);
+SELECT pg_catalog.setval('public.matriculation_matriculation_id_seq', 3, true);
 
 
 --
@@ -2079,7 +2113,7 @@ SELECT pg_catalog.setval('public.nrc_nationality_nrc_nationality_id_seq', 1, fal
 -- Name: nrc_nrc_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.nrc_nrc_id_seq', 1, false);
+SELECT pg_catalog.setval('public.nrc_nrc_id_seq', 13, true);
 
 
 --
@@ -2107,7 +2141,7 @@ SELECT pg_catalog.setval('public.relative_types_relative_type_id_seq', 1, false)
 -- Name: relatives_relative_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.relatives_relative_id_seq', 1, false);
+SELECT pg_catalog.setval('public.relatives_relative_id_seq', 7, true);
 
 
 --
@@ -2135,7 +2169,7 @@ SELECT pg_catalog.setval('public.student_types_student_type_id_seq', 5, true);
 -- Name: students_student_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.students_student_id_seq', 1, false);
+SELECT pg_catalog.setval('public.students_student_id_seq', 7, true);
 
 
 --
@@ -2487,14 +2521,6 @@ ALTER TABLE ONLY public.nrc
 
 ALTER TABLE ONLY public.nrc_state
     ADD CONSTRAINT nrc_state_nrc_state_number_fkey FOREIGN KEY (nrc_state_number) REFERENCES public.nrc_state_number(nrc_state_number_id);
-
-
---
--- Name: relatives relatives_gender_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.relatives
-    ADD CONSTRAINT relatives_gender_fkey FOREIGN KEY (gender) REFERENCES public.genders(gender_id);
 
 
 --

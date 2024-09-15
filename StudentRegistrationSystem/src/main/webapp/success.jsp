@@ -9,5 +9,8 @@
 </head>
 <body>
 	<h2>Success!!</h2>
+	<s:form action="studentEnroll">
+		<s:submit value="submit"></s:submit>
+	</s:form>
 </body>
 </html>

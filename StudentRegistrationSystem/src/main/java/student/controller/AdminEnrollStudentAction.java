@@ -1,8 +1,8 @@
-package student.action;
+package student.controller;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class StudentContactAction extends ActionSupport{
+public class AdminEnrollStudentAction extends ActionSupport{
 
 	@Override
 	public String execute() throws Exception {

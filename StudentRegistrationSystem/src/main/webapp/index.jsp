@@ -1,6 +1,9 @@
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="s" uri="/struts-tags" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,5 +42,6 @@
 						</a>
 					</p>
 		</div>
+
 </body>
 </html>

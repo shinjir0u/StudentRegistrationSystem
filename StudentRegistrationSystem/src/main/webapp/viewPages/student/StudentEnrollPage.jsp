@@ -9,9 +9,9 @@
 </head>
 <body>
 	<h1>Please enter student information</h1>
-     <div class="container">
-           <div class="border">
-				<s:form action="studentEnroll">
+     <div class="container">           
+     <div class="border">
+			<s:form action="studentEnrollTest">
        			    <s:div class="form-group">
             		    <s:textfield name="studentCardId" label="Student Card ID"/>
            			</s:div>

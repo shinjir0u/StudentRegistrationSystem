@@ -1,8 +1,8 @@
-package admin.action;
+package student.controller;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class AdminCheckAction extends ActionSupport{
+public class StudentViewProfileAction extends ActionSupport{
 
 	@Override
 	public String execute() throws Exception {
@@ -10,7 +10,5 @@ public class AdminCheckAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
-	public String showStudentDetails() {
-		return SUCCESS;
-	}
 }
+

@@ -3,7 +3,7 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
 	"http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-    <package name="StudentRegistration" extends="struts-default">
+    <package name="StudentRegistration" namespace="/" extends="struts-default">
     	<result-types>
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
@@ -47,20 +47,55 @@
        	
        	<!-- for student -->
         
-        <action name="studentViewProfile" class="student.action.StudentViewProfileAction" method="execute">
+        <action name="studentViewProfile" class="student.controller.StudentViewProfileAction" method="execute">
             <result name="success" type="tiles">student_view_profile</result>
         </action>
         
-        <action name="studentEnroll" class="student.action.StudentEnrollAction" method="execute">
+        <action name="sEnroll" class="student.controller.StudentEnrollAction" method="execute">
             <result name="success" type="tiles">student_enroll</result>
+		</action>
+		
+        <action name="adminRetrieveTest" class="student.controller.StudentRetrieveAction" method="retrieveStudentFromDatabase">
+        	<result name="success">/viewPages/admin/AdminStudentCheckPage.jsp</result>
+        </action>
+		
+		<action name="login" class="student.controller.LoginAction" method="execute">
+            <result name="success" type="tiles">home</result>
+        </action>
+        <action name="check" class="student.controller.StudentRetrieveAction" method="retrieveStudentFromHashMap">
+            <result name="success" type="tiles">check</result>
+        </action>
+        <action name="showDetails" class="student.controller.AdminCheckAction" method="showStudentDetails">
+            <result name="success" type="tiles">show_details</result>
+        </action>
+        <action name="insert" class="student.controller.StudentAddAction" method="execute">
+            <result name="success" type="tiles">insert</result>
+        </action>
+        <action name="search" class="student.controller.AdminSearchAction" method="display">
+            <result name="success" type="tiles">search</result>
+        </action>
+        <action name="filter" class="student.controller.AdminSearchAction" method="execute">
+            <result name="success" type="tiles">filter_result</result>
+        </action>
+        <action name="studentEnroll" class="student.controller.StudentRetrieveAction" method="retrieveStudentFromHashMap">
+        	<result name="success">/hashMapSuccess.jsp</result>
+        </action>
+        <action name="studentEnrollTest" class="student.controller.StudentAddAction" method="addStudentToHashMap">
+        	<result name="success">/hashMapSuccess.jsp</result>
+        </action>
+        <action name="adminEnrollTest" class="student.controller.StudentAddAction">
+        	<result name="success">/viewPages/admin/AdminEnrollPage.jsp</result>
+        </action> 
+        <action name="adminEnroll" class="student.controller.StudentAddAction" method="addStudentToDatabase">
+        	<result name="success">/databaseSuccess.jsp</result>
         </action>
         
-        <action name="studentContact" class="student.action.StudentContactAction" method="execute">
+        <action name="studentContact" class="student.controller.StudentContactAction" method="execute">
             <result name="success" type="tiles">student_contact</result>
         </action>
         
         <!-- for both admin and student -->
-        <action name="login" class="action.LoginAction" method="execute">
+        <action name="login" class="student.controller.LoginAction" method="execute">
             <result name="student_success" type="tiles" >student_home</result>
             <result name="admin_success" type="tiles">admin_home</result>
         </action>

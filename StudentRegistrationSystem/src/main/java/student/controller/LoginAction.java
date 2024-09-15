@@ -1,4 +1,4 @@
-package action;
+package student.controller;
 
 import com.opensymphony.xwork2.ActionSupport;
 
