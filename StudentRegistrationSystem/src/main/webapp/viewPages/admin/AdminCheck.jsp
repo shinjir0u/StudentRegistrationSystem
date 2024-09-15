@@ -6,10 +6,11 @@
             <div class="container">
 			<div class="table">
             	<s:iterator value="students">
+            		<s:set var="student" value="value"/>
             		<div class="table-row">	
             			<div class="table-data">
-            				Student 1 Name: <s:property value="student.name"/><br>
-            				Major: <s:property value="student.major"/><br>
+            				Name: <s:property value="#student.name"/><br>
+            				Major: <s:property value="#student.major"/><br>
             				<s:url action="showDetails" var="showDet"/>
 							<s:a href="%{showDet}"><b>Show Details</b></s:a><br>
             			</div>

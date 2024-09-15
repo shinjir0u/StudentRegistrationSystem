@@ -19,7 +19,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		return SUCCESS;
 	}
 	
-	public String addStudentToHashmap() {
+	public String addStudentToHashMap() {
 		students = studentDAO.loadFile();
  		students.put(studentDAO.generateHashKey(students), setStudentValuesFromRequest());
 		studentDAO.saveFile(students);
@@ -134,8 +134,8 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 				));
 		student.setReligion(request.getParameter("studentReligion"));
 		student.setNationality(request.getParameter("studentNationality"));
-		student.setGuardian(setGuardianValuesFromRequest());
-		student.setMatriculation(setMatriculationValuesFromRequest());
+		//student.setGuardian(setGuardianValuesFromRequest());
+		//student.setMatriculation(setMatriculationValuesFromRequest());
 		student.setType(request.getParameter("studentType"));
 		return student;
 	}

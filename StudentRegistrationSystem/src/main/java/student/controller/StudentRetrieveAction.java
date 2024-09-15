@@ -3,6 +3,7 @@ package student.controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 import data.MatriculationSubject;
@@ -11,13 +12,19 @@ import student.model.*;
 
 public class StudentRetrieveAction extends ActionSupport {
 	private StudentDAO studentDAO = new StudentDAO();
+	HashMap<Integer, Student> students;
 	Student student = new Student();
 
-	public String retrieveStudent() {
+	public String retrieveStudentFromDatabase() {
 		setStudentValuesFromDatabase();
 		return SUCCESS;
 	}
 	
+	public String retrieveStudentFromHashMap() {
+		students = studentDAO.loadFile();
+		return SUCCESS;
+	}
+
 	private void setStudentValuesFromDatabase() {
 		String sql = "SELECT * FROM student_view WHERE student_id=3;";
 		ResultSet resultSet = studentDAO.retriveDataFromDatabase(sql);
@@ -128,6 +135,14 @@ public class StudentRetrieveAction extends ActionSupport {
 	
 	private String[] getNrcFromDatabase(String databaseNrc) {
 		return databaseNrc.split("[\\/()]");
+	}
+	
+	public HashMap<Integer, Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(HashMap<Integer, Student> students) {
+		this.students = students;
 	}
 	
 	public Student getStudent() {

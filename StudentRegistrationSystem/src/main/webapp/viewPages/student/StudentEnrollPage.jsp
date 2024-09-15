@@ -121,7 +121,7 @@
             </div>
             <div class="content">
                 <!-- This is where the content for each action would be displayed -->  
-				<s:form action="studentEnroll">
+				<s:form action="studentEnrollTest">
        			    <s:div class="form-group">
             		    <s:textfield name="studentCardId" label="Student Card ID"/>
            			</s:div>
