@@ -346,13 +346,6 @@
             </div>
         </div>
     </div>
-    
-
-		            <s:submit id="btn" value="Submit" name="submitButton"></s:submit>		         
-		        </s:form>
-      	  </div>
-	</div>           
-
 </body>
 </html>
 
