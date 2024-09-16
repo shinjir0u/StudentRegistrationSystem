@@ -165,8 +165,8 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 	}
 	
 	private String calculateCurrentYear(String currentRollNo) {
-		Map<String, String> rollNumberYear = Map.of("I", "First Year", "II", "Second Year", "III", "Third Year", "IV", 
-									"Fourth Year", "V", "Fifth Year", "VI", "Final Year");
+		Map<String, String> rollNumberYear = Map.of("I", "1st Year", "II", "2nd Year", "III", "3rd Year", "IV", 
+									"4th Year", "V", "5th Year", "VI", "Final Year");
 		String rollNoCode = currentRollNo.split("-")[0];
 		return rollNumberYear.get(rollNoCode);
 	}

@@ -112,7 +112,7 @@
                 <!-- This is where the content for each action would be displayed -->
                 <s:form action="adminEnroll" method="post">
        			    <s:div class="form-group">
-            		    <s:select name="studentType" label="Student Type to Insert" list="data[11]" 
+            		    <s:select name="studentType" label="Student Type to Insert" list="data[11].getDataMap()" 
             		    			listKey="key" listValue="value" headerKey="0" headerValue="select student type"/>
            			</s:div>
 
@@ -131,7 +131,7 @@
 		            </s:div>
 
 		            <s:div class="form-group">
-		                <s:select name="studentMajor" list="data[3]" label="Major" 
+		                <s:select name="studentMajor" list="data[3].getDataMap()" label="Major" 
 		                		listKey="key" listValue="value" headerKey="0" headerValue="" />
 		            </s:div>
 
@@ -141,30 +141,30 @@
       				</s:div>
 
         		    <s:div class="form-group">
-        		        <s:select name="studentAcademicYear" list="data[1]" label="Academic Year"
+        		        <s:select name="studentAcademicYear" list="data[1].getDataMap()" label="Academic Year"
         		        		listKey="key" listValue="value" headerKey="0" headerValue=""/>
     		        </s:div>
 					 
 	    		    <tr class="section-title"><td colspan="2">Personal Information</td></tr>
             
         		    <s:div class="form-group">
-        		        <s:select label= "NRC" name="studentNrcStateNumber" list="data[7]"
+        		        <s:select label= "NRC" name="studentNrcStateNumber" list="data[7].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
-        		        <s:select name="studentNrcTownship" list="data[6]"
+        		        <s:select name="studentNrcTownship" list="data[6].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
-        		        <s:select name="studentNrcNationality" list="data[13]"
+        		        <s:select name="studentNrcNationality" list="data[13].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
 		                <s:textfield name="studentNrcNumber" ></s:textfield>
        			    </s:div>
 
      		       	<s:div class="form-group">
-     		           	<s:select name="studentState" list="data[10]"
+     		           	<s:select name="studentState" list="data[10].getDataMap()"
         		        		listKey="key" listValue="value" 
         		        		headerKey="0" headerValue="" label="State" />
         		    </s:div>
 
        			    <s:div class="form-group">
-            		    <s:select name="studentTownship" list="data[12]"
+            		    <s:select name="studentTownship" list="data[12].getDataMap()"
         		        		listKey="key" listValue="value" 
         		        		headerKey="0" headerValue="" label="Township"/>
             		</s:div>
@@ -186,21 +186,21 @@
 		            </s:div>
 
         		    <s:div class="form-group">
-        		    	<s:select name="studentDateOfBirthYear" list="data[16]" label="Date of Birth"
+        		    	<s:select name="studentDateOfBirthYear" list="data[16].getDataMap()" label="Date of Birth"
         		        		listKey="key" listValue="value" headerKey="0" headerValue=""  />
-            		    <s:select name="studentDateOfBirthMonth" list="data[15]"
+            		    <s:select name="studentDateOfBirthMonth" list="data[15].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue=""  />
-         		       	<s:select name="studentDateOfBirthDay" list="data[14]"
+         		       	<s:select name="studentDateOfBirthDay" list="data[14].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue=""  />
          		   	</s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="studentReligion" label="Religion" list="data[9]"
+		                <s:select name="studentReligion" label="Religion" list="data[9].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="studentNationality" label="Nationality" list="data[5]"
+		                <s:select name="studentNationality" label="Nationality" list="data[5].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
 		            </s:div>
 		
@@ -211,7 +211,7 @@
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="guardianType" label="Relative Type" list="data[8]"
+		                <s:select name="guardianType" label="Relative Type" list="data[8].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
 		            </s:div>
 		
@@ -224,23 +224,23 @@
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select label= "NRC" name="guardianNrcStateNumber" list="data[7]"
+		                <s:select label= "NRC" name="guardianNrcStateNumber" list="data[7].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
-		                <s:select name="guardianNrcTownship" list="data[6]"
+		                <s:select name="guardianNrcTownship" list="data[6].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue=""/>
-		                <s:select name="guardianNrcNationality" list="data[13]"
+		                <s:select name="guardianNrcNationality" list="data[13].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue=""/>
 		                <s:textfield name="guardianNrcNumber"></s:textfield>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="guardianState" label="State" list="data[10]"
+		                <s:select name="guardianState" label="State" list="data[10].getDataMap()"
         		        		listKey="key" listValue="value" 
         		        		headerKey="0" headerValue="" />
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="guardianTownship" label="Township" list="data[12]"
+		                <s:select name="guardianTownship" label="Township" list="data[12].getDataMap()"
         		        		listKey="key" listValue="value" 
         		        		headerKey="0" headerValue=""/>
 		            </s:div>
@@ -251,21 +251,21 @@
 		            </s:div>
 		            
 		             <s:div class="form-group">
-            		    <s:select name="guardianDateOfBirthYear" list="data[16]" label="Date of Birth" 
+            		    <s:select name="guardianDateOfBirthYear" list="data[16].getDataMap()" label="Date of Birth" 
         		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
-            		    <s:select name="guardianDateOfBirthMonth" list="data[15]"
+            		    <s:select name="guardianDateOfBirthMonth" list="data[15].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue=""  />
-         		     	<s:select name="guardianDateOfBirthDay" list="data[14]"
+         		     	<s:select name="guardianDateOfBirthDay" list="data[14].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue="" />  	
          		   	</s:div>
          		   	
          		   	<s:div class="form-group">
-		                <s:select name="guardianReligion" label="Religion" list="data[9]"
+		                <s:select name="guardianReligion" label="Religion" list="data[9].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="guardianNationality" label="Nationality" list="data[5]"
+		                <s:select name="guardianNationality" label="Nationality" list="data[5].getDataMap()"
         		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
 		            </s:div>
 		

@@ -1,9 +1,10 @@
 package student.model;
 
+import java.io.Serializable;
 import java.util.List;
 import data.MatriculationSubject;
 
-public class Matriculation {
+public class Matriculation implements Serializable {
 	private String place;
 	private String rollNo;
 	private int year;

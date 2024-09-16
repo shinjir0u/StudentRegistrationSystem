@@ -1,8 +1,9 @@
 package data;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class MatriculationSubject extends Data {
+public class MatriculationSubject extends Data implements Serializable {
 	
 	private int mark;
 	

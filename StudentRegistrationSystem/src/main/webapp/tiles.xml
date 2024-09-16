@@ -29,7 +29,7 @@
       <put-attribute name="title"  value="Student details"/>
       <put-attribute name="body"   value="/viewPages/admin/AdminStudentCheckPage.jsp"/>      
       <put-attribute name="navBar"   value="/viewPages/admin/AdminNavBarPage.jsp"/>
-      <put-attribute name="body"   value="/viewPages/admin/AdminShowDetails.jsp"/>      
+      <put-attribute name="body"   value="/viewPages/admin/AdminStudentCheckPage.jsp"/>      
    	</definition>
    	
    	<definition name="insert" extends="mainTemplate">
@@ -63,12 +63,24 @@
       <put-attribute name="body"   value="/viewPages/student/StudentViewProfilePage.jsp"/>      
    	</definition>
    	
+   	<definition name="student_enroll_initiate" extends="mainTemplate">
+      <put-attribute name="title"  value="Student Enroll"/>
+      <put-attribute name="navBar"   value="/viewPages/student/StudentNavBarPage.jsp"/>
+      <put-attribute name="body"   value="/viewPages/student/StudentEnrollHomePage.jsp"/>      
+   	</definition>
+   	
    	<definition name="student_enroll" extends="mainTemplate">
       <put-attribute name="title"  value="Student Enroll"/>
       <put-attribute name="navBar"   value="/viewPages/student/StudentNavBarPage.jsp"/>
       <put-attribute name="body"   value="/viewPages/student/StudentEnrollPage.jsp"/>      
    	</definition>
-   	
+
+   	<definition name="student_enroll_finalize" extends="mainTemplate">
+      <put-attribute name="title"  value="Student Enroll"/>
+      <put-attribute name="navBar"   value="/viewPages/student/StudentNavBarPage.jsp"/>
+      <put-attribute name="body"   value="/hashMapSuccess.jsp"/>      
+   	</definition>
+   	   	
    	<definition name="student_contact" extends="mainTemplate">
       <put-attribute name="title"  value="Student Contact"/>
       <put-attribute name="navBar"   value="/viewPages/student/StudentNavBarPage.jsp"/>
