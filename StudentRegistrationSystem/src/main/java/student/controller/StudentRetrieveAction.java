@@ -21,11 +21,18 @@ import student.model.*;
 
 public class StudentRetrieveAction extends ActionSupport implements ServletRequestAware {
 	private StudentDAO studentDAO = new StudentDAO();
+
 	private HashMap<Integer, Student> students;
 	private Student student;
 	private HttpServletRequest request;
 	private HashMap<Integer, Data> data;
 	private int order;
+	
+	@Override
+	public String execute() throws Exception {
+		System.out.println("hello retrieve");
+		return SUCCESS;
+	}
 
 	public String retrieveStudentFromDatabase() {
 		String studentCardId = request.getParameter("studentCardId");

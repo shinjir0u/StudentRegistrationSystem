@@ -104,6 +104,7 @@
         }
     </style>
 </head>
+
 <body>
      <div class="container">
         <h1>Home</h1>
@@ -114,6 +115,7 @@
                 
                 	<s:div class="form-group">
             		    <s:textfield name="studentCardId" label="Student Card ID" value="%{student.cardId}"/>
+
            			</s:div>
 
 					<tr class="section-title"><td  colspan="2">Academic Information</tr>
@@ -345,6 +347,12 @@
         </div>
     </div>
     
+
+		            <s:submit id="btn" value="Submit" name="submitButton"></s:submit>		         
+		        </s:form>
+      	  </div>
+	</div>           
+
 </body>
 </html>
 

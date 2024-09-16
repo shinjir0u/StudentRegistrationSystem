@@ -1,0 +1,71 @@
+@charset "UTF-8";
+body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1{
+        	text-align: center;
+        }
+        .container {
+    		display: flex; /* Use flexbox */
+    		justify-content: center; /* Horizontal centering */
+    		align-items: center; /* Vertical centering */
+		}
+		.border {
+  			border: #dbdbdb solid 3px;
+  			padding: 20px;
+    		border-radius: 3px;
+    		border-width: 3px;
+    		border-color: #c0c0c0;
+    		border-style: double;
+		}
+		
+.section{
+	justify-content: center;
+	align-items: center;
+}
+
+#btn{
+			width: 50%;
+            background: #ff8000;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #222;
+            cursor: pointer;
+            transition-duration: 0.3s;		
+}
+.mystyle {
+  width: 100%;
+  padding: 25px;
+  background-color: coral;
+  color: white;
+  font-size: 25px;
+}
+.personal-info-wrap{
+	position: absolute;
+	top: 100%;
+	right: 10%;
+	width:300px;
+	/* max-height: 400px; 
+	overflow: hidden;*/
+	max-height: 0px; 
+	overflow: hidden;
+	transition: max-height 0.5s;
+}
+
+.personal-info-box{
+	background: #ff00ff;
+	padding: 20px;
+	margin: 10px;
+	min-width:50%;
+	border-radius: 20px;
+}
+
+.personal-info-box.open-personal-info{
+	max-height: 400px;	
+}
