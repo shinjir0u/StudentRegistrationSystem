@@ -14,7 +14,10 @@ public class DateOfBirthMonth extends Data {
 		// TODO Auto-generated method stub
 		dataMap = new HashMap<>();
 		
-		for (int i = 1; i <= 12; i++) {
+		for (int i = 1; i <= 9; i++)
+			dataMap.put(i, "0" + String.valueOf(i));
+		
+		for (int i = 10; i <= 12; i++) {
             dataMap.put(i, String.valueOf(i));
         }
 	}

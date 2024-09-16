@@ -5,28 +5,51 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
+
 import com.opensymphony.xwork2.ActionSupport;
+
+import data.Data;
 import data.MatriculationSubject;
+import data.Township;
 import student.dao.StudentDAO;
 import student.model.*;
 
-public class StudentRetrieveAction extends ActionSupport {
+public class StudentRetrieveAction extends ActionSupport implements ServletRequestAware {
 	private StudentDAO studentDAO = new StudentDAO();
-	HashMap<Integer, Student> students;
-	Student student = new Student();
+	private HashMap<Integer, Student> students;
+	private Student student;
+	private HttpServletRequest request;
+	private HashMap<Integer, Data> data;
+	private int order;
 
 	public String retrieveStudentFromDatabase() {
-		setStudentValuesFromDatabase();
+		String studentCardId = request.getParameter("studentCardId");
+		String sql = "SELECT * FROM student_view WHERE student_card_id = '" + studentCardId + "';";
+		data = studentDAO.setDataValues();
+		setStudentValuesFromDatabase(sql);
+		return SUCCESS;
+	}
+	
+	public String retrieveStudentsFromHashMap() {
+		students = studentDAO.loadFile();
 		return SUCCESS;
 	}
 	
 	public String retrieveStudentFromHashMap() {
 		students = studentDAO.loadFile();
+		String number = request.getParameter("order");
+		student = students.get(order);
+		System.out.println(number);
 		return SUCCESS;
 	}
 
-	private void setStudentValuesFromDatabase() {
-		String sql = "SELECT * FROM student_view WHERE student_id=3;";
+	private void setStudentValuesFromDatabase(String sql) {
+		student = new Student();
 		ResultSet resultSet = studentDAO.retriveDataFromDatabase(sql);
 		
 		try {
@@ -53,6 +76,11 @@ public class StudentRetrieveAction extends ActionSupport {
 				student.setMatriculation(setMatriculationFromDatabase());
 				student.setGuardian(setGuardianFromDatabase());
 				student.setAcademicRecords(getAcademicRecordsFromDatabase());
+				student.setAcademicYear(student.getAcademicRecords().getLast().getAcademicYear());
+				
+				String currentRollNo = student.getAcademicRecords().getLast().getRollNo();
+				student.setCurrentYear(calculateCurrentYear(currentRollNo));
+				student.setRollNo(currentRollNo);
 			}
 			
 		} catch (SQLException e) {
@@ -92,7 +120,7 @@ public class StudentRetrieveAction extends ActionSupport {
 		
 		try {
 			while (resultSet.next()) {
-				String[] dateOfBirth = getDateOfBirthFromDatabase(resultSet.getString(4));
+				String[] dateOfBirth = getDateOfBirthFromDatabase(resultSet.getString("date_of_birth"));
 				String[] nrc = getNrcFromDatabase(resultSet.getString("nrc"));
 				guardian.setId(resultSet.getInt("relative_id"));
 				guardian.setName(resultSet.getString("relative_name"));
@@ -129,12 +157,25 @@ public class StudentRetrieveAction extends ActionSupport {
 		return academicRecords;
 	}
 	
+	private String calculateCurrentYear(String currentRollNo) {
+		Map<String, String> rollNumberYear = Map.of("I", "First Year", "II", "Second Year", "III", "Third Year", "IV", 
+									"Fourth Year", "V", "Fifth Year", "VI", "Final Year");
+		String rollNoCode = currentRollNo.split("-")[0];
+		return rollNumberYear.get(rollNoCode);
+	}
+	
 	private String[] getDateOfBirthFromDatabase(String databaseDate) {
 		return databaseDate.split("-"); 
 	}
 	
 	private String[] getNrcFromDatabase(String databaseNrc) {
 		return databaseNrc.split("[\\/()]");
+	}
+	
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		this.request = request;
 	}
 	
 	public HashMap<Integer, Student> getStudents() {
@@ -151,5 +192,29 @@ public class StudentRetrieveAction extends ActionSupport {
 
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+
+//	public HashMap<Integer, HashMap<Integer, String>> getData() {
+//		return data;
+//	}
+//
+//	public void setData(HashMap<Integer, HashMap<Integer, String>> data) {
+//		this.data = data;
+//	}
+	
+	public void setData(HashMap<Integer, Data> data) {
+		this.data = data;
+	}
+
+	public HashMap<Integer, Data> getData() {
+		return data;
+	}
+	
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
 	}
 }

@@ -29,7 +29,7 @@
    	
    	<definition name="show_details" extends="mainTemplate">
       <put-attribute name="title"  value="Student details"/>
-      <put-attribute name="body"   value="/viewPages/admin/AdminShowDetails.jsp"/>      
+      <put-attribute name="body"   value="/viewPages/admin/AdminStudentCheckPage.jsp"/>      
    	</definition>
    	
    	<definition name="insert" extends="mainTemplate">

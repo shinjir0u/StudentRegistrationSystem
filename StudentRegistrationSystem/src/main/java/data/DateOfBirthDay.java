@@ -14,10 +14,10 @@ public class DateOfBirthDay extends Data {
 		// TODO Auto-generated method stub
 		dataMap = new HashMap<>();
 		
+		for (int i = 1; i <= 9; i++)
+			dataMap.put(i, "0" + String.valueOf(i));
 		
-		for (int i = 1; i <= 31; i++) {
+		for (int i = 10; i <= 31; i++) 
             dataMap.put(i, String.valueOf(i));
-        }
 	}
-
 }

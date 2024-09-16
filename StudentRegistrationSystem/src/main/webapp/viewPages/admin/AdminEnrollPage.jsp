@@ -251,7 +251,7 @@
 		            </s:div>
 		            
 		             <s:div class="form-group">
-            		    <s:select name="guardianDateOfBirthYear" list="data[16]" label="Date of Birth"
+            		    <s:select name="guardianDateOfBirthYear" list="data[16]" label="Date of Birth" 
         		        		listKey="key" listValue="value" headerKey="0" headerValue="" />
             		    <s:select name="guardianDateOfBirthMonth" list="data[15]"
         		        		listKey="key" listValue="value" headerKey="0" headerValue=""  />

@@ -12,10 +12,10 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 	private HashMap<Integer, Student> students;
 	private HttpServletRequest request;
 	private StudentDAO studentDAO = new StudentDAO();
-	private HashMap<Integer, HashMap<Integer, String>> data = new HashMap<Integer, HashMap<Integer,String>>();
+	private HashMap<Integer, Data> data;
 
 	public String execute() {
-		setDataValues();
+		data = studentDAO.setDataValues();
 		return SUCCESS;
 	}
 	
@@ -134,8 +134,8 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 				));
 		student.setReligion(request.getParameter("studentReligion"));
 		student.setNationality(request.getParameter("studentNationality"));
-		//student.setGuardian(setGuardianValuesFromRequest());
-		//student.setMatriculation(setMatriculationValuesFromRequest());
+		student.setGuardian(setGuardianValuesFromRequest());
+		student.setMatriculation(setMatriculationValuesFromRequest());
 		student.setType(request.getParameter("studentType"));
 		return student;
 	}
@@ -184,26 +184,6 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		return matriculation;
 	}
 	
-	private void setDataValues() {
-		data.put(1, new AcademicYear().getDataMap());
-		data.put(2, new Gender().getDataMap());
-		data.put(3, new Major().getDataMap());
-		data.put(4, new MatriculationSubject().getDataMap());
-		data.put(5, new Nationality().getDataMap());
-		data.put(6, new NrcState().getDataMap());
-		data.put(7, new NrcStateNumber().getDataMap());
-		data.put(8, new RelativeType().getDataMap());
-		data.put(9, new Religion().getDataMap());
-		data.put(10, new State().getDataMap());
-		data.put(11, new StudentType().getDataMap());
-		data.put(12, new Township().getDataMap());
-		data.put(13, new NrcNationality().getDataMap());
-		data.put(14, new DateOfBirthDay().getDataMap());
-		data.put(15, new DateOfBirthMonth().getDataMap());
-		data.put(16, new DateOfBirthYear().getDataMap());
-		
-	}
-
 	public void setStudents(HashMap<Integer, Student> students) {
 		this.students = students;
 	}
@@ -218,11 +198,11 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		return students;
 	}
 
-	public HashMap<Integer, HashMap<Integer, String>> getData() {
+	public HashMap<Integer, Data> getData() {
 		return data;
 	}
 
-	public void setData(HashMap<Integer, HashMap<Integer, String>> data) {
+	public void setData(HashMap<Integer, Data> data) {
 		this.data = data;
 	}
 }

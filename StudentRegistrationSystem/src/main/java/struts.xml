@@ -26,10 +26,10 @@
 		<action name="login" class="student.controller.LoginAction" method="execute">
             <result name="success" type="tiles">home</result>
         </action>
-        <action name="check" class="student.controller.StudentRetrieveAction" method="retrieveStudentFromHashMap">
+        <action name="check" class="student.controller.StudentRetrieveAction" method="retrieveStudentsFromHashMap">
             <result name="success" type="tiles">check</result>
         </action>
-        <action name="showDetails" class="student.controller.AdminCheckAction" method="showStudentDetails">
+        <action name="showDetails" class="student.controller.StudentRetrieveAction" method="retrieveStudentFromHashMap">
             <result name="success" type="tiles">show_details</result>
         </action>
         <action name="insert" class="student.controller.StudentAddAction" method="execute">
@@ -40,6 +40,9 @@
         </action>
         <action name="filter" class="student.controller.AdminSearchAction" method="execute">
             <result name="success" type="tiles">filter_result</result>
+        </action>
+        <action name="studentEnrollInitiate" class="student.controller.StudentRetrieveAction" method="retrieveStudentFromDatabase">
+        	<result name="success">/viewPages/student/StudentEnrollPage.jsp</result>
         </action>
         <action name="studentEnroll" class="student.controller.StudentRetrieveAction" method="retrieveStudentFromHashMap">
         	<result name="success">/hashMapSuccess.jsp</result>

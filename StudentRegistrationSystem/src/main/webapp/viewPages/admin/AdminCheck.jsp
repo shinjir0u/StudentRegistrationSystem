@@ -9,10 +9,13 @@
             		<s:set var="student" value="value"/>
             		<div class="table-row">	
             			<div class="table-data">
-            				Name: <s:property value="#student.name"/><br>
-            				Major: <s:property value="#student.major"/><br>
-            				<s:url action="showDetails" var="showDet"/>
-							<s:a href="%{showDet}"><b>Show Details</b></s:a><br>
+            				<s:form action="showDetails">
+            					<s:hidden name="order" value="%{key}"></s:hidden>
+            					Name: <s:property value="#student.name"/><br>
+            					Major: <s:property value="#student.major"/><br>
+            					Current Year: <s:property value="#student.currentYear"/><br>
+            					<s:submit value="submit"></s:submit>            				
+            				</s:form>
             			</div>
             		</div>
             	</s:iterator>
