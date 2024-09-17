@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="container">
-		<s:form>
+		<s:form action="changePassword">
 			<s:label>Enter your email and student card ID</s:label>
 			<s:textfield name="email" label="Email"/>
 			<s:textfield name="email" label="Student card id"/>

@@ -84,11 +84,11 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 				student.setMatriculation(setMatriculationFromDatabase());
 				student.setGuardian(setGuardianFromDatabase());
 				student.setAcademicRecords(getAcademicRecordsFromDatabase());
-				student.setAcademicYear(student.getAcademicRecords().getLast().getAcademicYear());
+				//student.setAcademicYear(student.getAcademicRecords().getLast().getAcademicYear());
 				
-				String currentRollNo = student.getAcademicRecords().getLast().getRollNo();
-				student.setCurrentYear(calculateCurrentYear(currentRollNo));
-				student.setRollNo(currentRollNo);
+				//String currentRollNo = student.getAcademicRecords().getLast().getRollNo();
+				//student.setCurrentYear(calculateCurrentYear(currentRollNo));
+				//student.setRollNo(currentRollNo);
 			}
 			
 		} catch (SQLException e) {

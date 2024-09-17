@@ -97,7 +97,7 @@ input[type="radio"] {
 	margin-right: 3px;
 }
 
-.remember-forgot a{
+.forgotPwdLink{
 	color: #ff8040;
 	text-decoration: none;
 }

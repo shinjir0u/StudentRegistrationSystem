@@ -31,7 +31,8 @@
 					<br>
 					<div class="remember-forgot">
 						<label><input type="checkbox">Remember me</label>
-						<a href="#">Forgot Password?</a>
+						<s:url action="forgotPassword" var="forgotPwd"/>
+						<s:a href="%{forgotPwd}" cssClass="forgotPwdLink">Forgot password?</s:a>
 					</div>				
 		</div>
 		</div>
