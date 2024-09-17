@@ -1,6 +1,9 @@
 package student.controller;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import com.opensymphony.xwork2.ActionSupport;
@@ -45,19 +48,27 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		}
 		subject = subject.substring(0, (subject.length()-1)) + "),";
 		
+		String namePattern = "[a-zA-Z]+";
+		String emailPattern = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+		String phonenumberPattern = "^(\\+?959|09)\\d{7,10}$";
+		String rollnoPattern = "^[IVXLCDM]+\\.[A-Z]{1,4}-(?:[1-9]\\d?)$";
+		String markPattern = "^(100|[1-9]?[0-9])$";
+		String cardidPattern = "^\\d{2}/\\d{5}$";
+		String yearPattern = "^(19[0-9]{2}|20[01][0-9]|2100)$";
+		
 		if(student.getType().equals("0")) {
 			addFieldError("studentType", "Invalid Type");
 			return INPUT;
 		}
-		if(student.getName().isBlank()) {
+		if(student.getName().isBlank() || Pattern.compile(namePattern).matcher(student.getName()).matches() == false) {
 			addFieldError("studentName", "Invalid Name");
 			return INPUT;
 		}
-		if(student.getCardId().isBlank()) {
+		if(student.getCardId().isBlank() || Pattern.compile(cardidPattern).matcher(student.getCardId()).matches() == false) {
 			addFieldError("studentCardId", "Invalid Card ID");
 			return INPUT;
 		}
-		if(student.getRollNo().isBlank()) {
+		if(student.getRollNo().isBlank() || Pattern.compile(rollnoPattern).matcher(student.getRollNo()).matches() == false) {
 			addFieldError("studentRollNo", "Invalid Roll No");
 			return INPUT;
 		}
@@ -77,7 +88,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			addFieldError("studentNrcStateNumber", "Invalid NRC State Number");
 			return INPUT;
 		}
-		if(studentNrc.getStateNumber().equals("0")) {
+		if(studentNrc.getTownship().equals("0")) {
 			addFieldError("studentNrcTownship", "Invalid NRC Township");
 			return INPUT;
 		}
@@ -105,11 +116,11 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			addFieldError("studentGender", "Invalid Gender");
 			return INPUT;
 		}
-		if(student.getPhoneNumber().isBlank()) {
+		if(student.getPhoneNumber().isBlank() || Pattern.compile(phonenumberPattern).matcher(student.getPhoneNumber()).matches() == false) {
 			addFieldError("studentPhoneNumber", "Invalid Phone Number");
 			return INPUT;
 		}
-		if(student.getEmail().isBlank()) {
+		if(student.getEmail().isBlank() || Pattern.compile(emailPattern).matcher(student.getEmail()).matches() == false) {
 			addFieldError("studentEmail", "Invalid Email");
 			return INPUT;
 		}
@@ -133,19 +144,19 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			addFieldError("studentNationality", "Invalid Nationality");
 			return INPUT;
 		}
-		if(guardian.getName().isBlank()) {
+		if(guardian.getName().isBlank() || Pattern.compile(namePattern).matcher(guardian.getName()).matches() == false) {
 			addFieldError("guardianName", "Invalid Name");
 			return INPUT;
 		}
-		if(guardian.getName().equals("0")) {
+		if(guardian.getType().equals("0")) {
 			addFieldError("guardianType", "Invalid Type");
 			return INPUT;
 		}
-		if(guardian.getPhoneNumber().isBlank()) {
+		if(guardian.getPhoneNumber().isBlank() || Pattern.compile(phonenumberPattern).matcher(guardian.getPhoneNumber()).matches() == false) {
 			addFieldError("guaridanPhoneNumber", "Invalid Phone Number");
 			return INPUT;
 		}
-		if(guardian.getEmail().isBlank()) {
+		if(guardian.getEmail().isBlank() || Pattern.compile(emailPattern).matcher(guardian.getEmail()).matches() == false) {
 			addFieldError("guardianEmail", "Invalid Email");
 			return INPUT;
 		}
@@ -205,30 +216,30 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			addFieldError("matriculationRollNo", "Invalid Roll No");
 			return INPUT;
 		}
-		if(request.getParameter("matriculationYear").isBlank()) {
+		if(student.getMatriculation().getYear().isBlank() || Pattern.compile(yearPattern).matcher(student.getMatriculation().getYear()).matches() == false) {
 			addFieldError("matriculationYear", "Invalid Year");
 			return INPUT;
 		}
-		if(request.getParameter("matriculationSubject1").isBlank()) {
+		if(student.getMatriculation().getSubjects().get(0).getMark().isBlank() || Pattern.compile(markPattern).matcher(student.getMatriculation().getSubjects().get(0).getMark()).matches() == false) {
 			addFieldError("matriculationSubject1", "Invalid Mark");
 			return INPUT;
 		}
-		if(request.getParameter("matriculationSubject2").isBlank()) {
+		if(student.getMatriculation().getSubjects().get(1).getMark().isBlank() || Pattern.compile(markPattern).matcher(student.getMatriculation().getSubjects().get(1).getMark()).matches() == false) {
 			addFieldError("matriculationSubject2", "Invalid Mark");
 			return INPUT;
-		}if(request.getParameter("matriculationSubject3").isBlank()) {
+		}if(student.getMatriculation().getSubjects().get(2).getMark().isBlank() || Pattern.compile(markPattern).matcher(student.getMatriculation().getSubjects().get(2).getMark()).matches() == false) {
 			addFieldError("matriculationSubject3", "Invalid Mark");
 			return INPUT;
 		}
-		if(request.getParameter("matriculationSubject4").isBlank()) {
+		if(student.getMatriculation().getSubjects().get(3).getMark().isBlank() || Pattern.compile(markPattern).matcher(student.getMatriculation().getSubjects().get(3).getMark()).matches() == false) {
 			addFieldError("matriculationSubject4", "Invalid Mark");
 			return INPUT;
 		}
-		if(request.getParameter("matriculationSubject5").isBlank()) {
+		if(student.getMatriculation().getSubjects().get(4).getMark().isBlank() || Pattern.compile(markPattern).matcher(student.getMatriculation().getSubjects().get(4).getMark()).matches() == false) {
 			addFieldError("matriculationSubject5", "Invalid Mark");
 			return INPUT;
 		}
-		if(request.getParameter("matriculationSubject6").isBlank()) {
+		if(student.getMatriculation().getSubjects().get(5).getMark().isBlank() || Pattern.compile(markPattern).matcher(student.getMatriculation().getSubjects().get(5).getMark()).matches() == false) {
 			addFieldError("matriculationSubject6", "Invalid Mark");
 			return INPUT;
 		}

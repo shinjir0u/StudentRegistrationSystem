@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC 
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" 
-	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
     <package name="StudentRegistration" namespace="/" extends="struts-default">
     	<result-types>
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
-<<<<<<< HEAD
-		  
-		<!-- for admin  -->
-=======
 		       
 		<action name="hashMapTest" class="student.controller.StudentRetrieveAction" method="retrieveStudentsFromHashMap">
 			<result>/hashMapSuccess.jsp</result>
 		</action>
         <!-- for admin  -->
->>>>>>> 2d912f7fe7c7495e7c71d6de7b67dad8e1d8a521
+
         <action name="check" class="student.controller.StudentRetrieveAction" method="retrieveStudentsFromHashMap">
             <result name="success" type="tiles">check</result>
         </action>
