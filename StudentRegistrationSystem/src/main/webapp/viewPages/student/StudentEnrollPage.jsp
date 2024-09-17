@@ -198,7 +198,7 @@
 		            </s:div>
 
         		    <s:div class="form-group">
-        		    	<s:select name="studentDateOfBirthYear" list="data[16].getDataMap()" label="Date of Birth" value="data[16]..getIdByValue(student.dateOfBirth.year)"
+        		    	<s:select name="studentDateOfBirthYear" list="data[16].getDataMap()" label="Date of Birth" value="data[16].getIdByValue(student.dateOfBirth.year)"
         		        		listKey="key" listValue="value" disabled="true" />
         		        <s:hidden name="studentDateOfBirthYear" value="%{student.dateOfBirth.year}"></s:hidden>
             		    <s:select name="studentDateOfBirthMonth" list="data[15].getDataMap()" value="data[15].getIdByValue(student.dateOfBirth.month)"

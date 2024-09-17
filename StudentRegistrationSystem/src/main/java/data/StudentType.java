@@ -1,6 +1,7 @@
 package data;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class StudentType extends Data {
 
@@ -12,13 +13,10 @@ public class StudentType extends Data {
 	@Override
 	public void setData() {
 		// TODO Auto-generated method stub
-		dataMap = new HashMap<>();
+		dataMap = new LinkedHashMap<>();
 		
-		dataMap.put(1, "freshman");
-        dataMap.put(2, "returning");
-        dataMap.put(3, "transfer");
-        dataMap.put(4, "post-graduate");
-        dataMap.put(5, "graduated");
+		String sql = "SELECT * FROM student_types;";
+        dataMap = getDataMapFromDatabase(sql, 1, 2);
 	}
 
 }

@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import com.opensymphony.xwork2.ActionSupport;
 
 import data.Data;
-import data.MatriculationSubject;
+import data.MatriculationSubjectData;
 import data.Township;
 import student.dao.StudentDAO;
 import student.model.*;
@@ -44,15 +45,14 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 	
 	public String retrieveStudentsFromHashMap() {
 		students = studentDAO.loadFile();
+		students.remove(order);
 		return SUCCESS;
 	}
 	
 	public String retrieveStudentFromHashMap() {
 		students = studentDAO.loadFile();
 		data = studentDAO.setDataValues();
-		String number = request.getParameter("order");
 		student = students.get(order);
-		System.out.println(number);
 		return SUCCESS;
 	}
 
@@ -75,7 +75,7 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 				student.setAddress(resultSet.getString("address"));
 				student.setCardId(resultSet.getString("student_card_id"));
 				student.setPhoto(resultSet.getString("photo"));
-				student.setNrc(new Nrc(nrc[0], nrc[1], nrc[2], Integer.parseInt(nrc[3])));
+				student.setNrc(new Nrc(nrc[0], nrc[1], nrc[2], nrc[3]));
 				student.setGender(resultSet.getString("gender_name"));
 				student.setNationality(resultSet.getString("nationality_name"));
 				student.setReligion(resultSet.getString("religion_name"));
@@ -106,11 +106,11 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 		try {
 			while (resultSet.next()) {
 				list.add(new MatriculationSubject(
-						resultSet.getInt("subject_id"), 
+						resultSet.getString("subject_id"), 
 						resultSet.getString("subject_name"), 
-						resultSet.getInt("mark")));
+						resultSet.getString("mark")));
 				matriculation.setPlace(resultSet.getString("matriculation_place"));
-				matriculation.setYear(resultSet.getInt("matriculation_year"));
+				matriculation.setYear(resultSet.getString("matriculation_year"));
 				matriculation.setRollNo(resultSet.getString("matriculation_roll_no"));
 			}
 		matriculation.setSubjects(list);
@@ -138,7 +138,7 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 				guardian.setTownship(resultSet.getString("township_name"));
 				guardian.setState(resultSet.getString("state_name"));
 				guardian.setAddress(resultSet.getString("address"));
-				guardian.setNrc(new Nrc(nrc[0], nrc[1], nrc[2], Integer.parseInt(nrc[3])));
+				guardian.setNrc(new Nrc(nrc[0], nrc[1], nrc[2], nrc[3]));
 				guardian.setNationality(resultSet.getString("nationality_name"));
 				guardian.setReligion(resultSet.getString("religion_name"));
 				guardian.setType(resultSet.getString("relative_type"));
@@ -166,9 +166,15 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 	}
 	
 	private String calculateCurrentYear(String currentRollNo) {
-		Map<String, String> rollNumberYear = Map.of("I", "1st Year", "II", "2nd Year", "III", "3rd Year", "IV", 
-									"4th Year", "V", "5th Year", "VI", "Final Year");
-		String rollNoCode = currentRollNo.split("-")[0];
+		LinkedHashMap<String, String> rollNumberYear = new LinkedHashMap<>(); 
+		rollNumberYear.put("I", "1st Year");
+		rollNumberYear.put("II", "2nd Year");
+		rollNumberYear.put("III", "3rd Year");
+		rollNumberYear.put("IV", "4th Year");
+		rollNumberYear.put("V", "5th Year");
+		rollNumberYear.put("VI", "Final Year");
+		String rollNoCode = currentRollNo.toUpperCase().split("-")[0];
+		String s = rollNumberYear.get(rollNoCode);
 		return rollNumberYear.get(rollNoCode);
 	}
 	
@@ -177,7 +183,7 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 	}
 	
 	private String[] getNrcFromDatabase(String databaseNrc) {
-		return databaseNrc.split("[\\/()]");
+		return databaseNrc.split("[\\/ ( ) ]");
 	}
 	
 	@Override

@@ -6,9 +6,9 @@ public class Nrc implements Serializable {
 	private String stateNumber;
 	private String township;
 	private String nationality;
-	private int number;
+	private String number;
 	
-	public Nrc(String stateNumber, String township, String nationality, int number) {
+	public Nrc(String stateNumber, String township, String nationality, String number) {
 		super();
 		this.stateNumber = stateNumber;
 		this.township = township;
@@ -34,10 +34,10 @@ public class Nrc implements Serializable {
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
 	}
-	public int getNumber() {
+	public String getNumber() {
 		return number;
 	}
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 }

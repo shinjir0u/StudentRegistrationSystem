@@ -19,10 +19,18 @@
             <result name="success" type="tiles">show_details</result>
         </action>
         <action name="updateStudent" class="student.controller.StudentAddAction" method="addReturningStudentDataToDatabase">
-            <result name="success" type="tiles">update_student</result>
+            <result name="success" type="chain">check</result>
         </action>        
+        
         <action name="insert" class="student.controller.StudentAddAction" method="execute">
             <result name="success" type="tiles">insert</result>
+        </action>
+        <action name="adminEnroll" class="student.controller.StudentAddAction" method="addStudentToDatabase">
+        	<interceptor-ref name="defaultStack">
+        		<param name="validation.excludeMethods">execute</param>
+    		</interceptor-ref>
+            <result name="success" type="tiles">admin_enroll</result>
+            <result name="input" type="tiles">insert</result>
         </action>
         
         <action name="search" class="student.controller.AdminSearchAction" method="display">

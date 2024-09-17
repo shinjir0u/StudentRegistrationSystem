@@ -1,6 +1,7 @@
 package data;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Gender extends Data {
 
@@ -12,10 +13,10 @@ public class Gender extends Data {
 	@Override
 	public void setData() {
 		// TODO Auto-generated method stub
-		dataMap = new HashMap<Integer, String>();
+		dataMap = new LinkedHashMap<>();
 		
-		dataMap.put(1, "Male");
-		dataMap.put(2, "Female");
+		dataMap.put("1", "Male");
+		dataMap.put("2", "Female");
 	}
 	
 	

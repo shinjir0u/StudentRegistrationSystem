@@ -113,7 +113,7 @@
                 <s:form action="adminEnroll" method="post">
        			    <s:div class="form-group">
             		    <s:select name="studentType" label="Student Type to Insert" list="data[11].getDataMap()" 
-            		    			listKey="key" listValue="value" headerKey="0" headerValue="select student type"/>
+            		    			listKey="key" listValue="value" headerKey="0" headerValue="select student type" value="%{student.type}"/>
            			</s:div>
 
 					<tr class="section-title"><td  colspan="2">Academic Information</tr>

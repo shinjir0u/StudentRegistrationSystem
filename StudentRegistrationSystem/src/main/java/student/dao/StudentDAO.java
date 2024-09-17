@@ -17,7 +17,7 @@ import data.DateOfBirthMonth;
 import data.DateOfBirthYear;
 import data.Gender;
 import data.Major;
-import data.MatriculationSubject;
+import data.MatriculationSubjectData;
 import data.Nationality;
 import data.NrcNationality;
 import data.NrcState;
@@ -30,7 +30,8 @@ import data.Township;
 import student.model.Student;
 
 public class StudentDAO {
-	private final String filename = "student.ser";
+	private final String projectDir = System.getProperty("user.dir");
+	private final String filename = projectDir + "/student.ser";
 //	private final String url = "jdbc:postgresql://dpg-cril31jv2p9s738json0-a.singapore-postgres.render.com/university_database_glgp?user=shinji&password=bSzNteNUBc973PDCIPMWyJJI4pkDJB3F";
 	private final String url = "jdbc:postgresql://localhost/university_database";
 	private final String username = "shinji";
@@ -95,7 +96,7 @@ public class StudentDAO {
 		data.put(1, new AcademicYear());
 		data.put(2, new Gender());
 		data.put(3, new Major());
-		data.put(4, new MatriculationSubject());
+		data.put(4, new MatriculationSubjectData());
 		data.put(5, new Nationality());
 		data.put(6, new NrcState());
 		data.put(7, new NrcStateNumber());
