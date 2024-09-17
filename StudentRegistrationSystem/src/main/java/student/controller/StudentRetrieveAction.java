@@ -49,6 +49,7 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 	
 	public String retrieveStudentFromHashMap() {
 		students = studentDAO.loadFile();
+		data = studentDAO.setDataValues();
 		String number = request.getParameter("order");
 		student = students.get(order);
 		System.out.println(number);

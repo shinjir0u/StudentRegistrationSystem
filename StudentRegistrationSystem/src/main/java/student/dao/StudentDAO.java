@@ -31,17 +31,17 @@ import student.model.Student;
 
 public class StudentDAO {
 	private final String filename = "student.ser";
-	private final String url = "jdbc:postgresql://dpg-cril31jv2p9s738json0-a.singapore-postgres.render.com/university_database_glgp?user=shinji&password=bSzNteNUBc973PDCIPMWyJJI4pkDJB3F";
-//	private final String url = "jdbc:postgresql://localhost/university_database";
-//	private final String username = "shinji";
-//	private final String password = "pass";
+//	private final String url = "jdbc:postgresql://dpg-cril31jv2p9s738json0-a.singapore-postgres.render.com/university_database_glgp?user=shinji&password=bSzNteNUBc973PDCIPMWyJJI4pkDJB3F";
+	private final String url = "jdbc:postgresql://localhost/university_database";
+	private final String username = "shinji";
+	private final String password = "pass";
 	private Connection connection;
 	
 	private Statement connectDatabase() {
 		try {
 			Class.forName("org.postgresql.Driver");
-//			connection = DriverManager.getConnection(url, username, password);
-			connection = DriverManager.getConnection(url);
+			connection = DriverManager.getConnection(url, username, password);
+//			connection = DriverManager.getConnection(url);
 			return connection.createStatement();
 		} catch(ClassNotFoundException | SQLException e) {
 			throw new RuntimeException(e);

@@ -32,6 +32,13 @@
       <put-attribute name="body"   value="/viewPages/admin/AdminStudentCheckPage.jsp"/>      
    	</definition>
    	
+   	<definition name="update_student" extends="mainTemplate">
+      <put-attribute name="title"  value="Student details"/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminStudentCheckPage.jsp"/>      
+      <put-attribute name="navBar"   value="/viewPages/admin/AdminNavBarPage.jsp"/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminCheck.jsp"/>      
+   	</definition>
+   	
    	<definition name="insert" extends="mainTemplate">
       <put-attribute name="title"  value="Admin Enroll Page"/>
       <put-attribute name="navBar"   value="/viewPages/admin/AdminNavBarPage.jsp"/>

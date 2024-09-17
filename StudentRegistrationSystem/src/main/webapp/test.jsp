@@ -8,7 +8,7 @@
 <title>Test</title>
 </head>
 <body>
-	<s:form action="studentEnrollInitiate">
+	<s:form action="hashMapTest">
 		<s:submit></s:submit>
 	</s:form>
 </body>
