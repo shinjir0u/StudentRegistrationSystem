@@ -43,7 +43,7 @@
         }
         
         input:disabled {
-        	background-color: rgba(128, 128, 128, 0.3);
+        	background-color: rgba(128, 128, 128, 0.3;
         	border: none;
         	opacity: 1;
         	color: black;
@@ -99,7 +99,7 @@
         <div class="panel">
             <div class="content">
                 <!-- This is where the content for each action would be displayed -->
-                <s:form action="enroll" method="post">
+                <s:form action="updateStudent" method="post">
                 	<s:set value="student.dateOfBirth" var="studentDate"/>
                 	<s:set value="student.guardian" var="guardian"/>
                 	<s:set value="student.nrc" var="studentNrc"/>     
@@ -109,128 +109,152 @@
 					<tr class="section-title"><td  colspan="2">Academic Information</tr>
 
     		        <s:div class="form-group">
-        		        <s:textfield disabled="true" name="studentName" label="Student Name" value="%{student.name}"/>
+        		        <s:textfield name="studentName" label="Student Name" value="%{student.name}"/>
             		</s:div>
 	
 					<s:div class="form-group">
-            		    <s:textfield disabled="true" name="studentCardId" label="Student Card ID" value="%{student.cardId}"/>
+            		    <s:textfield name="studentCardId" label="Student Card ID" value="%{student.cardId}"/>
            			</s:div>
            			
 		            <s:div class="form-group">
-		                <s:textfield disabled="true" name="rollNo" label="Roll No" value="%{student.rollNo}"/>
+		                <s:textfield name="studentRollNo" label="Roll No" value="%{student.rollNo}"/>
 		            </s:div>
 
 		            <s:div class="form-group">
-		                <s:textfield disabled="true" name="major" label="Major" value="%{student.major}"/>
+		                <s:textfield name="studentMajor" label="Major" value="%{student.major}"/>
 		            </s:div>
 
         		    <s:div class="form-group">
-            		    <s:textfield disabled="true" name="currentYear" label="Current Year" />
+            		    <s:textfield name="studentCurrentYear" label="Current Year" value="%{data[17].getValueById(student.currentYear)}" />
       				</s:div>
 
         		    <s:div class="form-group">
-        		        <s:textfield disabled="true" name="academicYear" label="Academic Year"/>
+        		        <s:textfield name="studentAcademicYear" label="Academic Year" value="%{data[1].getValueById(student.academicYear)}"/>
     		        </s:div>
 					 
 	    		    <tr class="section-title"><td colspan="2">Personal Information</td></tr>
             
-        		    <s:div class="form-group">
-        		        <s:textfield disabled="true" label="NRC" name="nrcStateNumber" value="%{#studentNrc.stateNumber + '/' + #studentNrc.township + '(' +  #studentNrc.nationality + ')' + #studentNrc.number}"/>
-       			    </s:div>
+		            <s:div class="form-group">
+		                <s:textfield label= "NRC" name="nrc" value="%{#studentNrc.stateNumber + '/' 
+		                											+ #studentNrc.township 
+		           													+ '(' + #studentNrc.nationality + ')' 
+		           													+ #studentNrc.number}"/>
+		                <s:hidden name="studentrcStateNumber" value="%{#studentNrc.stateNumber}"></s:hidden>
+		                <s:hidden name="studentNrcTownship" value="%{#studentNrc.township}"></s:hidden>
+		                <s:hidden name="studentNrcNationality" value="%{#studentNrc.nationality}"></s:hidden>
+		                <s:hidden name="studentNrcNumber" value="%{#studentNrc.number}"></s:hidden>
+		            </s:div>
 
      		       	<s:div class="form-group">
-     		           	<s:textfield disabled="true" name="state" label="State" value="%{student.state}"/>
+     		           	<s:textfield name="studentState" label="State" value="%{data[10].getValueById(student.state)}"/>
         		    </s:div>
 
        			    <s:div class="form-group">
-            		    <s:textfield disabled="true" name="township" label="Township" value="%{student.township}"/>
+            		    <s:textfield name="studentTownship" label="Township" value="%{data[12].getValueById(student.township)}"/>
             		</s:div>
 
             		<s:div class="form-group">
-                		<s:textfield disabled="true" name="address" label="Address" value="%{student.address}"/>
+                		<s:textfield name="studentAddress" label="Address" value="%{student.address}"/>
 		            </s:div>
 
         		    <s:div class="form-group gender-options">
-            		    <s:textfield disabled="true" name="gender" label="Gender" value="%{student.gender}"/>
+            		    <s:textfield name="studentGender" label="Gender" value="%{data[2].getValueById(student.gender)}"/>
            			</s:div>
 
            			<s:div class="form-group">
-           			    <s:textfield disabled="true" name="phoneNumber" label="Phone Number" value="%{student.phoneNumber}"/>
+           			    <s:textfield name="studentPhoneNumber" label="Phone Number" value="%{student.phoneNumber}"/>
            			</s:div>
 		
            			<s:div class="form-group">
-                		<s:textfield disabled="true" name="email" label="Email" value="%{student.email}"/>
+                		<s:textfield name="studentEmail" label="Email" value="%{student.email}"/>
 		            </s:div>
 
+					<!--  year error -->
         		    <s:div class="form-group">
-            		    <s:textfield disabled="true" name="dateOfBirth" label="Date of Birth" value="%{#studentDate.day + '-' + #studentDate.month + '-' +  #studentDate.year}"/>
+            		    <s:textfield name="date" label="Date of Birth" value="%{#studentDate.day + '-' 
+            																+ #studentDate.month + '-' 
+            																+  #studentDate.year}"/>
+            			<s:hidden name="studentDateOfBirthDay" value="%{#studentDate.day}"></s:hidden>
+		                <s:hidden name="studentDateOfBirthMonth" value="%{#studentDate.month}"></s:hidden>
+		                <s:hidden name="studentDateOfBirthYear" value="%{#studentDate.year}"></s:hidden>												
          		   	</s:div>
 		
 		            <s:div class="form-group">
-		                <s:textfield disabled="true" name="religion" label="Religion" value="%{student.religion}"/>
+		                <s:textfield name="studentReligion" label="Religion" value="%{student.religion}"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:textfield disabled="true" name="nationality" label="Nationality" value="%{student.nationality}"/>
+		                <s:textfield name="studentNationality" label="Nationality" value="%{student.nationality}"/>
 		            </s:div>
 		
 		           	<tr class="section-title"><td colspan="2">Guardian Information</td></tr>
 		
 		            <s:div class="form-group">
-		                <s:textfield disabled="true" name="guardianName" label="Guardian Name" value="%{#guardian.name}"/>
+		                <s:textfield name="guardianName" label="Guardian Name" value="%{#guardian.name}"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:textfield disabled="true" name="relativeType" label="Relative Type" value="%{#guardian.type}"/>
+		                <s:textfield name="guardianType" label="Relative Type" value="%{data[8].getValueById(#guardian.type)}"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:textfield disabled="true" label= "Guardian NRC" name="guardianNrcStateNumber" value="%{#guardianNrc.stateNumber + '/' + #guardianNrc.township + '(' + #guardianNrc.nationality + ')' + #guardianNrc.number}"/>
+		                <s:textfield label= "Guardian NRC" name="guardianNrc" value="%{data[7].getValueById(#guardianNrc.stateNumber) + '/' 
+		                																		+ data[6].getValueById(#guardianNrc.township) 
+		                																		+ '(' + data[13].getValueById(#guardianNrc.nationality) + ')' 
+		                																		+ #guardianNrc.number}"/>
+		                <s:hidden name="guardianNrcStateNumber" value="%{data[7].getValueById(#guardianNrc.stateNumber)}"></s:hidden>
+		                <s:hidden name="guardianNrcTownship" value="%{data[6].getValueById(#guardianNrc.township)}"></s:hidden>
+		                <s:hidden name="guardianNrcNationality" value="%{data[13].getValueById(#guardianNrc.nationality)}"></s:hidden>
+		                <s:hidden name="guardianNrcNumber" value="%{#guardianNrc.number}"></s:hidden>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:textfield disabled="true" name="guardianState" label="Guardian State" value="%{#guardian.state}"/>
+		                <s:textfield name="guardianState" label="Guardian State" value="%{data[10].getValueById(#guardian.state)}"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:textfield disabled="true" name="guardianTownship" label="Guardian Township" value="%{#guardian.township}"/>
+		                <s:textfield name="guardianTownship" label="Guardian Township" value="%{data[12].getValueById(#guardian.township)}"/>
 		            </s:div> 
 		
 		            <s:div class="form-group">
-		                <s:textfield disabled="true"  name="guardianAddress" label="Guardian Address" value="%{#guardian.address}"/>
+		                <s:textfield  name="guardianAddress" label="Guardian Address" value="%{#guardian.address}"/>
 		            </s:div>
 		
 					<s:div class="form-group">
-           			    <s:textfield disabled="true" name="phoneNumber" label="Phone Number" value="%{#guardian.phoneNumber}"/>
+           			    <s:textfield name="guardianPhoneNumber" label="Phone Number" value="%{#guardian.phoneNumber}"/>
            			</s:div>
 		
            			<s:div class="form-group">
-                		<s:textfield disabled="true" name="email" label="Email" value="%{#guardian.email}"/>
+                		<s:textfield name="guardianEmail" label="Email" value="%{#guardian.email}"/>
 		            </s:div>
 
         		    <s:div class="form-group">
-            		    <s:textfield disabled="true" name="dateOfBirth" label="Date of Birth" value="%{#guardianDate.day + '-' + #guardianDate.month + '-' +  #guardianDate.year}"/>
+            		    <s:textfield name="guardianDate" label="Date of Birth" value="%{data[14].getValueById(#guardianDate.day) + '-' 
+            		    																	+ data[15].getValueById(#guardianDate.month) + '-' 
+            		    																	+  data[16].getValueById(#guardianDate.year)}"/>
+         		   	<s:hidden name="guardianDateOfBirthDay" value="%{data[14].getValueById(#guardianDate.day)}"></s:hidden>
+		            <s:hidden name="guardianDateOfBirthMonth" value="%{data[15].getValueById(#guardianDate.month)}"></s:hidden>
+		            <s:hidden name="guardianDateOfBirthYear" value="%{data[16].getValueById(#guardianDate.year)}"></s:hidden>
          		   	</s:div>
 		
 		            <s:div class="form-group">
-		                <s:textfield disabled="true" name="religion" label="Religion" value="%{student.religion}"/>
+		                <s:textfield name="guardianReligion" label="Religion" value="%{data[9].getValueById(#guardian.religion)}"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:textfield disabled="true" name="nationality" label="Nationality" value="%{student.nationality}"/>
+		                <s:textfield name="guardianNationality" label="Nationality" value="%{data[5].getValueById(#guardian.nationality)}"/>
 		            </s:div>
-		            <tr class="section-title"><td colspan="2">Academic Record</td></tr>
-		
-					<table border="1px solid black" style="width: 300px; margin-left: auto; margin-right: auto">
-		           		<tr style="font-weight:bold">
-		           			<td style="text-align:center">Academic Year</td>
-		           			<td style="text-align:center">Roll No</td>
-		           		</tr>
-		          		<tr>
-		     				<td></td>
-		       				<td></td>
-		           		</tr>
-		           	</table>
+		            
+		            <!-- yes, passing actual value is possible and this is total nonsense added just to make the program work xD -->\
+		           	 <s:hidden name="subject6" value="11"/>
+		           	 <s:hidden name="matriculationYear" value="1"/>
+		           	 <s:hidden name="matriculationSubject1" value="1"/>
+		           	 <s:hidden name="matriculationSubject2" value="1"/>
+		           	 <s:hidden name="matriculationSubject3" value="1"/>
+		           	 <s:hidden name="matriculationSubject4" value="1"/>
+		           	 <s:hidden name="matriculationSubject5" value="1"/>
+		           	 <s:hidden name="matriculationSubject6" value="1"/>
+		            
 		            <s:submit id="submit-btn" value="Submit"></s:submit>
 		        </s:form>
   

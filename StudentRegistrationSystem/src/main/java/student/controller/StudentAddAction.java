@@ -42,68 +42,110 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		}
 		subject = subject.substring(0, (subject.length()-1)) + "),";
 		
-		
 		String sql = "WITH new_nrc AS ("
-				+ "  INSERT INTO nrc (state, nationality, number)  "
-				+ "  VALUES ( " 
-				+ "" + studentNrc.getTownship() + ", " 
-				+ "" + studentNrc.getNationality() + ", " 
-				+ studentNrc.getNumber() 
-				+ ") RETURNING nrc_id ), "
+					+ "  INSERT INTO nrc (state, nationality, number)  "
+					+ "  VALUES ( " 
+					+ "" + studentNrc.getTownship() + ", " 
+					+ "" + studentNrc.getNationality() + ", " 
+					+ studentNrc.getNumber() 
+					+ ") RETURNING nrc_id ), "
 				+ "  new_student AS ("
-				+ "	 INSERT INTO students (nrc, gender, nationality, religion, township, major, student_type,"
-				+ "                        student_name, date_of_birth, phone_number, email, address, "
-				+ "                        student_card_id, photo) VALUES "
-				+ "                        ((SELECT nrc_id FROM new_nrc),"
-				+ "" + student.getGender() + ", "
-				+ "" + student.getNationality() + ", "
-				+ "" + student.getReligion() + ", "
-				+ "" + student.getTownship() + ", "
-				+ "" + student.getMajor() + ", "
-				+ "" + student.getType() + ", "
-				+ "'" + student.getName() + "', "
-				+ "'" + studentDateOfBirth.getYear() + "-" + studentDateOfBirth.getMonth() + "-" + studentDateOfBirth.getDay() + "', "
-				+ student.getPhoneNumber() + ", "
-				+ "'" + student.getEmail() + "', "
-				+ "'" + student.getAddress() + "', "
-				+ "'" + student.getCardId() + "', "
-				+ "'" + student.getPhoto() + "') RETURNING student_id),"
+					+ "	 INSERT INTO students (nrc, gender, nationality, religion, township, major, student_type,"
+					+ "                        student_name, date_of_birth, phone_number, email, address, "
+					+ "                        student_card_id, photo) VALUES "
+					+ "                        ((SELECT nrc_id FROM new_nrc),"
+					+ "" + student.getGender() + ", "
+					+ "" + student.getNationality() + ", "
+					+ "" + student.getReligion() + ", "
+					+ "" + student.getTownship() + ", "
+					+ "" + student.getMajor() + ", "
+					+ "" + student.getType() + ", "
+					+ "'" + student.getName() + "', "
+					+ "'" + studentDateOfBirth.getYear() + "-" + studentDateOfBirth.getMonth() + "-" + studentDateOfBirth.getDay() + "', "
+					+ student.getPhoneNumber() + ", "
+					+ "'" + student.getEmail() + "', "
+					+ "'" + student.getAddress() + "', "
+					+ "'" + student.getCardId() + "', "
+					+ "'" + student.getPhoto() + "') RETURNING student_id),"
 				+ " new_matriculation AS ("
-				+ " INSERT INTO matriculation (student_id, place, roll_no, year) VALUES"
-				+ "((SELECT student_id FROM new_student),"
-				+ "'" + matriculation.getPlace() + "', "
-				+ "'" + matriculation.getRollNo() + "', "
-				+ matriculation.getYear() + ") RETURNING matriculation_id),"
+					+ " INSERT INTO matriculation (student_id, place, roll_no, year) VALUES"
+					+ "((SELECT student_id FROM new_student),"
+					+ "'" + matriculation.getPlace() + "', "
+					+ "'" + matriculation.getRollNo() + "', "
+					+ matriculation.getYear() + ") RETURNING matriculation_id),"
 				+ " new_matriculation_marks AS ("
-				+ " INSERT INTO matriculation_marks(matriculation_id, subject_id, mark) VALUES "
-				+ subject
+					+ " INSERT INTO matriculation_marks(matriculation_id, subject_id, mark) VALUES "
+					+ subject
 				+ " guardian_nrc AS ("
-				+ " INSERT INTO nrc (state, nationality, number)"
-				+ " VALUES ("
-				+ "'" + guardianNrc.getTownship() + "', "
-				+ "'" + guardianNrc.getNationality() + "', "
-				+ guardianNrc.getNumber()
-				+ ") RETURNING nrc_id ),"
+					+ " INSERT INTO nrc (state, nationality, number)"
+					+ " VALUES ("
+					+ "'" + guardianNrc.getTownship() + "', "
+					+ "'" + guardianNrc.getNationality() + "', "
+					+ guardianNrc.getNumber()
+					+ ") RETURNING nrc_id ),"
 				+ "	new_relative AS ( "
-				+ " INSERT INTO relatives (nrc, nationality, religion, township, "
-				+ "							student_id, relative_name, phone_number, email,"
-				+ "							address, date_of_birth) "
-				+ " VALUES ("
-				+ " (SELECT nrc_id FROM guardian_nrc), "
-				+ "" + guardian.getNationality() + ", "
-				+ "" + guardian.getReligion() + ", "
-				+ "" + guardian.getTownship() + ", "
-				+ " (SELECT student_id FROM new_student), "
-				+ "'" + guardian.getName() + "', "
-				+ guardian.getPhoneNumber() + ", "
-				+ "'" + guardian.getEmail() + "', "
-				+ "'" + guardian.getAddress() + "', "
-				+ "'" + guardianDateOfBirth.getYear() + "-" + guardianDateOfBirth.getMonth() + "-" + guardianDateOfBirth.getDay() 
-				+ "') RETURNING relative_id)"
+					+ " INSERT INTO relatives (nrc, nationality, religion, township, "
+					+ "							student_id, relative_name, phone_number, email,"
+					+ "							address, date_of_birth) "
+					+ " VALUES ("
+					+ " (SELECT nrc_id FROM guardian_nrc), "
+					+ "" + guardian.getNationality() + ", "
+					+ "" + guardian.getReligion() + ", "
+					+ "" + guardian.getTownship() + ", "
+					+ " (SELECT student_id FROM new_student), "
+					+ "'" + guardian.getName() + "', "
+					+ guardian.getPhoneNumber() + ", "
+					+ "'" + guardian.getEmail() + "', "
+					+ "'" + guardian.getAddress() + "', "
+					+ "'" + guardianDateOfBirth.getYear() + "-" + guardianDateOfBirth.getMonth() + "-" + guardianDateOfBirth.getDay() 
+					+ "') RETURNING relative_id)"
 				+ " INSERT INTO type_of_relation (relative_id, relative_type_id) VALUES ("
-				+ "(SELECT relative_id FROM new_relative),"
-				+ "" + guardian.getType() + ");";
+					+ "(SELECT relative_id FROM new_relative),"
+					+ "" + guardian.getType() + ");";
 		studentDAO.addStudentToDatabase(sql);
+		return SUCCESS;
+	}
+	
+	public String addReturningStudentDataToDatabase() {
+		Student student = setStudentValuesFromRequest();
+		Guardian guardian = student.getGuardian();
+		Nrc guardianNrc = guardian.getNrc();
+		DateOfBirth studentDateOfBirth = student.getDateOfBirth();
+		DateOfBirth guardianDateOfBirth = guardian.getDateOfBirth();
+
+		
+		String sql = "WITH new_student AS ("
+					+ " UPDATE students SET "
+					+ "township = " + new Township().getIdByValue(student.getTownship()) + ", "
+					+ "address = '" + student.getAddress() + "', "
+					+ "phone_number = '" + student.getPhoneNumber() + "',"
+					+ "email = '" + student.getEmail() + "'"
+					+ "WHERE student_card_id = '" + student.getCardId() 
+					+"' RETURNING student_id),"
+				+ "	new_relative AS ( "
+					+ " UPDATE relatives SET "
+					+ " relative_name = '" + guardian.getName() + "', "
+					+ " phone_number = '" + guardian.getPhoneNumber() + "', "
+					+ " email = '" + guardian.getEmail() + "', "
+					+ " township = " + new Township().getIdByValue(guardian.getTownship()) + ", "
+					+ " address = '" + guardian.getAddress() + "', "
+					+ " nationality = " + new Nationality().getIdByValue(guardian.getNationality()) + ", "
+					+ " religion = " + new Religion().getIdByValue(guardian.getReligion()) + ", "
+					+ " date_of_birth = '" + guardianDateOfBirth.getYear() + "-" + guardianDateOfBirth.getMonth() + "-" + guardianDateOfBirth.getDay() + "' " 
+					+ " WHERE student_id = (SELECT student_id FROM new_student)"
+					+ " RETURNING nrc),"
+				+ " guardian_nrc AS ("
+					+ " UPDATE nrc SET"
+					+ " state = " + new NrcState().getIdByValue(guardianNrc.getTownship()) + ", "
+					+ " nationality = " + new NrcNationality().getIdByValue(guardianNrc.getNationality()) + ", "
+					+ " number = '" + guardianNrc.getNumber() + "'"
+					+ " WHERE nrc_id = (SELECT nrc FROM new_relative)"
+					+ ")"
+				+ " INSERT INTO academic_record VALUES ("
+				+ " (SELECT student_id FROM new_student), "
+				+ new AcademicYear().getIdByValue(student.getAcademicYear()) + ", "
+				+ "' " + student.getRollNo() + "' );";
+		studentDAO.addStudentToDatabase(sql);		
 		return SUCCESS;
 	}
 	
