@@ -42,5 +42,10 @@ public class LoginAction extends ActionSupport {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	public String forgotPassword() {
+		return SUCCESS;
+	}
+	public String changePassword() {
+		return SUCCESS;
+	}
 }
