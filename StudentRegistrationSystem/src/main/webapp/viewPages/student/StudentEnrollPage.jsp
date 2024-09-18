@@ -6,6 +6,16 @@
 <head>
     <title>Student Enrollment Form</title>
     <link type="text/css" rel="stylesheet" href="./css/form.css">
+     <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
+          rel='stylesheet'>
+          
+    <script src=
+		"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" >
+    </script>
+
+    <script src=
+		"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" >
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -112,7 +122,6 @@
 
 <body>
      <div class="container">
-        <h1>Home</h1>
         <div class="panel">
             <div class="content">
                 <!-- This is where the content for each action would be displayed -->
@@ -130,12 +139,12 @@
             		</s:div>
     
 		            <s:div class="form-group">
-		                <s:textfield name="studentRollNo" label="Roll No"/>
+		                <s:textfield name="studentRollNo" label="Roll No" required="true" value="%{student.rollNo}"/>
 		            </s:div>
 		           
        			    <s:div class="form-group">
             		    <s:select name="studentType" label="Student Type to Insert" list="data[11].getDataMap()" 
-            		    			listKey="key" listValue="value"  value="data[11].getIdByValue(student.type)"/>
+            		    			listKey="key" listValue="value" required="true" value="data[11].getIdByValue(student.type)"/>
            			</s:div>
            			
 		            <s:div class="form-group">
@@ -146,12 +155,12 @@
 
         		    <s:div class="form-group">
             		    <s:select name="studentCurrentYear" list="data[17].getDataMap()" label="Current Year"
-            		    		 value="data[17].getIdByValue(student.currentYear)"/>
+            		    		 value="data[17].getIdByValue(student.currentYear)" required="true"/>
       				</s:div>
 
         		    <s:div class="form-group">
         		        <s:select name="studentAcademicYear" list="data[1].getDataMap()" label="Academic Year" value="data[1].getIdByValue(student.academicYear)"
-        		        		listKey="key" listValue="value" />
+        		        		listKey="key" listValue="value" required="true"/>
     		        </s:div>
 					 
 	    		    <tr class="section-title"><td colspan="2">Personal Information</td></tr>
@@ -172,17 +181,17 @@
      		       	<s:div class="form-group">
      		           	<s:select name="studentState" list="data[10].getDataMap()"
         		        		listKey="key" listValue="value" 
-        		        		 label="State" value="%{student.state}"/>
+        		        		 label="State" value="%{student.state}" required="true"/>
         		    </s:div>
 
        			    <s:div class="form-group">
             		    <s:select name="studentTownship" list="data[12].getDataMap()" value="data[12].getIdByValue(student.township)"
         		        		listKey="key" listValue="value" 
-        		        		 label="Township"/>
+        		        		 label="Township" required="true"/>
             		</s:div>
 
             		<s:div class="form-group">
-                		<s:textarea name="studentAddress" label="Address" value="%{student.address}"/>
+                		<s:textarea name="studentAddress" label="Address" value="%{student.address}" required="true"/>
 		            </s:div>
 
         		    <s:div class="form-group gender-options">
@@ -190,11 +199,11 @@
            			</s:div>
 
            			<s:div class="form-group">
-           			    <s:textfield name="studentPhoneNumber" label="Phone Number" value="%{student.phoneNumber}"/>
+           			    <s:textfield name="studentPhoneNumber" label="Phone Number" value="%{student.phoneNumber}" required="true"/>
            			</s:div>
 		
            			<s:div class="form-group">
-                		<s:textfield name="studentEmail" label="Email" value="%{student.email}"/>
+                		<s:textfield name="studentEmail" label="Email" value="%{student.email}" required="true"/>
 		            </s:div>
 
         		    <s:div class="form-group">
@@ -216,47 +225,45 @@
 		           	<tr class="section-title"><td colspan="2">Guardian Information</td></tr>
 		
 		            <s:div class="form-group">
-		                <s:textfield name="guardianName" label="Guardian Name" value="%{student.guardian.name}"/>
+		                <s:textfield name="guardianName" label="Guardian Name" value="%{student.guardian.name}" required="true"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
 		                <s:select name="guardianType" label="Relative Type" list="data[8].getDataMap()" value="data[8].getIdByValue(student.guardian.type)"
-        		        		listKey="key" listValue="value"  />
+        		        		listKey="key" listValue="value" required="true"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-           			    <s:textfield name="guardianPhoneNumber" label="Phone Number" value="%{student.guardian.phoneNumber}"/>
+           			    <s:textfield name="guardianPhoneNumber" label="Phone Number" value="%{student.guardian.phoneNumber}" required="true"/>
            			</s:div>
 		
            			<s:div class="form-group">
-                		<s:textfield name="guardianEmail" label="Email" value="%{student.guardian.email}"/>
+                		<s:textfield name="guardianEmail" label="Email" value="%{student.guardian.email}" required="true"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
 		                <s:select label= "NRC" name="guardianNrcStateNumber" list="data[7].getDataMap()" value="data[7].getIdByValue(student.guardian.nrc.stateNumber)"
-        		        		listKey="key" listValue="value"  />
+        		        		listKey="key" listValue="value" required="true"/>
 		                <s:select name="guardianNrcTownship" list="data[6].getDataMap()" value="data[6].getIdByValue(student.guardian.nrc.township)"
-        		        		listKey="key" listValue="value" />
+        		        		listKey="key" listValue="value" required="true"/>
 		                <s:select name="guardianNrcNationality" list="data[13].getDataMap()" value="data[13].getIdByValue(student.guardian.nrc.nationality)"
-        		        		listKey="key" listValue="value" />
-		                <s:textfield name="guardianNrcNumber" value="%{student.guardian.nrc.number}"></s:textfield>
+        		        		listKey="key" listValue="value" required="true"/>
+		                <s:textfield name="guardianNrcNumber" value="%{student.guardian.nrc.number}" required="true"></s:textfield>
 		            </s:div>
 		
 		            <s:div class="form-group">
 		                <s:select name="guardianState" label="State" list="data[10].getDataMap()" value="data[10].getIdByValue(student.guardian.state)"
-        		        		listKey="key" listValue="value" 
-        		        		 />
+        		        		listKey="key" listValue="value" required="true"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
 		                <s:select name="guardianTownship" label="Township" list="data[12].getDataMap()" value="data[12].getIdByValue(student.guardian.township)"
-        		        		listKey="key" listValue="value" 
-        		        		/>
+        		        		listKey="key" listValue="value" required="true"/>
 		            </s:div>
 		            
 		
 		            <s:div class="form-group">
-		                <s:textarea name="guardianAddress" label="Address" value="%{student.guardian.address}"/>
+		                <s:textarea name="guardianAddress" label="Address" value="%{student.guardian.address}" required="true"/>
 		            </s:div>
 		            
 		             <s:div class="form-group">
@@ -265,12 +272,12 @@
          		   	
          		   	<s:div class="form-group">
 		                <s:select name="guardianReligion" label="Religion" list="data[9].getDataMap()" value="data[9].getIdByValue(student.guardian.religion)"
-        		        		listKey="key" listValue="value"  />
+        		        		listKey="key" listValue="value" required="true"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
 		                <s:select name="guardianNationality" label="Nationality" list="data[5].getDataMap()" value="data[5].getIdByValue(student.guardian.nationality)"
-        		        		listKey="key" listValue="value"  />
+        		        		listKey="key" listValue="value" required="true"/>
 		            </s:div>
 		
 		            <tr class="section-title"><td colspan="2">Academic Record</td></tr>

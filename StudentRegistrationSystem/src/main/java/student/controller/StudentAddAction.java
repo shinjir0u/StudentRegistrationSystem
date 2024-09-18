@@ -27,6 +27,10 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 	
 	public String addStudentToHashMap() {
 		String rollnoPattern = "^[IVXLCDM]+\\.[A-Z]{1,4}-(?:[1-9]\\d?)$";
+		String emailPattern = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+		String phonenumberPattern = "^(\\+?959|09)\\d{7,10}$";
+		String namePattern = "[a-zA-Z]+";
+		String nrcnumberPattern = "^\\d{6}$";
 		data = studentDAO.setDataValues();
 		students = studentDAO.loadFile();
 		student = setStudentValuesFromRequest();
@@ -35,7 +39,43 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			addFieldError("studentRollNo", "Invalid Roll No");
 			return INPUT;
 		}
-		
+		if(student.getAddress().isBlank()) {
+			addFieldError("studentAddress", "Invalid Address");
+			return INPUT;
+		}
+		if(student.getPhoneNumber().isBlank() || Pattern.compile(phonenumberPattern).matcher(student.getPhoneNumber()).matches() == false) {
+			addFieldError("studentPhoneNumber", "Invalid Phone Number");
+			return INPUT;
+		}
+		if(student.getEmail().isBlank() || Pattern.compile(emailPattern).matcher(student.getEmail()).matches() == false) {
+			addFieldError("studentEmail", "Invalid Email");
+			return INPUT;
+		}
+		if(student.getGuardian().getName().isBlank() || Pattern.compile(namePattern).matcher(student.getGuardian().getName()).matches() == false) {
+			addFieldError("guardianName", "Invalid Name");
+			return INPUT;
+		}
+		if(student.getGuardian().getPhoneNumber().isBlank() || Pattern.compile(phonenumberPattern).matcher(student.getGuardian().getPhoneNumber()).matches() == false) {
+			addFieldError("guaridanPhoneNumber", "Invalid Phone Number");
+			return INPUT;
+		}
+		if(student.getGuardian().getEmail().isBlank() || Pattern.compile(emailPattern).matcher(student.getGuardian().getEmail()).matches() == false) {
+			addFieldError("guardianEmail", "Invalid Email");
+			return INPUT;
+		}
+		if(student.getGuardian().getNrc().getNumber().isBlank() || Pattern.compile(nrcnumberPattern).matcher(student.getGuardian().getNrc().getNumber()).matches() == false) {
+			addFieldError("guardianNrcNumber", "Invalid NRC Number");
+			return INPUT;
+		}
+		if(student.getGuardian().getAddress().isBlank()) {
+			addFieldError("guardianNrcNumber", "Invalid Address");
+			return INPUT;
+		}
+		if(student.getGuardian().getDateOfBirth().isBlank()) {
+			addFieldError("guardianDateOfBirth", "Invalid Birthday");
+			return INPUT;
+		}
+				
  		students.put(studentDAO.generateHashKey(students), student);
 		studentDAO.saveFile(students);
 		return SUCCESS;
@@ -43,7 +83,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 	
 	public String addStudentToDatabase() {
 		data = studentDAO.setDataValues();	
-		Student student = setStudentValuesFromRequest();
+		student = setStudentValuesFromRequest();
 		Guardian guardian = student.getGuardian();
 		Nrc studentNrc = student.getNrc();
 		Nrc guardianNrc = guardian.getNrc();
@@ -63,6 +103,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		String markPattern = "^(100|[1-9]?[0-9])$";
 		String cardidPattern = "^\\d{2}/\\d{5}$";
 		String yearPattern = "^(19[0-9]{2}|20[01][0-9]|2100)$";
+		String nrcnumberPattern = "^\\d{6}$";
 		
 		if(student.getType().equals("0")) {
 			addFieldError("studentType", "Invalid Type");
@@ -104,7 +145,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			addFieldError("studentNrcNationality", "Invalid NRC Nationality");
 			return INPUT;
 		}
-		if(studentNrc.getNumber().isBlank()) {
+		if(studentNrc.getNumber().isBlank() || Pattern.compile(nrcnumberPattern).matcher(studentNrc.getNumber()).matches() == false) {
 			addFieldError("studentNrcNumber", "Invalid NRC Number");
 			return INPUT;
 		}
@@ -172,7 +213,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			addFieldError("guardianNrcNationality", "Invalid NRC Nationality");
 			return INPUT;
 		}
-		if(guardian.getNrc().getNumber().isBlank()) {
+		if(guardian.getNrc().getNumber().isBlank() || Pattern.compile(nrcnumberPattern).matcher(guardian.getNrc().getNumber()).matches() == false) {
 			addFieldError("guardianNrcNumber", "Invalid NRC Number");
 			return INPUT;
 		}
@@ -189,7 +230,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			return INPUT;
 		}
 		if(guardian.getDateOfBirth().isBlank()) {
-			addFieldError("guardianDateOfBirth", "Invalid Birth");
+			addFieldError("guardianDateOfBirth", "Invalid Birthday");
 			return INPUT;
 		}
 		if(student.getReligion().equals("0")) {
