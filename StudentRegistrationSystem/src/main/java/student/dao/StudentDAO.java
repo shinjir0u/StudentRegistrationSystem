@@ -32,14 +32,14 @@ import student.model.Student;
 
 public class StudentDAO {
 
-	private final String projectDir = System.getProperty("user.dir");
-	private final String filename = projectDir + "/student.ser";
+	private final String filename = "student.ser";
 //	private final String url = "jdbc:postgresql://dpg-cril31jv2p9s738json0-a.singapore-postgres.render.com/"
 //			+ "university_database_glgp?user="
 //			+ "shinji&password=bSzNteNUBc973PDCIPMWyJJI4pkDJB3F";
 	private final String url = "jdbc:postgresql://localhost/university_database";
 	private final String username = "shinji";
 	private final String password = "pass";
+
 
 	private Connection connection;
 	

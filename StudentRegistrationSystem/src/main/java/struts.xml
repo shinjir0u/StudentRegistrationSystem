@@ -7,11 +7,6 @@
     	<result-types>
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
-	       
-		<action name="hashMapTest" class="student.controller.StudentRetrieveAction" method="retrieveStudentsFromHashMap">
-			<result>/hashMapSuccess.jsp</result>
-		</action>
-        <!-- for admin  -->
         <action name="check" class="student.controller.StudentRetrieveAction" method="retrieveStudentsFromHashMap">
             <result name="success" type="tiles">check</result>
         </action>
