@@ -24,6 +24,7 @@ import data.NrcState;
 import data.NrcStateNumber;
 import data.RelativeType;
 import data.Religion;
+import data.RollNumberCode;
 import data.State;
 import data.StudentType;
 import data.Township;
@@ -33,20 +34,20 @@ public class StudentDAO {
 
 	private final String projectDir = System.getProperty("user.dir");
 	private final String filename = projectDir + "/student.ser";
-	private final String url = "jdbc:postgresql://dpg-cril31jv2p9s738json0-a.singapore-postgres.render.com/"
-			+ "university_database_glgp?user="
-			+ "shinji&password=bSzNteNUBc973PDCIPMWyJJI4pkDJB3F";
-//	private final String url = "jdbc:postgresql://localhost/university_database";
-//	private final String username = "shinji";
-//	private final String password = "pass";
+//	private final String url = "jdbc:postgresql://dpg-cril31jv2p9s738json0-a.singapore-postgres.render.com/"
+//			+ "university_database_glgp?user="
+//			+ "shinji&password=bSzNteNUBc973PDCIPMWyJJI4pkDJB3F";
+	private final String url = "jdbc:postgresql://localhost/university_database";
+	private final String username = "shinji";
+	private final String password = "pass";
 
 	private Connection connection;
 	
 	private Statement connectDatabase() {
 		try {
 			Class.forName("org.postgresql.Driver");
-//			connection = DriverManager.getConnection(url, username, password);
-			connection = DriverManager.getConnection(url);
+			connection = DriverManager.getConnection(url, username, password);
+//			connection = DriverManager.getConnection(url);
 			return connection.createStatement();
 		} catch(ClassNotFoundException | SQLException e) {
 			throw new RuntimeException(e);
@@ -114,6 +115,7 @@ public class StudentDAO {
 		data.put(15, new DateOfBirthMonth());
 		data.put(16, new DateOfBirthYear());
 		data.put(17, new CurrentYear());
+		data.put(18, new RollNumberCode());
 		return data;
 	}
 

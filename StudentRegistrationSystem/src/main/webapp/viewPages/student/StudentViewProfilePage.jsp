@@ -30,7 +30,7 @@
 							Student card ID
 						</td>
 						<td>
-							1001
+							<s:property value="student.cardId"/>
 						</td>
 					</tr>
 					<tr>
@@ -38,7 +38,7 @@
 							Name
 						</td>
 						<td>
-							Victoria
+							<s:property value="student.name"/>
 						</td>
 					</tr>
 					<tr>
@@ -46,7 +46,7 @@
 							Roll number
 						</td>
 						<td>
-							IV CEIT 23
+							<s:property value="student.rollNo"/>
 						</td>
 					</tr>
 					<tr>
@@ -54,7 +54,7 @@
 							Major
 						</td>
 						<td>
-							CEIT
+							<s:property value="student.major"/>
 						</td>
 					</tr>
 					<tr>
@@ -62,7 +62,7 @@
 							Academic year
 						</td>
 						<td>
-							2023-2024
+							<s:property value="student.academicYear"/>
 						</td>
 					</tr>
 					<tr>
@@ -70,7 +70,8 @@
 							NRC
 						</td>
 						<td>
-							12/DaGaTa(N)343435
+							<s:property value="student.nrc.stateNumber + student.nrc.township + 
+													student.nrc.nationality + student.nrc.number "/>
 						</td>
 					</tr>
 					<tr>
@@ -78,7 +79,7 @@
 							Address
 						</td>
 						<td>
-							Ahlone township,Yangon
+							<s:property value="student.address"/>
 						</td>
 					</tr>
 					<tr>
@@ -86,7 +87,7 @@
 							Gender
 						</td>
 						<td>
-							Female
+							<s:property value="student.gender"/>
 						</td>
 					</tr>
 					<tr>
@@ -94,7 +95,7 @@
 							Phone number
 						</td>
 						<td>
-							09434334343
+							<s:property value="student.phoneNumber"/>
 						</td>
 					</tr>
 					<tr>
@@ -102,7 +103,7 @@
 							Email
 						</td>
 						<td>
-							vitoria@gmail.com
+							<s:property value="student.email"/>
 						</td>
 					</tr>
 					<tr>
@@ -110,7 +111,7 @@
 							Date of birth
 						</td>
 						<td>
-							04-03-1999
+							<s:property value="student.dateOfBirth.year + '-' + student.dateOfBirth.month + '-' + student.dateOfBirth.day"/>
 						</td>
 					</tr>
 					<tr>
@@ -118,7 +119,7 @@
 							Religion
 						</td>
 						<td>
-							Buddha
+							<s:property value="student.religion"/>
 						</td>
 					</tr>
 					<tr>
@@ -126,14 +127,22 @@
 							Nationality
 						</td>
 						<td>
-							Burmese
+							<s:property value="student.nationality"/>
 						</td>
 					</tr>
 				</table>
-				<br>
-				<s:form action="academicRecord">
-					<button type="submit" id="btn">View Academic Records</button>
-				</s:form>
+				<table border="1px solid black" style="width: 300px; margin-left: auto; margin-right: auto">
+		           	<tr style="font-weight:bold">
+		           		<td style="text-align:center">Academic Year</td>
+		           		<td style="text-align:center">Roll No</td>
+		           	</tr>
+		          	<s:iterator value="%{student.academicRecords}">
+		          		<tr style="text-align: center;">
+		          			<td><s:property value="%{academicYear}"/>
+		          			<td><s:property value="%{rollNo}"/>
+		          		</tr>
+		          	</s:iterator>
+		       	</table>
 							
 		</div>
 	</div>

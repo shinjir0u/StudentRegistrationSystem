@@ -136,7 +136,7 @@
 		            </s:div>
 
         		    <s:div class="form-group">
-            		    <s:select name="studentCurrentYear" list="#{'1':'1st Year', '2':'2nd Year', '3':'3rd Year', '4':'4th Year', '5':'5th Year', '6':'Final Year' }" label="Current Year"
+            		    <s:select name="studentCurrentYear" list="data[17].getDataMap()" label="Current Year"
             		    		headerKey="0" headerValue=""/>
       				</s:div>
 

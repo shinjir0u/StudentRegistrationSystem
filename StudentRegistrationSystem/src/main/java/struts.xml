@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC 
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" 
-	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
     <package name="StudentRegistration" namespace="/" extends="struts-default">
     	<result-types>
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
-<<<<<<< HEAD
-		  
-		<!-- for admin  -->
-=======
-		       
+	       
 		<action name="hashMapTest" class="student.controller.StudentRetrieveAction" method="retrieveStudentsFromHashMap">
 			<result>/hashMapSuccess.jsp</result>
 		</action>
         <!-- for admin  -->
->>>>>>> 2d912f7fe7c7495e7c71d6de7b67dad8e1d8a521
         <action name="check" class="student.controller.StudentRetrieveAction" method="retrieveStudentsFromHashMap">
             <result name="success" type="tiles">check</result>
         </action>
@@ -38,23 +33,26 @@
             <result name="input" type="tiles">insert</result>
         </action>
         
-        <action name="search" class="student.controller.AdminSearchAction" method="display">
+        <action name="search" class="student.controller.StudentAddAction" method="execute">
             <result name="success" type="tiles">search</result>
         </action>
-        <action name="filter" class="student.controller.AdminSearchAction" method="execute">
+        <action name="filter" class="student.controller.StudentRetrieveAction" method="retrieveFilteredStudentsFromDatabase">
             <result name="success" type="tiles">filter_result</result>
+        </action>
+        <action name="showFilteredStudentDetails" class="student.controller.StudentRetrieveAction" method="retrieveFilteredStudentFromDatabase">
+            <result name="success" type="tiles">filter_result_view_detail</result>
+        </action>
+        <action name="backToFilteredResultPage" class="student.controller.StudentRetrieveAction" method="execute">
+            <result name="success" type="chain">filter</result>
         </action>
         
        	<!-- for student -->
         <!-- Map this later -->
-        <action name="view" class="student.controller.StudentRetrieveAction" method="execute">
+        <action name="view" class="student.controller.StudentRetrieveAction" method="retrieveStudentFromDatabase">
             <result name="success" type="tiles">student_view_profile</result>
         </action>
         
-        <action name="enroll" class="student.controller.StudentRetrieveAction" method="execute">
-            <result name="success" type="tiles">student_enroll_initiate</result>
-		</action>
-		<action name="studentEnrollInitiate" class="student.controller.StudentRetrieveAction" method="retrieveStudentFromDatabase">
+		<action name="enroll" class="student.controller.StudentRetrieveAction" method="retrieveStudentFromDatabase">
             <result name="success" type="tiles">student_enroll</result>
 		</action>
 		<action name="studentEnroll" class="student.controller.StudentAddAction" method="addStudentToHashMap">
@@ -69,6 +67,7 @@
         <action name="login" class="student.controller.LoginAction" method="execute">
             <result name="student_success" type="tiles" >student_home</result>
             <result name="admin_success" type="tiles">admin_home</result>
+            <result name="input">index.jsp</result>
         </action>
         
         <action name="forgotPassword" class="student.controller.TestAction" method="execute">

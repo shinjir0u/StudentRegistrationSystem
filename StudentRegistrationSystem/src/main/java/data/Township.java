@@ -2,6 +2,7 @@ package data;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 
 public class Township extends Data {
 
@@ -17,5 +18,4 @@ public class Township extends Data {
 		String sql = "SELECT * FROM townships;";
         dataMap = getDataMapFromDatabase(sql, 1, 3);
 	}
-
 }

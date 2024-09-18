@@ -53,7 +53,13 @@
    	<definition name="filter_result" extends="mainTemplate">
       <put-attribute name="title"  value="Results"/>
       <put-attribute name="navBar"   value="/viewPages/admin/AdminNavBarPage.jsp"/>
-      <put-attribute name="body"   value="/viewPages/admin/AdminFilterResultPaginationPage.jsp"/>      
+      <put-attribute name="body"   value="/viewPages/admin/AdminFilterResultPage.jsp"/>      
+   	</definition>
+   	
+   	<definition name="filter_result_view_detail" extends="mainTemplate">
+      <put-attribute name="title"  value="Results"/>
+      <put-attribute name="navBar"   value="/viewPages/admin/AdminNavBarPage.jsp"/>
+      <put-attribute name="body"   value="/viewPages/admin/AdminFilterResultViewDetailsPage.jsp"/>      
    	</definition>
    	
    	<!-- for student -->
@@ -67,12 +73,6 @@
       <put-attribute name="title"  value="Student Profile"/>
       <put-attribute name="navBar"   value="/viewPages/student/StudentNavBarPage.jsp"/>
       <put-attribute name="body"   value="/viewPages/student/StudentViewProfilePage.jsp"/>      
-   	</definition>
-   	
-   	<definition name="student_enroll_initiate" extends="mainTemplate">
-      <put-attribute name="title"  value="Student Enroll"/>
-      <put-attribute name="navBar"   value="/viewPages/student/StudentNavBarPage.jsp"/>
-      <put-attribute name="body"   value="/viewPages/student/StudentEnrollHomePage.jsp"/>      
    	</definition>
    	
    	<definition name="student_enroll" extends="mainTemplate">
