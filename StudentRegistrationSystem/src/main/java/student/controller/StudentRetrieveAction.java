@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,7 +30,7 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 	private Student student;
 	private HttpServletRequest request;
 	private HashMap<Integer, Data> data;
-	private String order;
+	private int orderNumber;
 	private Map<String, Object> session;
 	
 	public String execute() {
@@ -114,8 +116,10 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 	}
 
 	public String retrieveFilteredStudentFromDatabase() {
-		students= (HashMap<Integer, Student>) session.get("filteredStudents");		
-		student = students.get(order);
+		students= (HashMap<Integer, Student>) session.get("filteredStudents");	
+		String orderString = request.getParameter("order");
+		orderNumber = (null==orderString || "".equals(orderString)) ? 0 : Integer.parseInt(orderString);
+		student = students.get(orderNumber);
 		return SUCCESS;
 	}
 	
@@ -128,15 +132,15 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 	
 	public String retrieveStudentsFromHashMap() {
 		students = studentDAO.loadFile();
-		order = request.getParameter("order");
-		students.remove(order);
 		return SUCCESS;
 	}
 	
 	public String retrieveStudentFromHashMap() {
 		students = studentDAO.loadFile();
 		data = studentDAO.setDataValues();
-		student = students.get(order);
+		String orderString = request.getParameter("order");
+		orderNumber = (null==orderString || "".equals(orderString)) ? 0 : Integer.parseInt(orderString);
+		student = students.get(orderNumber);
 		return SUCCESS;
 	}
 
@@ -281,12 +285,12 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 		return data;
 	}
 	
-	public String getOrder() {
-		return order;
+	public int getOrderNumber() {
+		return orderNumber;
 	}
 
-	public void setOrder(String order) {
-		this.order = order;
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 
 	@Override

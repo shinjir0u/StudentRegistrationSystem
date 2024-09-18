@@ -7,15 +7,16 @@
 		<div class="table">
 		    <div class="table-row">	
 				<div class="table-data">
-					<s:form action="showDetails">
-						<s:iterator value="students">
-		   					<s:hidden name="order" value="%{key}"></s:hidden>
+					<s:iterator value="students">
+					<s:set value="value" var="student"/>
+						<s:form action="showDetails">
+							<s:hidden name="order" value="%{key}"></s:hidden>
             				Name: <s:property value="#student.name"/><br>
             				Major: <s:property value="#student.major"/><br>
             				Current Year: <s:property value="#student.currentYear"/><br>
-	            		</s:iterator>
-            			<s:submit value="submit"></s:submit>            				
-            		</s:form>
+	               			<s:submit value="submit"></s:submit>            				
+            			</s:form>
+            		</s:iterator>
             	</div>
             </div>
 		</div>

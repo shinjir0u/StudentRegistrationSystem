@@ -105,7 +105,7 @@
                 	<s:set value="#guardian.dateOfBirth" var="guardianDate"/>   	
 
 					<tr class="section-title"><td  colspan="2">Academic Information</tr>
-					<s:hidden name="order" value="%{order}"/>
+					<s:hidden name="order" value="%{orderNumber}"/>
     		        <s:div class="form-group">
         		        <s:textfield readonly="true" name="studentName" label="Student Name" value="%{student.name}"/>
             		</s:div>

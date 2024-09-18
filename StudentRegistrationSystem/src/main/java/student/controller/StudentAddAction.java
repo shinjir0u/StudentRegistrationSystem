@@ -334,6 +334,11 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 					+ "'" + student.getRollNo() + "' );";
 			studentDAO.addStudentToDatabase(sql);		
 		}
+		students = studentDAO.loadFile();
+		String orderString = request.getParameter("order");
+		int orderNumber = (null==orderString || "".equals(orderString)) ? 0 : Integer.parseInt(orderString);
+		students.remove(orderNumber);
+		studentDAO.saveFile(students);
 		return SUCCESS;
 	}
 	
