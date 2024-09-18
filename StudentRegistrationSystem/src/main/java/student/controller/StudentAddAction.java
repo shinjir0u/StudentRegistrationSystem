@@ -123,8 +123,8 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			addFieldError("studentEmail", "Invalid Email");
 			return INPUT;
 		}
-		if(student.getDateOfBirth().equals("15-08-2000")) {
-			addFieldError("studentDateOfBirthYear", "Invalid Birth Year");
+		if(student.getDateOfBirth().isBlank()) {
+			addFieldError("studentDateOfBirth", "Invalid Birthday");
 			return INPUT;
 		}
 		if(student.getReligion().equals("0")) {
@@ -179,8 +179,8 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			addFieldError("guradianAddress", "Invalid Address");
 			return INPUT;
 		}
-		if(guardian.getDateOfBirth().equals("15-08-2000")) {
-			addFieldError("guardianDateOfBirthYear", "Invalid Birth Year");
+		if(guardian.getDateOfBirth().isBlank()) {
+			addFieldError("guardianDateOfBirth", "Invalid Birth");
 			return INPUT;
 		}
 		if(student.getReligion().equals("0")) {

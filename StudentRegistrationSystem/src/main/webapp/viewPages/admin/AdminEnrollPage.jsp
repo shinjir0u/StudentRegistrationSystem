@@ -196,7 +196,7 @@
 		            </s:div>
 
         		    <s:div class="form-group">
-        		    	<s:textfield name="studentDateOfBirthDay" id="my_date_picker_1" label="Date of Birth" required="true"></s:textfield>
+        		    	<s:textfield name="studentDateOfBirth" id="my_date_picker_1" label="Date of Birth" required="true"></s:textfield>
          		   	</s:div>
 		
 		            <s:div class="form-group">
