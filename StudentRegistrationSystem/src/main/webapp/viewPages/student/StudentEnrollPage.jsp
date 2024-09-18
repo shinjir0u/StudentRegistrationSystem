@@ -198,7 +198,7 @@
 		            </s:div>
 
         		    <s:div class="form-group">
-        		    	<s:textfield name="studentDateOfBirth" label="Date of Birth" id="my_date_picker_1" required="true" value="%{student.dateOfBirth}"></s:textfield>
+        		    	<s:textfield name="studentDateOfBirth" readonly="true" label="Date of Birth" id="my_date_picker_1" required="true" value="%{student.dateOfBirth}"></s:textfield>
          		   	</s:div>
 		
 		            <s:div class="form-group">
