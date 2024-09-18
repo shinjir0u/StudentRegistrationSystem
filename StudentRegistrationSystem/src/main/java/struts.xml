@@ -51,7 +51,11 @@
             <result name="success" type="tiles">student_enroll</result>
 		</action>
 		<action name="studentEnroll" class="student.controller.StudentAddAction" method="addStudentToHashMap">
+			<interceptor-ref name="defaultStack">
+        		<param name="validation.excludeMethods">execute</param>
+    		</interceptor-ref>
             <result name="success" type="tiles">student_enroll_finalize</result>
+            <result name="input" type="tiles">student_enroll</result>
 		</action>
 		
 		<action name="academicRecord" class="student.controller.StudentRetrieveAction" method="execute">

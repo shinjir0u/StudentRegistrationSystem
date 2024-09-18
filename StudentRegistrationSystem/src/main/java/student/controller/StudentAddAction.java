@@ -26,8 +26,17 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 	}
 	
 	public String addStudentToHashMap() {
+		String rollnoPattern = "^[IVXLCDM]+\\.[A-Z]{1,4}-(?:[1-9]\\d?)$";
+		data = studentDAO.setDataValues();
 		students = studentDAO.loadFile();
- 		students.put(studentDAO.generateHashKey(students), setStudentValuesFromRequest());
+		student = setStudentValuesFromRequest();
+		
+		if(student.getRollNo().isBlank() || Pattern.compile(rollnoPattern).matcher(student.getRollNo()).matches() == false) {
+			addFieldError("studentRollNo", "Invalid Roll No");
+			return INPUT;
+		}
+		
+ 		students.put(studentDAO.generateHashKey(students), student);
 		studentDAO.saveFile(students);
 		return SUCCESS;
 	}
