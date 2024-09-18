@@ -98,9 +98,9 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 				student.setMatriculation(setMatriculationFromDatabase());
 				student.setGuardian(setGuardianFromDatabase());
 				student.setAcademicRecords(getAcademicRecordsFromDatabase());
-				student.setAcademicYear(student.getAcademicRecords().getLast().getAcademicYear());
+				student.setAcademicYear(student.getAcademicRecords().get(student.getAcademicRecords().size() - 1).getAcademicYear());
 				
-				String currentRollNo = student.getAcademicRecords().getLast().getRollNo();
+				String currentRollNo = student.getAcademicRecords().get(student.getAcademicRecords().size() - 1).getRollNo();
 				student.setCurrentYear(calculateCurrentYearFromRollNo(currentRollNo));
 				student.setRollNo(currentRollNo);
 				students.put(studentDAO.generateHashKey(students), student);
@@ -167,9 +167,9 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 				student.setMatriculation(setMatriculationFromDatabase());
 				student.setGuardian(setGuardianFromDatabase());
 				student.setAcademicRecords(getAcademicRecordsFromDatabase());
-				student.setAcademicYear(student.getAcademicRecords().getLast().getAcademicYear());
+				student.setAcademicYear(student.getAcademicRecords().get(student.getAcademicRecords().size() - 1).getAcademicYear());
 				
-				String currentRollNo = student.getAcademicRecords().getLast().getRollNo();
+				String currentRollNo = student.getAcademicRecords().get(student.getAcademicRecords().size() - 1).getRollNo();
 				student.setCurrentYear(calculateCurrentYearFromRollNo(currentRollNo));
 				student.setRollNo(currentRollNo);
 			}
