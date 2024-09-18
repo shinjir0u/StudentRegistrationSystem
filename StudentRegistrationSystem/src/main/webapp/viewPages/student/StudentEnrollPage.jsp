@@ -198,15 +198,7 @@
 		            </s:div>
 
         		    <s:div class="form-group">
-        		    	<s:select name="studentDateOfBirthYear" list="data[16].getDataMap()" label="Date of Birth" value="data[16].getIdByValue(student.dateOfBirth.year)"
-        		        		listKey="key" listValue="value" disabled="true" />
-        		        <s:hidden name="studentDateOfBirthYear" value="%{student.dateOfBirth.year}"></s:hidden>
-            		    <s:select name="studentDateOfBirthMonth" list="data[15].getDataMap()" value="data[15].getIdByValue(student.dateOfBirth.month)"
-        		        		listKey="key" listValue="value" disabled="true" />
-        		        <s:hidden name="studentDateOfBirthMonth" value="%{student.dateOfBirth.month}"></s:hidden>
-         		       	<s:select name="studentDateOfBirthDay" list="data[14].getDataMap()" value="data[14].getIdByValue(student.dateOfBirth.day)"
-        		        		listKey="key" listValue="value" disabled="true" />
-        		        <s:hidden name="studentDateOfBirthDay" value="%{student.dateOfBirth.day}"></s:hidden>
+        		    	<s:textfield name="studentDateOfBirth" label="Date of Birth" id="my_date_picker_1" required="true" value="%{student.dateOfBirth}"></s:textfield>
          		   	</s:div>
 		
 		            <s:div class="form-group">
@@ -268,12 +260,7 @@
 		            </s:div>
 		            
 		             <s:div class="form-group">
-            		    <s:select name="guardianDateOfBirthYear" list="data[16].getDataMap()" label="Date of Birth" value="data[16].getIdByValue(student.guardian.dateOfBirth.year)"
-        		        		listKey="key" listValue="value"  />
-            		    <s:select name="guardianDateOfBirthMonth" list="data[15].getDataMap()" value="data[15].getIdByValue(student.guardian.dateOfBirth.month)"
-        		        		listKey="key" listValue="value"   />
-         		     	<s:select name="guardianDateOfBirthDay" list="data[14].getDataMap()" value="data[14].getIdByValue(student.guardian.dateOfBirth.day)"
-        		        		listKey="key" listValue="value"  />  	
+            		    <s:textfield name="guardianDateOfBirth" label="Date of Birth" id="my_date_picker_2" required="true" value="%{student.guardian.dateOfBirth}"></s:textfield>	
          		   	</s:div>
          		   	
          		   	<s:div class="form-group">
@@ -359,6 +346,24 @@
             </div>
         </div>
     </div>
+    <script>
+        $(function() {
+            $( "#my_date_picker_1" ).datepicker({
+                changeYear:true,
+                dateFormat:'yy-mm-dd',
+                defaultDate:"15-08-2000"
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            $( "#my_date_picker_2" ).datepicker({
+                changeYear:true,
+                dateFormat:'yy-mm-dd',
+                defaultDate:"15-08-2000"
+            });
+        });
+    </script>
 </body>
 </html>
 

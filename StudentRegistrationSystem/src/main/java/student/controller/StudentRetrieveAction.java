@@ -28,7 +28,7 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 	private Student student;
 	private HttpServletRequest request;
 	private HashMap<Integer, Data> data;
-	private int order;
+	private String order;
 	private Map<String, Object> session;
 	
 	public String execute() {
@@ -77,12 +77,11 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 		try {
 			while (resultSet.next()) {
 				student = new Student();
-				String[] dateOfBirth = getDateOfBirthFromDatabase(resultSet.getString("date_of_birth"));
 				String[] nrc = getNrcFromDatabase(resultSet.getString("nrc"));
 				
 				student.setId(resultSet.getInt("student_id"));
 				student.setName(resultSet.getString("student_name"));
-				student.setDateOfBirth(new DateOfBirth(dateOfBirth[2], dateOfBirth[1], dateOfBirth[0]));
+				student.setDateOfBirth(resultSet.getString("date_of_birth"));
 				student.setPhoneNumber(resultSet.getString("phone_number"));
 				student.setEmail(resultSet.getString("email"));
 				student.setTownship(resultSet.getString("township_name"));
@@ -129,6 +128,7 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 	
 	public String retrieveStudentsFromHashMap() {
 		students = studentDAO.loadFile();
+		order = request.getParameter("order");
 		students.remove(order);
 		return SUCCESS;
 	}
@@ -146,12 +146,11 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 		
 		try {
 			while (resultSet.next()) {
-				String[] dateOfBirth = getDateOfBirthFromDatabase(resultSet.getString("date_of_birth"));
 				String[] nrc = getNrcFromDatabase(resultSet.getString("nrc"));
 				
 				student.setId(resultSet.getInt("student_id"));
 				student.setName(resultSet.getString("student_name"));
-				student.setDateOfBirth(new DateOfBirth(dateOfBirth[2], dateOfBirth[1], dateOfBirth[0]));
+				student.setDateOfBirth(resultSet.getString("date_of_birth"));
 				student.setPhoneNumber(resultSet.getString("phone_number"));
 				student.setEmail(resultSet.getString("email"));
 				student.setTownship(resultSet.getString("township_name"));
@@ -212,11 +211,11 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 		
 		try {
 			while (resultSet.next()) {
-				String[] dateOfBirth = getDateOfBirthFromDatabase(resultSet.getString("date_of_birth"));
 				String[] nrc = getNrcFromDatabase(resultSet.getString("nrc"));
+				
 				guardian.setId(resultSet.getInt("relative_id"));
 				guardian.setName(resultSet.getString("relative_name"));
-				guardian.setDateOfBirth(new DateOfBirth(dateOfBirth[2],	dateOfBirth[1],	dateOfBirth[0]));
+				guardian.setDateOfBirth(resultSet.getString("date_of_birth"));
 				guardian.setPhoneNumber(resultSet.getString("phone_number"));
 				guardian.setEmail(resultSet.getString("email"));
 				guardian.setTownship(resultSet.getString("township_name"));
@@ -254,10 +253,6 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 		return data.get(17).getValueById(data.get(18).getIdByValue(rollNoCode));
 	}
 	
-	private String[] getDateOfBirthFromDatabase(String databaseDate) {
-		return databaseDate.split("-"); 
-	}
-	
 	private String[] getNrcFromDatabase(String databaseNrc) {
 		return databaseNrc.split("[\\/ ( ) ]");
 	}
@@ -286,11 +281,11 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 		return data;
 	}
 	
-	public int getOrder() {
+	public String getOrder() {
 		return order;
 	}
 
-	public void setOrder(int order) {
+	public void setOrder(String order) {
 		this.order = order;
 	}
 

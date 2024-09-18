@@ -18,6 +18,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 	private StudentDAO studentDAO = new StudentDAO();
 	private HashMap<Integer, Data> data;
 	private Student student;
+	private String action;
 
 	public String execute() {
 		data = studentDAO.setDataValues();
@@ -37,8 +38,6 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		Guardian guardian = student.getGuardian();
 		Nrc studentNrc = student.getNrc();
 		Nrc guardianNrc = guardian.getNrc();
-		DateOfBirth studentDateOfBirth = student.getDateOfBirth();
-		DateOfBirth guardianDateOfBirth = guardian.getDateOfBirth();
 		Matriculation matriculation = setMatriculationValuesFromRequest();
 		List<MatriculationSubject> subjects = matriculation.getSubjects();
 		String subject = "";
@@ -124,16 +123,8 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			addFieldError("studentEmail", "Invalid Email");
 			return INPUT;
 		}
-		if(student.getDateOfBirth().getYear().equals("0")) {
+		if(student.getDateOfBirth().equals("15-08-2000")) {
 			addFieldError("studentDateOfBirthYear", "Invalid Birth Year");
-			return INPUT;
-		}
-		if(student.getDateOfBirth().getMonth().equals("0")) {
-			addFieldError("studentDateOfBirthMonth", "Invalid Birth Month");
-			return INPUT;
-		}
-		if(student.getDateOfBirth().getDay().equals("0")) {
-			addFieldError("studentDateOfBirthDay", "Invalid Birth Day");
 			return INPUT;
 		}
 		if(student.getReligion().equals("0")) {
@@ -188,16 +179,8 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			addFieldError("guradianAddress", "Invalid Address");
 			return INPUT;
 		}
-		if(studentDateOfBirth.getYear().equals("0")) {
+		if(guardian.getDateOfBirth().equals("15-08-2000")) {
 			addFieldError("guardianDateOfBirthYear", "Invalid Birth Year");
-			return INPUT;
-		}
-		if(studentDateOfBirth.getMonth().equals("0")) {
-			addFieldError("guardianDateOfBirthMonth", "Invalid Birth Month");
-			return INPUT;
-		}
-		if(studentDateOfBirth.getDay().equals("0")) {
-			addFieldError("guardianDateOfBirthDay", "Invalid Birth Day");
 			return INPUT;
 		}
 		if(student.getReligion().equals("0")) {
@@ -267,7 +250,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 					+ "" + student.getMajor() + ", "
 					+ "" + student.getType() + ", "
 					+ "'" + student.getName() + "', "
-					+ "'" + studentDateOfBirth.getYear() + "-" + studentDateOfBirth.getMonth() + "-" + studentDateOfBirth.getDay() + "', "
+					+ "'" + student.getDateOfBirth() + "', "
 					+ "'" + student.getPhoneNumber() + "', "
 					+ "'" + student.getEmail() + "', "
 					+ "'" + student.getAddress() + "', "
@@ -303,7 +286,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 					+ "'" + guardian.getPhoneNumber() + "', "
 					+ "'" + guardian.getEmail() + "', "
 					+ "'" + guardian.getAddress() + "', "
-					+ "'" + guardianDateOfBirth.getYear() + "-" + guardianDateOfBirth.getMonth() + "-" + guardianDateOfBirth.getDay() 
+					+ "'" + guardian.getDateOfBirth() 
 					+ "') RETURNING relative_id)"
 				+ " INSERT INTO type_of_relation (relative_id, relative_type_id) VALUES ("
 					+ "(SELECT relative_id FROM new_relative),"
@@ -316,42 +299,41 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		Student student = setStudentValuesFromRequest();
 		Guardian guardian = student.getGuardian();
 		Nrc guardianNrc = guardian.getNrc();
-		DateOfBirth studentDateOfBirth = student.getDateOfBirth();
-		DateOfBirth guardianDateOfBirth = guardian.getDateOfBirth();
-
 		
-		String sql = "WITH new_student AS ("
-					+ " UPDATE students SET "
-					+ "township = " + new Township().getIdByValue(student.getTownship()) + ", "
-					+ "address = '" + student.getAddress() + "', "
-					+ "phone_number = '" + student.getPhoneNumber() + "',"
-					+ "email = '" + student.getEmail() + "'"
-					+ "WHERE student_card_id = '" + student.getCardId() 
-					+"' RETURNING student_id),"
-				+ "	new_relative AS ( "
-					+ " UPDATE relatives SET "
-					+ " relative_name = '" + guardian.getName() + "', "
-					+ " phone_number = '" + guardian.getPhoneNumber() + "', "
-					+ " email = '" + guardian.getEmail() + "', "
-					+ " township = " + new Township().getIdByValue(guardian.getTownship()) + ", "
-					+ " address = '" + guardian.getAddress() + "', "
-					+ " nationality = " + new Nationality().getIdByValue(guardian.getNationality()) + ", "
-					+ " religion = " + new Religion().getIdByValue(guardian.getReligion()) + ", "
-					+ " date_of_birth = '" + guardianDateOfBirth.getYear() + "-" + guardianDateOfBirth.getMonth() + "-" + guardianDateOfBirth.getDay() + "' " 
-					+ " WHERE student_id = (SELECT student_id FROM new_student)"
-					+ " RETURNING nrc),"
-				+ " guardian_nrc AS ("
-					+ " UPDATE nrc SET"
-					+ " state = " + new NrcState().getIdByValue(guardianNrc.getTownship()) + ", "
-					+ " nationality = " + new NrcNationality().getIdByValue(guardianNrc.getNationality()) + ", "
-					+ " number = '" + guardianNrc.getNumber() + "'"
-					+ " WHERE nrc_id = (SELECT nrc FROM new_relative)"
-					+ ")"
-				+ " INSERT INTO academic_record VALUES ("
-				+ " (SELECT student_id FROM new_student), "
-				+ new AcademicYear().getIdByValue(student.getAcademicYear()) + ", "
-				+ "'" + student.getRollNo() + "' );";
-		studentDAO.addStudentToDatabase(sql);		
+		if (("Accept").equals(action)) {
+			String sql = "WITH new_student AS ("
+						+ " UPDATE students SET "
+						+ "township = " + new Township().getIdByValue(student.getTownship()) + ", "
+						+ "address = '" + student.getAddress() + "', "
+						+ "phone_number = '" + student.getPhoneNumber() + "',"
+						+ "email = '" + student.getEmail() + "'"
+						+ "WHERE student_card_id = '" + student.getCardId() 
+						+"' RETURNING student_id),"
+					+ "	new_relative AS ( "
+						+ " UPDATE relatives SET "
+						+ " relative_name = '" + guardian.getName() + "', "
+						+ " phone_number = '" + guardian.getPhoneNumber() + "', "
+						+ " email = '" + guardian.getEmail() + "', "
+						+ " township = " + new Township().getIdByValue(guardian.getTownship()) + ", "
+						+ " address = '" + guardian.getAddress() + "', "
+						+ " nationality = " + new Nationality().getIdByValue(guardian.getNationality()) + ", "
+						+ " religion = " + new Religion().getIdByValue(guardian.getReligion()) + ", "
+						+ " date_of_birth = '" + guardian.getDateOfBirth() + "' " 
+						+ " WHERE student_id = (SELECT student_id FROM new_student)"
+						+ " RETURNING nrc),"
+					+ " guardian_nrc AS ("
+						+ " UPDATE nrc SET"
+						+ " state = " + new NrcState().getIdByValue(guardianNrc.getTownship()) + ", "
+						+ " nationality = " + new NrcNationality().getIdByValue(guardianNrc.getNationality()) + ", "
+						+ " number = '" + guardianNrc.getNumber() + "'"
+						+ " WHERE nrc_id = (SELECT nrc FROM new_relative)"
+						+ ")"
+					+ " INSERT INTO academic_record VALUES ("
+					+ " (SELECT student_id FROM new_student), "
+					+ new AcademicYear().getIdByValue(student.getAcademicYear()) + ", "
+					+ "'" + student.getRollNo() + "' );";
+			studentDAO.addStudentToDatabase(sql);		
+		}
 		return SUCCESS;
 	}
 	
@@ -375,11 +357,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		student.setGender(request.getParameter("studentGender"));
 		student.setPhoneNumber(request.getParameter("studentPhoneNumber"));
 		student.setEmail(request.getParameter("studentEmail"));
-		student.setDateOfBirth(new DateOfBirth(
-				request.getParameter("studentDateOfBirthDay"),
-				request.getParameter("studentDateOfBirthMonth"),
-				request.getParameter("studentDateOfBirthYear")
-				));
+		student.setDateOfBirth(request.getParameter("studentDateOfBirth"));
 		student.setReligion(request.getParameter("studentReligion"));
 		student.setNationality(request.getParameter("studentNationality"));
 		student.setGuardian(setGuardianValuesFromRequest());
@@ -403,11 +381,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		guardian.setTownship(request.getParameter("guardianTownship"));
 		guardian.setState(request.getParameter("guardianState"));
 		guardian.setAddress(request.getParameter("guardianAddress"));
-		guardian.setDateOfBirth(new DateOfBirth(
-				request.getParameter("guardianDateOfBirthDay"),
-				request.getParameter("guardianDateOfBirthMonth"),
-				request.getParameter("guardianDateOfBirthYear")
-				));
+		guardian.setDateOfBirth(request.getParameter("guardianDateOfBirth"));
 		guardian.setReligion(request.getParameter("guardianReligion"));
 		guardian.setNationality(request.getParameter("guardianNationality"));
 		return guardian;
@@ -417,7 +391,6 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		Matriculation matriculation = new Matriculation();
 		List<MatriculationSubject> subjects = new ArrayList<>();
 		String subject6 = request.getParameter("subject6");
-		MatriculationSubject matriculationSubject = new MatriculationSubject();
 		
 		matriculation.setPlace(request.getParameter("matriculationPlace"));
 		matriculation.setRollNo(request.getParameter("matriculationRollNo"));
@@ -461,6 +434,13 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 	public void setStudent(Student student) {
 		this.student = student;
 	}
-	
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
 	
 }

@@ -111,7 +111,7 @@
 							Date of birth
 						</td>
 						<td>
-							<s:property value="student.dateOfBirth.year + '-' + student.dateOfBirth.month + '-' + student.dateOfBirth.day"/>
+							<s:property value="student.dateOfBirth"/>
 						</td>
 					</tr>
 					<tr>

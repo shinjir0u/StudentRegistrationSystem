@@ -175,12 +175,7 @@
 
 					<!--  year error -->
         		    <s:div class="form-group">
-            		    <s:textfield readonly="true" name="date" label="Date of Birth" value="%{#studentDate.day + '-' 
-            																+ #studentDate.month + '-' 
-            																+  #studentDate.year}"/>
-            			<s:hidden name="studentDateOfBirthDay" value="%{#studentDate.day}"></s:hidden>
-		                <s:hidden name="studentDateOfBirthMonth" value="%{#studentDate.month}"></s:hidden>
-		                <s:hidden name="studentDateOfBirthYear" value="%{#studentDate.year}"></s:hidden>												
+            		    <s:textfield readonly="true" name="studentDateOfBirth" label="Date of Birth" value="%{student.dateOfBirth}"/>												
          		   	</s:div>
 		
 		            <s:div class="form-group">
@@ -233,12 +228,7 @@
 		            </s:div>
 
         		    <s:div class="form-group">
-            		    <s:textfield readonly="true" name="guardianDate" label="Date of Birth" value="%{#guardianDate.day + '-' 
-            		    																	+ #guardianDate.month + '-' 
-            		    																	+ #guardianDate.year}"/>
-         		   	<s:hidden name="guardianDateOfBirthDay" value="%{#guardianDate.day}"></s:hidden>
-		            <s:hidden name="guardianDateOfBirthMonth" value="%{#guardianDate.month}"></s:hidden>
-		            <s:hidden name="guardianDateOfBirthYear" value="%{#guardianDate.year}"></s:hidden>
+            		    <s:textfield readonly="true" name="guardianDate" label="Date of Birth" value="%{#guardianDate}"/>
          		   	</s:div>
 		
 		            <s:div class="form-group">

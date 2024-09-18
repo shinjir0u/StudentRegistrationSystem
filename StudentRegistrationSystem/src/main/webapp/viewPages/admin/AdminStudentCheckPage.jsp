@@ -99,7 +99,6 @@
             <div class="content">
                 <!-- This is where the content for each action would be displayed -->
                 <s:form action="updateStudent" method="post">
-                	<s:set value="student.dateOfBirth" var="studentDate"/>
                 	<s:set value="student.guardian" var="guardian"/>
                 	<s:set value="student.nrc" var="studentNrc"/>     
                 	<s:set value="#guardian.nrc" var="guardianNrc"/>        
@@ -168,14 +167,8 @@
                 		<s:textfield readonly="true" name="studentEmail" label="Email" value="%{student.email}"/>
 		            </s:div>
 
-					<!--  year error -->
         		    <s:div class="form-group">
-            		    <s:textfield readonly="true" name="date" label="Date of Birth" value="%{#studentDate.day + '-' 
-            																+ #studentDate.month + '-' 
-            																+  #studentDate.year}"/>
-            			<s:hidden name="studentDateOfBirthDay" value="%{#studentDate.day}"></s:hidden>
-		                <s:hidden name="studentDateOfBirthMonth" value="%{#studentDate.month}"></s:hidden>
-		                <s:hidden name="studentDateOfBirthYear" value="%{#studentDate.year}"></s:hidden>												
+            		    <s:textfield readonly="true" name="studentDateOfBirth" label="Date of Birth" value="%{student.dateOfBirth}"/>												
          		   	</s:div>
 		
 		            <s:div class="form-group">
@@ -228,12 +221,7 @@
 		            </s:div>
 
         		    <s:div class="form-group">
-            		    <s:textfield readonly="true" name="guardianDate" label="Date of Birth" value="%{data[14].getValueById(#guardianDate.day) + '-' 
-            		    																	+ data[15].getValueById(#guardianDate.month) + '-' 
-            		    																	+  data[16].getValueById(#guardianDate.year)}"/>
-         		   	<s:hidden name="guardianDateOfBirthDay" value="%{data[14].getValueById(#guardianDate.day)}"></s:hidden>
-		            <s:hidden name="guardianDateOfBirthMonth" value="%{data[15].getValueById(#guardianDate.month)}"></s:hidden>
-		            <s:hidden name="guardianDateOfBirthYear" value="%{data[16].getValueById(#guardianDate.year)}"></s:hidden>
+            		    <s:textfield readonly="true" name="guardianDateOfBirth" label="Date of Birth" value="%{#guardian.dateOfBirth}"/>
          		   	</s:div>
 		
 		            <s:div class="form-group">
@@ -253,8 +241,8 @@
 		           	 <s:hidden name="matriculationSubject4" value="1"/>
 		           	 <s:hidden name="matriculationSubject5" value="1"/>
 		           	 <s:hidden name="matriculationSubject6" value="1"/>
-		            
-		            <s:submit id="submit-btn" value="Submit"></s:submit>
+		            <s:submit name="action" value="Reject"></s:submit>
+		            <s:submit name="action" id="submit-btn" value="Accept"></s:submit>
 		        </s:form>
   
             </div>

@@ -196,7 +196,7 @@
 		            </s:div>
 
         		    <s:div class="form-group">
-        		    	<s:textfield name="studentBirthday" id="my_date_picker_1" label="Birthday" required="true"></s:textfield>
+        		    	<s:textfield name="studentDateOfBirthDay" id="my_date_picker_1" label="Date of Birth" required="true"></s:textfield>
          		   	</s:div>
 		
 		            <s:div class="form-group">
@@ -256,7 +256,7 @@
 		            </s:div>
 		            
 		             <s:div class="form-group">
-            		    <s:textfield name="guardianBirthday" label="Birthday" id="my_date_picker_2" required="true"></s:textfield>	
+            		    <s:textfield name="guardianDateOfBirth" label="Date of Birth" id="my_date_picker_2" required="true"></s:textfield>	
          		   	</s:div>
          		   	
          		   	<s:div class="form-group">
@@ -343,8 +343,8 @@
         $(function() {
             $( "#my_date_picker_1" ).datepicker({
                 changeYear:true,
-                dateFormat:'yy/mm/dd',
-                defaultDate:"15/08/2000"
+                dateFormat:'yy-mm-dd',
+                defaultDate:"15-08-2000"
             });
         });
     </script>
@@ -352,8 +352,8 @@
         $(function() {
             $( "#my_date_picker_2" ).datepicker({
                 changeYear:true,
-                dateFormat:'yy/mm/dd',
-                defaultDate:"15/08/2000"
+                dateFormat:'yy-mm-dd',
+                defaultDate:"15-08-2000"
             });
         });
     </script>
