@@ -37,8 +37,7 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 		return SUCCESS;
 	}
 	
-	//Change roll number code to .
-	public String retrieveFilteredStudentsFromDatabase() {
+	public String retrieveFilteredStudentsFromDatabase() {		
 		data = studentDAO.setDataValues();
 		String sql = "SELECT * FROM student_view WHERE";
 		String filteredStudentCardId = request.getParameter("studentCardId");
@@ -50,19 +49,19 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 		String filteredTownship = request.getParameter("studentTownship");
 
 		if (!filteredStudentCardId.isBlank())
-			sql += " student_card_id ='" + filteredStudentCardId + "' AND";
+			sql += " student_card_id LIKE '%" + filteredStudentCardId + "%' AND";
 		if (!filteredStudentName.isBlank())
-			sql += " student_name = '" + filteredStudentName + "' AND";
+			sql += " student_name LIKE '%" + filteredStudentName + "%' AND";
 		if (!filteredMajor.equals("0"))
 			sql += " major_name = '" + data.get(3).getValueById(filteredMajor)  + "' AND";
 		if (!filteredStudentType.equals("0"))
 			sql += " student_type_name = '" + data.get(11).getValueById(filteredStudentType) + "' AND";
 		if (!filteredCurrentYear.equals("0"))
-			sql += "OR student_id IN "
+			sql += " student_id IN "
 					+ "(SELECT a.student_id FROM students s, academic_record a "
 					+ "WHERE s.student_id=a.student_id AND "
 					+ "a.academic_year_id=(SELECT max(a2.academic_year_id) FROM academic_record a2 WHERE a.student_id=a2.student_id) "
-					+ "AND a.roll_no LIKE '" + data.get(18).getValueById(filteredCurrentYear) +"-%') AND";
+					+ "AND a.roll_no LIKE '" + data.get(18).getValueById(filteredCurrentYear) +".%') AND";
 		if (!filteredState.equals("0"))
 			sql += " state_name = '" + data.get(10).getValueById(filteredState) + "' AND";
 		if (!filteredTownship.equals("0"))
@@ -120,6 +119,11 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 		String orderString = request.getParameter("order");
 		orderNumber = (null==orderString || "".equals(orderString)) ? 0 : Integer.parseInt(orderString);
 		student = students.get(orderNumber);
+		return SUCCESS;
+	}
+	
+	public String backToRetrievedStudents() {
+		students = (HashMap<Integer, Student>) session.get("filteredStudents");
 		return SUCCESS;
 	}
 	
