@@ -8,5 +8,10 @@
 }
 
 .container {
-    width: 100%;
+    		display: flex; /* Use flexbox */
+    		justify-content: center; /* Horizontal centering */
+    		align-items: center; /* Vertical centering */
+}
+.panel{
+	width:50%;
 }

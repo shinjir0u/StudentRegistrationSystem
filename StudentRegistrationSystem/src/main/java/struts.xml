@@ -7,16 +7,12 @@
     	<result-types>
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
-<<<<<<< HEAD
-		  
-		<!-- for admin  -->
-=======
-		       
+		   
 		<action name="hashMapTest" class="student.controller.StudentRetrieveAction" method="retrieveStudentsFromHashMap">
 			<result>/hashMapSuccess.jsp</result>
 		</action>
+		
         <!-- for admin  -->
->>>>>>> 2d912f7fe7c7495e7c71d6de7b67dad8e1d8a521
         <action name="check" class="student.controller.StudentRetrieveAction" method="retrieveStudentsFromHashMap">
             <result name="success" type="tiles">check</result>
         </action>
@@ -29,7 +25,6 @@
         <action name="insert" class="student.controller.StudentAddAction" method="execute">
             <result name="success" type="tiles">insert</result>
         </action>
-        
         <action name="search" class="student.controller.AdminSearchAction" method="display">
             <result name="success" type="tiles">search</result>
         </action>

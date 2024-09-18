@@ -5,97 +5,11 @@
 <html>
 <head>
     <title>Admin Student Check Page</title>
-    <link type="text/css" rel="stylesheet" href="./css/baseTemplate.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .form-group {
-        	width: 80%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .form-group td {
-        	padding-top: 10px;
-        	padding-bottom: 10px;
-        }
-
-        label {
-        	width: 100%;
-            flex: 1;
-            line-height: 2;
-            margin-right: 10px;
-            font-weight: normal;
-        }
-
-        input[type="text"], input[type="email"], input[type="date"], select {
-            flex: 2;
-            width: 100%;
-            padding: 8px;
-           
-        }
-        
-        input:disabled {
-        	background-color: rgba(128, 128, 128, 0.3;
-        	border: none;
-        	opacity: 1;
-        	color: black;
-        }
-
-        input[type="radio"] {
-            margin-right: 10px;
-        }
-
-        .gender-options {
-            display: flex;
-            align-items: center;
-        }
-
-        .gender-options label {
-            font-weight: bold;
-            margin-right: 20px;
-        }
-
-        #submit-btn {
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        #submit-btn:hover {
-            background-color: #45a049;
-        }
-        
-        .section-title {
-        	font-weight: bold;
-        	font-size: 25px;
-            height: 50px;
-            margin-top: 20px;
-            margin-bottom: 5px;
-            color: #333;
-        }
-        
-        .section-title td {
-        	vertical-align: bottom;
-        	padding-bottom: 5px;
-        }
-    </style>
+    <link type="text/css" rel="stylesheet" href="./css/form.css">
 </head>
 <body>
+<h1>Home</h1>
      <div class="container">
-        <h1>Home</h1>
         <div class="panel">
             <div class="content">
                 <!-- This is where the content for each action would be displayed -->
@@ -255,7 +169,7 @@
 		           	 <s:hidden name="matriculationSubject5" value="1"/>
 		           	 <s:hidden name="matriculationSubject6" value="1"/>
 		            
-		            <s:submit id="submit-btn" value="Submit"></s:submit>
+		            <s:submit id="btn" value="Submit"></s:submit>
 		        </s:form>
   
             </div>
