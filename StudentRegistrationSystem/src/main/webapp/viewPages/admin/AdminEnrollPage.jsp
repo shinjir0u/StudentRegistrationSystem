@@ -116,6 +116,7 @@
     </style>
 </head>
 <body>
+<h1>Home</h1>
      <div class="container">
         <div class="panel">
             <div class="content">
@@ -320,7 +321,7 @@
 		           	</table>
 		           		
 		                
-		            <s:submit id="submit-btn" value="Submit"></s:submit>
+		            <s:submit id="btn" value="Submit"></s:submit>
 		        </s:form>
   
             </div>

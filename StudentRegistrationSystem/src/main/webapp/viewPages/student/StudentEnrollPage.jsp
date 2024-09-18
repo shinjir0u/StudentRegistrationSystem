@@ -6,6 +6,7 @@
 <head>
     <title>Student Enrollment Form</title>
     <link type="text/css" rel="stylesheet" href="./css/form.css">
+<<<<<<< HEAD
      <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
           rel='stylesheet'>
           
@@ -347,7 +348,7 @@
 		           	</table>
 		           		
 		                
-		            <s:submit id="submit-btn" value="Submit"></s:submit>
+		            <s:submit id="btn" value="Submit"></s:submit>
 		        </s:form>
   
             </div>
