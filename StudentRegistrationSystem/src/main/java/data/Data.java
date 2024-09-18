@@ -1,13 +1,17 @@
 package data;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import student.dao.StudentDAO;
+
 public abstract class Data {
-	int id;
+	String id;
 	String value;
-	HashMap<Integer, String> dataMap;
-	
+	HashMap<String, String> dataMap;
+	StudentDAO studentDAO = new StudentDAO();
 	
 	public Data() {
 		setData();
@@ -15,23 +19,36 @@ public abstract class Data {
 
 	public abstract void setData();
 	
-	public int getIdByValue(String value) {
-		for (Entry<Integer, String> data : dataMap.entrySet()) {
+	public String getIdByValue(String value) {
+		for (Entry<String, String> data : dataMap.entrySet()) {
 			if (data.getValue().equals(value))
 				return data.getKey();
 		}
-		return 0;
+		return "0";
 	}
 	
-	public String getValueById(int id) {
+	public HashMap<String, String> getDataMapFromDatabase(String sql, int idColumn, int valueColumn) {
+		ResultSet resultSet = studentDAO.retriveDataFromDatabase(sql);
+        try {
+			while (resultSet.next()) {
+				dataMap.put(resultSet.getString(idColumn), resultSet.getString(valueColumn));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return dataMap;
+	}
+	
+	public String getValueById(String id) {
 		return dataMap.get(id);
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -43,11 +60,11 @@ public abstract class Data {
 		this.value = value;
 	}
 
-	public HashMap<Integer, String> getDataMap() {
+	public HashMap<String, String> getDataMap() {
 		return dataMap;
 	}
 
-	public void setDataMap(HashMap<Integer, String> dataMap) {
+	public void setDataMap(HashMap<String, String> dataMap) {
 		this.dataMap = dataMap;
 	}
 }

@@ -2,6 +2,7 @@ package data;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 public class NrcStateNumber extends Data {
 
@@ -13,10 +14,10 @@ public class NrcStateNumber extends Data {
 	@Override
 	public void setData() {
 		// TODO Auto-generated method stub
-		dataMap = new HashMap<Integer, String>();
+		dataMap = new LinkedHashMap<>();
 		
-		for (int i = 1; i <= 14; i++) 
-			dataMap.put(i, i+"/");
+		for (int i = 0; i < 14; i++) 
+			dataMap.put(String.valueOf(i+1), (i+1)+"/");
 	}
 
 }

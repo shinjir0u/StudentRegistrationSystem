@@ -3,6 +3,7 @@ package data;
 import java.time.Year;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class DateOfBirthYear extends Data {
 
@@ -14,11 +15,11 @@ public class DateOfBirthYear extends Data {
 	@Override
 	public void setData() {
 		// TODO Auto-generated method stub
-		dataMap = new HashMap<>();
+		dataMap = new LinkedHashMap<>();
 		int currentYear = Year.now().getValue();
 		int acceptedYear = currentYear - 16;
         for (int year = 1960; year <= acceptedYear ; year++) {
-            dataMap.put(year, String.valueOf(year));
+            dataMap.put(String.valueOf(year), String.valueOf(year));
         }  
 	}
 }

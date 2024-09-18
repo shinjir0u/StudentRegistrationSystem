@@ -1,6 +1,7 @@
 package data;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class NrcNationality extends Data {
 
@@ -12,11 +13,11 @@ public class NrcNationality extends Data {
 	@Override
 	public void setData() {
 		// TODO Auto-generated method stub
-		dataMap = new HashMap<Integer, String>();
+		dataMap = new LinkedHashMap<>();
 		
-		dataMap.put(1, "(N)");
-		dataMap.put(2, "(E)");
-		dataMap.put(3, "(P)");
+		dataMap.put("1", "(N)");
+		dataMap.put("2", "(E)");
+		dataMap.put("3", "(P)");
 	}
 
 }

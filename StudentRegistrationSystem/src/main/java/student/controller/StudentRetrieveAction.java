@@ -4,39 +4,127 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 import data.Data;
-import data.MatriculationSubject;
+import data.MatriculationSubjectData;
 import data.Township;
 import student.dao.StudentDAO;
 import student.model.*;
 
-public class StudentRetrieveAction extends ActionSupport implements ServletRequestAware {
+public class StudentRetrieveAction extends ActionSupport implements SessionAware, ServletRequestAware {
 	private StudentDAO studentDAO = new StudentDAO();
 
 	private HashMap<Integer, Student> students;
 	private Student student;
 	private HttpServletRequest request;
 	private HashMap<Integer, Data> data;
-	private int order;
+	private int orderNumber;
+	private Map<String, Object> session;
 	
-	@Override
-	public String execute() throws Exception {
-		System.out.println("hello retrieve");
+	public String execute() {
+		return SUCCESS;
+	}
+	
+	//Change roll number code to .
+	public String retrieveFilteredStudentsFromDatabase() {
+		data = studentDAO.setDataValues();
+		String sql = "SELECT * FROM student_view WHERE";
+		String filteredStudentCardId = request.getParameter("studentCardId");
+		String filteredStudentName = request.getParameter("studentName");
+		String filteredMajor = request.getParameter("studentMajor");
+		String filteredStudentType = request.getParameter("studentType");
+		String filteredCurrentYear = request.getParameter("studentCurrentYear");
+		String filteredState = request.getParameter("studentState");
+		String filteredTownship = request.getParameter("studentTownship");
+
+		if (!filteredStudentCardId.isBlank())
+			sql += " student_card_id ='" + filteredStudentCardId + "' AND";
+		if (!filteredStudentName.isBlank())
+			sql += " student_name = '" + filteredStudentName + "' AND";
+		if (!filteredMajor.equals("0"))
+			sql += " major_name = '" + data.get(3).getValueById(filteredMajor)  + "' AND";
+		if (!filteredStudentType.equals("0"))
+			sql += " student_type_name = '" + data.get(11).getValueById(filteredStudentType) + "' AND";
+		if (!filteredCurrentYear.equals("0"))
+			sql += "OR student_id IN "
+					+ "(SELECT a.student_id FROM students s, academic_record a "
+					+ "WHERE s.student_id=a.student_id AND "
+					+ "a.academic_year_id=(SELECT max(a2.academic_year_id) FROM academic_record a2 WHERE a.student_id=a2.student_id) "
+					+ "AND a.roll_no LIKE '" + data.get(18).getValueById(filteredCurrentYear) +"-%') AND";
+		if (!filteredState.equals("0"))
+			sql += " state_name = '" + data.get(10).getValueById(filteredState) + "' AND";
+		if (!filteredTownship.equals("0"))
+			sql += " township_name = '" + data.get(12).getValueById(filteredTownship) + "'";
+		sql += ";";
+		sql = sql.replace("ANDOR", "OR");
+		sql = sql.replace("AND;", ";");
+		sql = sql.replace("WHERE;", ";");
+		sql = sql.replace("WHEREOR", "WHERE");
+		
+		students = new LinkedHashMap<>();
+		ResultSet resultSet = studentDAO.retriveDataFromDatabase(sql);
+		
+		try {
+			while (resultSet.next()) {
+				student = new Student();
+				String[] nrc = getNrcFromDatabase(resultSet.getString("nrc"));
+				
+				student.setId(resultSet.getInt("student_id"));
+				student.setName(resultSet.getString("student_name"));
+				student.setDateOfBirth(resultSet.getString("date_of_birth"));
+				student.setPhoneNumber(resultSet.getString("phone_number"));
+				student.setEmail(resultSet.getString("email"));
+				student.setTownship(resultSet.getString("township_name"));
+				student.setState(resultSet.getString("state_name"));
+				student.setAddress(resultSet.getString("address"));
+				student.setCardId(resultSet.getString("student_card_id"));
+				student.setPhoto(resultSet.getString("photo"));
+				student.setNrc(new Nrc(nrc[0]+"/", nrc[1], "(" + nrc[2] + ")", nrc[3]));
+				student.setGender(resultSet.getString("gender_name"));
+				student.setNationality(resultSet.getString("nationality_name"));
+				student.setReligion(resultSet.getString("religion_name"));
+				student.setMajor(resultSet.getString("major_name"));
+				student.setType(resultSet.getString("student_type_name"));
+				student.setMatriculation(setMatriculationFromDatabase());
+				student.setGuardian(setGuardianFromDatabase());
+				student.setAcademicRecords(getAcademicRecordsFromDatabase());
+				student.setAcademicYear(student.getAcademicRecords().getLast().getAcademicYear());
+				
+				String currentRollNo = student.getAcademicRecords().getLast().getRollNo();
+				student.setCurrentYear(calculateCurrentYearFromRollNo(currentRollNo));
+				student.setRollNo(currentRollNo);
+				students.put(studentDAO.generateHashKey(students), student);
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		session.put("filteredStudents", students);
 		return SUCCESS;
 	}
 
+	public String retrieveFilteredStudentFromDatabase() {
+		students= (HashMap<Integer, Student>) session.get("filteredStudents");	
+		String orderString = request.getParameter("order");
+		orderNumber = (null==orderString || "".equals(orderString)) ? 0 : Integer.parseInt(orderString);
+		student = students.get(orderNumber);
+		return SUCCESS;
+	}
+	
 	public String retrieveStudentFromDatabase() {
-		String studentCardId = request.getParameter("studentCardId");
-		String sql = "SELECT * FROM student_view WHERE student_card_id = '" + studentCardId + "';";
+		String sql = "SELECT * FROM student_view WHERE student_id = " + session.get("studentId") + ";";
 		data = studentDAO.setDataValues();
 		setStudentValuesFromDatabase(sql);
 		return SUCCESS;
@@ -50,9 +138,9 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 	public String retrieveStudentFromHashMap() {
 		students = studentDAO.loadFile();
 		data = studentDAO.setDataValues();
-		String number = request.getParameter("order");
-		student = students.get(order);
-		System.out.println(number);
+		String orderString = request.getParameter("order");
+		orderNumber = (null==orderString || "".equals(orderString)) ? 0 : Integer.parseInt(orderString);
+		student = students.get(orderNumber);
 		return SUCCESS;
 	}
 
@@ -62,12 +150,11 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 		
 		try {
 			while (resultSet.next()) {
-				String[] dateOfBirth = getDateOfBirthFromDatabase(resultSet.getString("date_of_birth"));
 				String[] nrc = getNrcFromDatabase(resultSet.getString("nrc"));
 				
 				student.setId(resultSet.getInt("student_id"));
 				student.setName(resultSet.getString("student_name"));
-				student.setDateOfBirth(new DateOfBirth(dateOfBirth[2], dateOfBirth[1], dateOfBirth[0]));
+				student.setDateOfBirth(resultSet.getString("date_of_birth"));
 				student.setPhoneNumber(resultSet.getString("phone_number"));
 				student.setEmail(resultSet.getString("email"));
 				student.setTownship(resultSet.getString("township_name"));
@@ -75,7 +162,7 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 				student.setAddress(resultSet.getString("address"));
 				student.setCardId(resultSet.getString("student_card_id"));
 				student.setPhoto(resultSet.getString("photo"));
-				student.setNrc(new Nrc(nrc[0], nrc[1], nrc[2], Integer.parseInt(nrc[3])));
+				student.setNrc(new Nrc(nrc[0]+"/", nrc[1], "(" + nrc[2] + ")", nrc[3]));
 				student.setGender(resultSet.getString("gender_name"));
 				student.setNationality(resultSet.getString("nationality_name"));
 				student.setReligion(resultSet.getString("religion_name"));
@@ -84,11 +171,11 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 				student.setMatriculation(setMatriculationFromDatabase());
 				student.setGuardian(setGuardianFromDatabase());
 				student.setAcademicRecords(getAcademicRecordsFromDatabase());
-				//student.setAcademicYear(student.getAcademicRecords().getLast().getAcademicYear());
+				student.setAcademicYear(student.getAcademicRecords().getLast().getAcademicYear());
 				
-				//String currentRollNo = student.getAcademicRecords().getLast().getRollNo();
-				//student.setCurrentYear(calculateCurrentYear(currentRollNo));
-				//student.setRollNo(currentRollNo);
+				String currentRollNo = student.getAcademicRecords().getLast().getRollNo();
+				student.setCurrentYear(calculateCurrentYearFromRollNo(currentRollNo));
+				student.setRollNo(currentRollNo);
 			}
 			
 		} catch (SQLException e) {
@@ -106,11 +193,11 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 		try {
 			while (resultSet.next()) {
 				list.add(new MatriculationSubject(
-						resultSet.getInt("subject_id"), 
+						resultSet.getString("subject_id"), 
 						resultSet.getString("subject_name"), 
-						resultSet.getInt("mark")));
+						resultSet.getString("mark")));
 				matriculation.setPlace(resultSet.getString("matriculation_place"));
-				matriculation.setYear(resultSet.getInt("matriculation_year"));
+				matriculation.setYear(resultSet.getString("matriculation_year"));
 				matriculation.setRollNo(resultSet.getString("matriculation_roll_no"));
 			}
 		matriculation.setSubjects(list);
@@ -128,17 +215,17 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 		
 		try {
 			while (resultSet.next()) {
-				String[] dateOfBirth = getDateOfBirthFromDatabase(resultSet.getString("date_of_birth"));
 				String[] nrc = getNrcFromDatabase(resultSet.getString("nrc"));
+				
 				guardian.setId(resultSet.getInt("relative_id"));
 				guardian.setName(resultSet.getString("relative_name"));
-				guardian.setDateOfBirth(new DateOfBirth(dateOfBirth[2],	dateOfBirth[1],	dateOfBirth[0]));
+				guardian.setDateOfBirth(resultSet.getString("date_of_birth"));
 				guardian.setPhoneNumber(resultSet.getString("phone_number"));
 				guardian.setEmail(resultSet.getString("email"));
 				guardian.setTownship(resultSet.getString("township_name"));
 				guardian.setState(resultSet.getString("state_name"));
 				guardian.setAddress(resultSet.getString("address"));
-				guardian.setNrc(new Nrc(nrc[0], nrc[1], nrc[2], Integer.parseInt(nrc[3])));
+				guardian.setNrc(new Nrc(nrc[0] + "/", nrc[1], "(" + nrc[2] + ")", nrc[3]));
 				guardian.setNationality(resultSet.getString("nationality_name"));
 				guardian.setReligion(resultSet.getString("religion_name"));
 				guardian.setType(resultSet.getString("relative_type"));
@@ -165,27 +252,15 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 		return academicRecords;
 	}
 	
-	private String calculateCurrentYear(String currentRollNo) {
-		Map<String, String> rollNumberYear = Map.of("I", "1st Year", "II", "2nd Year", "III", "3rd Year", "IV", 
-									"4th Year", "V", "5th Year", "VI", "Final Year");
-		String rollNoCode = currentRollNo.split("-")[0];
-		return rollNumberYear.get(rollNoCode);
-	}
-	
-	private String[] getDateOfBirthFromDatabase(String databaseDate) {
-		return databaseDate.split("-"); 
+	private String calculateCurrentYearFromRollNo(String currentRollNo) {
+		String rollNoCode = currentRollNo.toUpperCase().split("[\\.-]")[0];
+		return data.get(17).getValueById(data.get(18).getIdByValue(rollNoCode));
 	}
 	
 	private String[] getNrcFromDatabase(String databaseNrc) {
-		return databaseNrc.split("[\\/()]");
+		return databaseNrc.split("[\\/ ( ) ]");
 	}
-	
-	@Override
-	public void setServletRequest(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		this.request = request;
-	}
-	
+
 	public HashMap<Integer, Student> getStudents() {
 		return students;
 	}
@@ -202,14 +277,6 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 		this.student = student;
 	}
 
-//	public HashMap<Integer, HashMap<Integer, String>> getData() {
-//		return data;
-//	}
-//
-//	public void setData(HashMap<Integer, HashMap<Integer, String>> data) {
-//		this.data = data;
-//	}
-	
 	public void setData(HashMap<Integer, Data> data) {
 		this.data = data;
 	}
@@ -218,11 +285,24 @@ public class StudentRetrieveAction extends ActionSupport implements ServletReque
 		return data;
 	}
 	
-	public int getOrder() {
-		return order;
+	public int getOrderNumber() {
+		return orderNumber;
 	}
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
 	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		// TODO Auto-generated method stub
+		this.session = session;
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		this.request = request;
+	}
+	
 }

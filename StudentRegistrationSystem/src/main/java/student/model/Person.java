@@ -14,7 +14,7 @@ public class Person implements Serializable {
 	private String religion;
 	private String nationality;
 	private Nrc nrc;
-	private DateOfBirth dateOfBirth;
+	private String dateOfBirth;
 	private String type;
 	
 	public String getState() {
@@ -65,10 +65,10 @@ public class Person implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public DateOfBirth getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(DateOfBirth dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public String getReligion() {

@@ -2,19 +2,19 @@ package student.model;
 
 import java.io.Serializable;
 import java.util.List;
-import data.MatriculationSubject;
+import data.MatriculationSubjectData;
 
 public class Matriculation implements Serializable {
 	private String place;
 	private String rollNo;
-	private int year;
+	private String year;
 	private List<MatriculationSubject> subjects;
 
 	public Matriculation() {
 		super();
 	}
 
-	public Matriculation(String place, String rollNo, int year) {
+	public Matriculation(String place, String rollNo, String year) {
 		super();
 		this.place = place;
 		this.rollNo = rollNo;
@@ -39,10 +39,10 @@ public class Matriculation implements Serializable {
 	public void setRollNo(String rollNo) {
 		this.rollNo = rollNo;
 	}
-	public int getYear() {
+	public String getYear() {
 		return year;
 	}
-	public void setYear(int year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 }
