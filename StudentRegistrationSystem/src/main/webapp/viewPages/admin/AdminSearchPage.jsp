@@ -3,7 +3,7 @@
 	<title>Home</title>
 	<link rel="stylesheet" href="../../css/form.css">
 </head>   
-        	<h1>Enter fields you want to search</h1>
+<h1>Enter fields you want to search</h1>
         	<div class="container">
         	<div class="border">
         	<s:form action="filter" method="post">

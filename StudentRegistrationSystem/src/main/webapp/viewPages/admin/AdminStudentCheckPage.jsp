@@ -5,7 +5,8 @@
 <html>
 <head>
     <title>Admin Student Check Page</title>
-    <link type="text/css" rel="stylesheet" href="./css/baseTemplate.css">
+
+    <link type="text/css" rel="stylesheet" href="./css/form.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -91,10 +92,11 @@
         	padding-bottom: 5px;
         }
     </style>
+
 </head>
 <body>
+<h1>Home</h1>
      <div class="container">
-        <h1>Home</h1>
         <div class="panel">
             <div class="content">
                 <!-- This is where the content for each action would be displayed -->
@@ -243,6 +245,7 @@
 		           	 <s:hidden name="matriculationSubject6" value="1"/>
 		            <s:submit name="action" value="Reject"></s:submit>
 		            <s:submit name="action" id="submit-btn" value="Accept"></s:submit>
+
 		        </s:form>
   
             </div>
