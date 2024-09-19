@@ -29,7 +29,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		String rollnoPattern = "^[IVXLCDM]+\\.[A-Z]{1,4}-(?:[1-9]\\d?)$";
 		String emailPattern = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 		String phonenumberPattern = "^(\\+?959|09)\\d{7,10}$";
-		String namePattern = "[a-zA-Z]+";
+		String namePattern = "^([A-Z][a-z]+)(\\s[A-Z][a-z]+)*$";
 		String nrcnumberPattern = "^\\d{6}$";
 		data = studentDAO.setDataValues();
 		students = studentDAO.loadFile();
@@ -96,7 +96,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		}
 		subject = subject.substring(0, (subject.length()-1)) + "),";
 		
-		String namePattern = "[a-zA-Z]+";
+		String namePattern = "^([A-Z][a-z]+)(\\s[A-Z][a-z]+)*$";
 		String emailPattern = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 		String phonenumberPattern = "^(\\+?959|09)\\d{7,10}$";
 		String rollnoPattern = "^[IVXLCDM]+\\.[A-Z]{1,4}-(?:[1-9]\\d?)$";

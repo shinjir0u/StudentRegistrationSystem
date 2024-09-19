@@ -6,7 +6,6 @@
 <head>
     <title>Student Enrollment Form</title>
     <link type="text/css" rel="stylesheet" href="./css/form.css">
-<<<<<<< HEAD
      <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
           rel='stylesheet'>
           
@@ -338,16 +337,7 @@
 		          				<input readonly="readonly" type="text" name="matriculationSubject6" value="${student.matriculation.subjects[5].mark}">
 		          			</td>
 		          		</tr>
-		           	</table>		    
-		           	
-		           	<table>
-		           		<tr class="section-title"><td colspan="2">Document</td></tr>
-		           		<s:div class="form-group">
-		           			<s:file name="photo" label="Your photo"></s:file>
-		           		</s:div>
-		           	</table>
-		           		
-		                
+		           	</table>	                
 		            <s:submit id="btn" value="Submit"></s:submit>
 		        </s:form>
   
