@@ -195,7 +195,7 @@
 		            </s:div>
 
         		    <s:div class="form-group gender-options">
-            		    <s:radio onclick="return false" name="studentGender" label="Gender" list="#{'1':'Male', '2':'Female' }" value="data[2].getIdByValue(student.gender)"/>
+            		    <s:radio name="studentGender" label="Gender" list="#{'1':'Male', '2':'Female' }" value="data[2].getIdByValue(student.gender)"/>
            			</s:div>
 
            			<s:div class="form-group">

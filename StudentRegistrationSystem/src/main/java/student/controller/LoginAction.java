@@ -26,24 +26,50 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		this.password = password;
 	}
 	
+//	public String login() {
+//		StudentDAO studentDAO = new StudentDAO();
+//		String sql = "SELECT * FROM users;";
+//		ResultSet resultSet = studentDAO.retriveDataFromDatabase(sql);
+//		try {
+//			while (resultSet.next()) {
+//				if (resultSet.getString("email").equals(email) && 
+//						resultSet.getString("password").equals(password)) {
+//					studentId = resultSet.getString("student_id");
+//					session.put("studentId", studentId);
+//					return (resultSet.getInt("user_type_id") == 1) ? "admin_success" : "student_success";
+//				}
+//			}
+//		} catch (SQLException e) {
+//			throw new RuntimeException(e);
+//		}
+//		return INPUT;
+//	}
+	
 	public String login() {
+		int count = 0;
 		StudentDAO studentDAO = new StudentDAO();
 		String sql = "SELECT * FROM users;";
 		ResultSet resultSet = studentDAO.retriveDataFromDatabase(sql);
 		try {
 			while (resultSet.next()) {
-				if (resultSet.getString("email").equals(email) && 
-						resultSet.getString("password").equals(password)) {
-					studentId = resultSet.getString("student_id");
-					session.put("studentId", studentId);
-					return (resultSet.getInt("user_type_id") == 1) ? "admin_success" : "student_success";
+				if(resultSet.getString("email").equals(email)) {
+					count = 1;
+					if(resultSet.getString("password").equals(password)) {
+						studentId = resultSet.getString("student_id");
+						session.put("studentId", studentId);
+						return (resultSet.getInt("user_type_id") == 1) ? "admin_success" : "student_success";
+					}
 				}
+				
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new RuntimeException(e);
 		}
-		return INPUT;	 
+		if (count==1) 
+			addFieldError("password", "Invalid password");
+		else
+			addFieldError("email", "Invalid email and password");
+		return INPUT;
 	}
 	
 	public String logout() {
