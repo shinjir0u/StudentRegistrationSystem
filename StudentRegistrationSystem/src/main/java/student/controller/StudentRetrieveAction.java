@@ -7,9 +7,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -18,12 +15,15 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.opensymphony.xwork2.ActionSupport;
 
 import data.Data;
-import data.MatriculationSubjectData;
-import data.Township;
 import student.dao.StudentDAO;
 import student.model.*;
 
 public class StudentRetrieveAction extends ActionSupport implements SessionAware, ServletRequestAware {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4419148324897190958L;
+
 	private StudentDAO studentDAO = new StudentDAO();
 
 	private HashMap<Integer, Student> students;
@@ -114,6 +114,7 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 		return SUCCESS;
 	}
 
+	@SuppressWarnings("unchecked")
 	public String retrieveFilteredStudentFromDatabase() {
 		students= (HashMap<Integer, Student>) session.get("filteredStudents");	
 		String orderString = request.getParameter("order");
@@ -122,6 +123,7 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 		return SUCCESS;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public String backToRetrievedStudents() {
 		students = (HashMap<Integer, Student>) session.get("filteredStudents");
 		return SUCCESS;

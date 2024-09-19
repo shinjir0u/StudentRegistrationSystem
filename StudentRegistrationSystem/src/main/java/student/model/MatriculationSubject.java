@@ -3,6 +3,10 @@ package student.model;
 import java.io.Serializable;
 
 public class MatriculationSubject implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7053932698346383146L;
 	private String id;
 	private String name;
 	private String mark;

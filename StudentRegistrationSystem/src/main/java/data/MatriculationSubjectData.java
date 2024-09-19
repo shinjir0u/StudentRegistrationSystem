@@ -1,11 +1,15 @@
 package data;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class MatriculationSubjectData extends Data implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3635897292045632615L;
+
 	public MatriculationSubjectData() {
 		super();
 		// TODO Auto-generated constructor stub

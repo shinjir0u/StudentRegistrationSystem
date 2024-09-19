@@ -1,8 +1,6 @@
 package data;
 
 import java.time.Year;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class DateOfBirthYear extends Data {

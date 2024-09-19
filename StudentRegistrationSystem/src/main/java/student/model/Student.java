@@ -1,9 +1,12 @@
 package student.model;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class Student extends Person {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5408290763700851013L;
 	private String cardId;
 	private String rollNo;
 	private String major;

@@ -10,6 +10,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import student.dao.StudentDAO;
 
 public class LoginAction extends ActionSupport implements SessionAware {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5424682584955180140L;
 	private String email;
 	private String password;
 	private String studentId;

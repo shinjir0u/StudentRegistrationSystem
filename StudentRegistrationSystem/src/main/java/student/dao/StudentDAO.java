@@ -7,8 +7,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Map.Entry;
-
 import data.AcademicYear;
 import data.CurrentYear;
 import data.Data;
@@ -76,6 +74,7 @@ public class StudentDAO {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public HashMap<Integer, Student> loadFile() {
 		try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filename))) {
 			return (HashMap<Integer, Student>) objectInputStream.readObject();

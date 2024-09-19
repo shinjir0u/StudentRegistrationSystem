@@ -3,6 +3,10 @@ package student.model;
 import java.io.Serializable;
 
 public class Nrc implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5057959649678917063L;
 	private String stateNumber;
 	private String township;
 	private String nationality;

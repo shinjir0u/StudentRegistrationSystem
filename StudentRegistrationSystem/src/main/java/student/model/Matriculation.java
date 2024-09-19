@@ -2,9 +2,12 @@ package student.model;
 
 import java.io.Serializable;
 import java.util.List;
-import data.MatriculationSubjectData;
 
 public class Matriculation implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6821311794654776390L;
 	private String place;
 	private String rollNo;
 	private String year;

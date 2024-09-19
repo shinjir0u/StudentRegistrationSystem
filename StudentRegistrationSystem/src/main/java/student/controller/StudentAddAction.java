@@ -1,7 +1,6 @@
 package student.controller;
 
 import java.util.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +12,10 @@ import student.model.*;
 import student.model.MatriculationSubject;
 
 public class StudentAddAction extends ActionSupport implements ServletRequestAware {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6237100648886362326L;
 	private HashMap<Integer, Student> students;
 	private HttpServletRequest request;
 	private StudentDAO studentDAO = new StudentDAO();

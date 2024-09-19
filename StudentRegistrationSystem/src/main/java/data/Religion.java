@@ -1,6 +1,5 @@
 package data;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class Religion extends Data {
