@@ -436,7 +436,6 @@ window.onload = function() {
   							</td>
   						</tr>
   					</s:div>
->>>>>>> devel
 
             		<s:div class="form-group">
                 		<s:textarea name="studentAddress" label="Address" required="true" value="%{student.address}"/>
