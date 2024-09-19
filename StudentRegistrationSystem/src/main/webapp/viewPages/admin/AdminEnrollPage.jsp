@@ -356,7 +356,7 @@ window.onload = function() {
         <div class="panel">
             <div class="content">
                 <!-- This is where the content for each action would be displayed -->
-                <s:form action="adminEnroll" method="post">
+                <s:form action="adminEnroll" method="post" enctype="multipart/form-data">
        			    <s:div class="form-group">
             		    <s:select name="studentType" value="%{student.type}" label="Student Type to Insert" list="data[11].getDataMap()" 
             		    			listKey="key" listValue="value" headerKey="0" headerValue="select student type" required="true"/>
@@ -595,11 +595,9 @@ window.onload = function() {
 		           	<table>
 		           		<tr class="section-title"><td colspan="2">Document</td></tr>
 		           		<s:div class="form-group">
-		           			<s:file name="photo" label="Your photo"></s:file>
+		           			<s:file name="upload.image" label="Your photo"></s:file>
 		           		</s:div>
-		           	</table>
-		           		
-		                
+		           	</table>		                
 		            <s:submit id="btn" value="Submit"></s:submit>
 		        </s:form>
   

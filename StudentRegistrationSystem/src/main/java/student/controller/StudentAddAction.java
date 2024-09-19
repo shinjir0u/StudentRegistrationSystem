@@ -109,7 +109,6 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		String rollnoPattern = "^[IVXLCDM]+\\.[A-Z]{1,4}-(?:[1-9]\\d?)$";
 		String markPattern = "^(100|[1-9]?[0-9])$";
 		String cardidPattern = "^\\d{2}/\\d{5}$";
-		String yearPattern = "^(19[0-9]{2}|20[01][0-9]|2100)$";
 		String nrcnumberPattern = "^\\d{6}$";
 		
 		if(student.getType().equals("0")) {
@@ -256,7 +255,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			addFieldError("matriculationRollNo", "Invalid Roll No");
 			return INPUT;
 		}
-		if(student.getMatriculation().getYear().isBlank() || Pattern.compile(yearPattern).matcher(student.getMatriculation().getYear()).matches() == false) {
+		if(student.getMatriculation().getYear().isBlank()) {
 			addFieldError("matriculationYear", "Invalid Year");
 			return INPUT;
 		}
@@ -425,6 +424,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		student.setGuardian(setGuardianValuesFromRequest());
 		student.setMatriculation(setMatriculationValuesFromRequest());
 		student.setType(request.getParameter("studentType"));
+		student.setPhoto(request.getParameter("studentPhoto"));
 		return student;
 	}
 	
