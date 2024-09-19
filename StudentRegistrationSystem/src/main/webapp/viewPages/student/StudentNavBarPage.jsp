@@ -53,7 +53,7 @@
 					Help & Support
 					<span>></span>
 				</a>
-				<a href="#" class="sub-menu-link">
+				<a href="logout" class="sub-menu-link">
 					<img src="resources/images/logout.png">
 					Logout
 					<span>></span>

@@ -40,9 +40,6 @@
         <action name="showFilteredStudentDetails" class="student.controller.StudentRetrieveAction" method="retrieveFilteredStudentFromDatabase">
             <result name="success" type="tiles">filter_result_view_detail</result>
         </action>
-        <action name="backToFilteredResultPage" class="student.controller.StudentRetrieveAction" method="execute">
-            <result name="success" type="chain">filter</result>
-        </action>
         
        	<!-- for student -->
         <!-- Map this later -->
@@ -66,10 +63,13 @@
 		</action>
         
         <!-- for both admin and student -->
-        <action name="login" class="student.controller.LoginAction" method="execute">
+        <action name="login" class="student.controller.LoginAction" method="login">
             <result name="student_success" type="tiles" >student_home</result>
             <result name="admin_success" type="tiles">admin_home</result>
-            <result name="input">index.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="logout" class="student.controller.LoginAction" method="logout">
+        	<result name="success">/index.jsp</result>
         </action>
         
         <action name="forgotPassword" class="student.controller.TestAction" method="execute">

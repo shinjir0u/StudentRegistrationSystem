@@ -103,7 +103,6 @@
         <div class="panel">
             <div class="content">
                 <!-- This is where the content for each action would be displayed -->
-                <s:form action="backToFilteredResultPage" method="post">
                 	<s:set value="student.dateOfBirth" var="studentDate"/>
                 	<s:set value="student.guardian" var="guardian"/>
                 	<s:set value="student.nrc" var="studentNrc"/>     
@@ -119,6 +118,8 @@
 					<s:div class="form-group">
             		    <s:textfield readonly="true" name="studentCardId" label="Student Card ID" value="%{student.cardId}"/>
            			</s:div>
+           			
+           			<s:hidden name="studentType" value="%{student.type}"></s:hidden>
            			
 		            <s:div class="form-group">
 		                <s:textfield readonly="true" name="studentRollNo" label="Roll No" value="%{student.rollNo}"/>
@@ -277,11 +278,7 @@
 		          				<input readonly="readonly" type="text" name="matriculationSubject6" value="${student.matriculation.subjects[5].mark}">
 		          			</td>
 		          		</tr>
-		           	</table>
-		           
-		            <s:submit id="submit-btn" value="Back"></s:submit>
-		        </s:form>
-  
+		           	</table>	       
             </div>
         </div>
     </div>

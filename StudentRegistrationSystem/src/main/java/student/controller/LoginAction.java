@@ -26,8 +26,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		this.password = password;
 	}
 	
-	@Override
-	public String execute() {
+	public String login() {
 		StudentDAO studentDAO = new StudentDAO();
 		String sql = "SELECT * FROM users;";
 		ResultSet resultSet = studentDAO.retriveDataFromDatabase(sql);
@@ -45,6 +44,10 @@ public class LoginAction extends ActionSupport implements SessionAware {
 			throw new RuntimeException(e);
 		}
 		return INPUT;	 
+	}
+	
+	public String logout() {
+		return SUCCESS;
 	}
 	
 	@Override
