@@ -63,9 +63,9 @@ public class StudentRetrieveAction extends ActionSupport implements SessionAware
 					+ "a.academic_year_id=(SELECT max(a2.academic_year_id) FROM academic_record a2 WHERE a.student_id=a2.student_id) "
 					+ "AND a.roll_no LIKE '" + data.get(18).getValueById(filteredCurrentYear) +".%') AND";
 		if (!filteredState.equals("0"))
-			sql += " state_name = '" + data.get(10).getValueById(filteredState) + "' AND";
+			sql += " state_name = '" + filteredState + "' AND";
 		if (!filteredTownship.equals("0"))
-			sql += " township_name = '" + data.get(12).getValueById(filteredTownship) + "'";
+			sql += " township_name = '" + filteredTownship + "'";
 		sql += ";";
 		sql = sql.replace("ANDOR", "OR");
 		sql = sql.replace("AND;", ";");

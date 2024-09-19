@@ -42,7 +42,6 @@ public class StudentDAO {
 	private final String password = "pass";
 
 	private Connection connection;
-	
 	private Statement connectDatabase() {
 		try {
 			Class.forName("org.postgresql.Driver");

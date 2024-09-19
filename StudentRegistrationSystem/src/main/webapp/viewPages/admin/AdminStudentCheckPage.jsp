@@ -135,22 +135,22 @@
 	    		    <tr class="section-title"><td colspan="2">Personal Information</td></tr>
             
 		            <s:div class="form-group">
-		                <s:textfield readonly="true" label= "NRC" name="nrc" value="%{#studentNrc.stateNumber + '/' 
+		                <s:textfield readonly="true" label= "NRC" name="nrc" value="%{#studentNrc.stateNumber
 		                											+ #studentNrc.township 
-		           													+ '(' + #studentNrc.nationality + ')' 
+		           													+ #studentNrc.nationality 
 		           													+ #studentNrc.number}"/>
-		                <s:hidden name="studentrcStateNumber" value="%{#studentNrc.stateNumber}"></s:hidden>
+		                <s:hidden name="studentNrcStateNumber" value="%{#studentNrc.stateNumber}"></s:hidden>
 		                <s:hidden name="studentNrcTownship" value="%{#studentNrc.township}"></s:hidden>
 		                <s:hidden name="studentNrcNationality" value="%{#studentNrc.nationality}"></s:hidden>
 		                <s:hidden name="studentNrcNumber" value="%{#studentNrc.number}"></s:hidden>
 		            </s:div>
 
      		       	<s:div class="form-group">
-     		           	<s:textfield readonly="true" name="studentState" label="State" value="%{data[10].getValueById(student.state)}"/>
+     		           	<s:textfield readonly="true" name="studentState" label="State" value="%{student.state}"/>
         		    </s:div>
 
        			    <s:div class="form-group">
-            		    <s:textfield readonly="true" name="studentTownship" label="Township" value="%{data[12].getValueById(student.township)}"/>
+            		    <s:textfield readonly="true" name="studentTownship" label="Township" value="%{student.township}"/>
             		</s:div>
 
             		<s:div class="form-group">
@@ -192,22 +192,21 @@
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:textfield readonly="true" label= "Guardian NRC" name="guardianNrc" value="%{data[7].getValueById(#guardianNrc.stateNumber) + '/' 
-		                																		+ data[6].getValueById(#guardianNrc.township) 
-		                																		+ '(' + data[13].getValueById(#guardianNrc.nationality) + ')' 
+		                <s:textfield readonly="true" label= "Guardian NRC" name="guardianNrc" value="%{#guardianNrc.stateNumber + #guardianNrc.township
+		                																		+ data[13].getValueById(#guardianNrc.nationality)
 		                																		+ #guardianNrc.number}"/>
-		                <s:hidden name="guardianNrcStateNumber" value="%{data[7].getValueById(#guardianNrc.stateNumber)}"></s:hidden>
-		                <s:hidden name="guardianNrcTownship" value="%{data[6].getValueById(#guardianNrc.township)}"></s:hidden>
+		                <s:hidden name="guardianNrcStateNumber" value="%{#guardianNrc.stateNumber}"></s:hidden>
+		                <s:hidden name="guardianNrcTownship" value="%{#guardianNrc.township}"></s:hidden>
 		                <s:hidden name="guardianNrcNationality" value="%{data[13].getValueById(#guardianNrc.nationality)}"></s:hidden>
 		                <s:hidden name="guardianNrcNumber" value="%{#guardianNrc.number}"></s:hidden>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:textfield readonly="true" name="guardianState" label="Guardian State" value="%{data[10].getValueById(#guardian.state)}"/>
+		                <s:textfield readonly="true" name="guardianState" label="Guardian State" value="%{#guardian.state}"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:textfield readonly="true" name="guardianTownship" label="Guardian Township" value="%{data[12].getValueById(#guardian.township)}"/>
+		                <s:textfield readonly="true" name="guardianTownship" label="Guardian Township" value="%{#guardian.township}"/>
 		            </s:div> 
 		
 		            <s:div class="form-group">

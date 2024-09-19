@@ -220,17 +220,39 @@ window.onload = function() {
 	      stateSel.options[stateSel.options.length] = new Option(x, x);
 	    }
 
+	    // Preselect the state number if provided
+	    var preselectedState = stateSel.getAttribute('data-preselected');
+	    if (preselectedState) {
+	      stateSel.value = preselectedState;
+	      // Populate the township dropdown based on the preselected state
+	      populateTownships(stateSel, townshipSelects[index], preselectedState);
+	    }
+
 	    stateSel.onchange = function() {
-	      // Empty the corresponding township dropdown
-	      townshipSelects[index].length = 1;
-	      // Display correct values
-	      var z = stateObject[this.value];
-	      for (var i = 0; i < z.length; i++) {
-	        townshipSelects[index].options[townshipSelects[index].options.length] = new Option(z[i], z[i]);
-	      }
+	      populateTownships(this, townshipSelects[index], this.value);
 	    }
 	  });
-	  
+
+	  function populateTownships(stateSel, townshipSelect, stateValue) {
+	    // Empty the corresponding township dropdown
+	    townshipSelect.length = 1;
+
+	    // If there is a valid state, populate townships
+	    if (stateValue && stateObject[stateValue]) {
+	      var townships = stateObject[stateValue];
+	      for (var i = 0; i < townships.length; i++) {
+	        townshipSelect.options[townshipSelect.options.length] = new Option(townships[i], townships[i]);
+	      }
+
+	      // Preselect the township if provided after population
+	      var preselectedTownship = townshipSelect.getAttribute('data-preselected');
+	      if (preselectedTownship) {
+	        townshipSelect.value = preselectedTownship;
+	      }
+	    }
+	  };
+
+
 	  var stateNumberSelects = document.querySelectorAll(".stateNumber");
 	  var nrcTownshipSelects = document.querySelectorAll(".nrcTownship");
 
@@ -239,16 +261,37 @@ window.onload = function() {
 	      stateNumberSel.options[stateNumberSel.options.length] = new Option(x, x);
 	    }
 
+	    // Preselect the state number if provided
+	    var preselectedStateNumber = stateNumberSel.getAttribute('data-preselected');
+	    if (preselectedStateNumber) {
+	      stateNumberSel.value = preselectedStateNumber;
+	      // Populate the township dropdown based on the preselected state
+	      populateNrcTownships(stateNumberSel, nrcTownshipSelects[index], preselectedStateNumber);
+	    }
+
 	    stateNumberSel.onchange = function() {
-	      // Empty the corresponding nrcTownship dropdown
-	      nrcTownshipSelects[index].length = 1;
-	      // Display correct values
-	      var z = stateNumberObject[this.value];
-	      for (var i = 0; i < z.length; i++) {
-	        nrcTownshipSelects[index].options[nrcTownshipSelects[index].options.length] = new Option(z[i], z[i]);
-	      }
+	      populateNrcTownships(this, nrcTownshipSelects[index], this.value);
 	    }
 	  });
+
+	  function populateNrcTownships(stateNumberSel, nrcTownshipSelect, stateNumberValue) {
+	    // Empty the corresponding township dropdown
+	    nrcTownshipSelect.length = 1;
+
+	    // If there is a valid state, populate townships
+	    if (stateNumberValue && stateNumberObject[stateNumberValue]) {
+	      var nrcTownships = stateNumberObject[stateNumberValue];
+	      for (var i = 0; i < nrcTownships.length; i++) {
+	        nrcTownshipSelect.options[nrcTownshipSelect.options.length] = new Option(nrcTownships[i], nrcTownships[i]);
+	      }
+
+	      // Preselect the township if provided after population
+	      var preselectedNrcTownship = nrcTownshipSelect.getAttribute('data-preselected');
+	      if (preselectedNrcTownship) {
+	        nrcTownshipSelect.value = preselectedNrcTownship;
+	      }
+	    }
+	  };
 	}
 </script>
     
@@ -380,35 +423,35 @@ window.onload = function() {
 		           
        			    <s:div class="form-group">
             		    <s:select name="studentType" label="Student Type to Insert" list="data[11].getDataMap()" 
-            		    			listKey="key" listValue="value" required="true" value="data[11].getIdByValue(student.type)"/>
+            		    			listKey="key" listValue="value" required="true" value="data[11].calculateValueField(student.type)"/>
            			</s:div>
            			
 		            <s:div class="form-group">
-		                <s:select name="studentMajor" list="data[3].getDataMap()" label="Major" value="data[3].getIdByValue(student.major)"
+		                <s:select name="studentMajor" list="data[3].getDataMap()" label="Major" value="data[3].calculateValueField(student.major)"
 		                		listKey="key" listValue="value" disabled="true" />
 		                <s:hidden name="studentMajor" value="%{student.major}"></s:hidden>
 		            </s:div>
 
         		    <s:div class="form-group">
             		    <s:select name="studentCurrentYear" list="data[17].getDataMap()" label="Current Year"
-            		    		 value="data[17].getIdByValue(student.currentYear)" required="true"/>
+            		    		 value="data[17].calculateValueField(student.currentYear)" required="true"/>
       				</s:div>
 
         		    <s:div class="form-group">
-        		        <s:select name="studentAcademicYear" list="data[1].getDataMap()" label="Academic Year" value="data[1].getIdByValue(student.academicYear)"
+        		        <s:select name="studentAcademicYear" list="data[1].getDataMap()" label="Academic Year" value="data[1].calculateValueField(student.academicYear)"
         		        		listKey="key" listValue="value" required="true"/>
     		        </s:div>
 					 
 	    		    <tr class="section-title"><td colspan="2">Personal Information</td></tr>
             
         		    <s:div class="form-group">
-		                <s:select name="studentNrcStateNumber" list="data[7].getDataMap()" label= "NRC" value="data[7].getIdByValue(student.nrc.stateNumber)"
+		                <s:select name="studentNrcStateNumber" list="data[7].getDataMap()" label= "NRC" value="data[7].calculateValueField(student.nrc.stateNumber)"
         		        		listKey="key" listValue="value" disabled="true" />
         		        <s:hidden name="studentNrcStateNumber" value="%{student.nrc.stateNumber}"></s:hidden>       		      
-        		        <s:select name="studentNrcTownship" list="data[6].getDataMap()" value="data[6].getIdByValue(student.nrc.township)"
+        		        <s:select name="studentNrcTownship" list="data[6].getDataMap()" value="data[6].calculateValueField(student.nrc.township)"
         		        		listKey="key" listValue="value" disabled="true" />
-        		        <s:hidden name="studentNrcTownship" value="%{data[6].getIdByValue(student.nrc.township)}"></s:hidden>
-        		        <s:select name="studentNrcNationality" list="data[13].getDataMap()" value="data[13].getIdByValue(student.nrc.nationality)"
+        		        <s:hidden name="studentNrcTownship" value="%{student.nrc.township}"></s:hidden>
+        		        <s:select name="studentNrcNationality" list="data[13].getDataMap()" value="data[13].calculateValueField(student.nrc.nationality)"
         		        		listKey="key" listValue="value" disabled="true" />
         		        <s:hidden name="studentNrcNationality" value="%{student.nrc.nationality}"></s:hidden>
 		                <s:textfield readonly="true"  name="studentNrcNumber" value="%{student.nrc.number}"></s:textfield>
@@ -418,8 +461,8 @@ window.onload = function() {
 						<tr>
 							<td>State*:</td>
 							<td> 
-								<select name="studentState" class="state" required="required">
-   									 <option value="" selected="selected"><s:property value="student.state" /></option>
+								<select name="studentState" class="state" required="required" data-preselected="${student.state}">
+   									 <option value="" selected="selected">Select state</option>
   								</select>
   							</td>
   						</tr>
@@ -428,8 +471,8 @@ window.onload = function() {
   						<tr>
   							<td>Township*:</td>
   							<td>
-								 <select name="studentTownship" class="township" required="required">
-    								<option value="0" selected="selected">Please select state first</option>
+								 <select name="studentTownship" class="township" required="required" data-preselected="${student.township}">
+    								<option value="" selected="selected">Please select state first</option>
 								  </select>  							
   							</td>
   						</tr>
@@ -440,7 +483,7 @@ window.onload = function() {
 		            </s:div>
 
         		    <s:div class="form-group gender-options">
-            		    <s:radio name="studentGender" label="Gender" list="#{'1':'Male', '2':'Female' }" value="data[2].getIdByValue(student.gender)"/>
+            		    <s:radio onclick="return false" name="studentGender" label="Gender" list="#{'1':'Male', '2':'Female' }" value="%{data[2].calculateValueField(student.gender)}"/>
            			</s:div>
 
            			<s:div class="form-group">
@@ -456,13 +499,13 @@ window.onload = function() {
          		   	</s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="studentReligion" label="Religion" list="data[9].getDataMap()" value="data[9].getIdByValue(student.religion)"
+		                <s:select name="studentReligion" label="Religion" list="data[9].getDataMap()" value="data[9].calculateValueField(student.religion)"
         		        		listKey="key" listValue="value" disabled="true" />
         		        <s:hidden name="studentReligion" value="%{student.religion}"></s:hidden>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="studentNationality" label="Nationality" list="data[5].getDataMap()" value="data[5].getIdByValue(student.nationality)"
+		                <s:select name="studentNationality" label="Nationality" list="data[5].getDataMap()" value="data[5].calculateValueField(student.nationality)"
         		        		listKey="key" listValue="value" disabled="true" />
         		        <s:hidden name="studentNationality" value="%{student.nationality}"></s:hidden>
 		            </s:div>
@@ -474,7 +517,7 @@ window.onload = function() {
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="guardianType" label="Relative Type" list="data[8].getDataMap()" value="data[8].getIdByValue(student.guardian.type)"
+		                <s:select name="guardianType" label="Relative Type" list="data[8].getDataMap()" value="data[8].calculateValueField(student.guardian.type)"
         		        		listKey="key" listValue="value" required="true"/>
 		            </s:div>
 		
@@ -486,25 +529,50 @@ window.onload = function() {
                 		<s:textfield name="guardianEmail" label="Email" value="%{student.guardian.email}" required="true"/>
 		            </s:div>
 		
+					<s:div class="form-group">         
+						<tr>
+							<td>Nrc*:
+							<td> 
+								<select name="guardianNrcStateNumber" class="stateNumber" required="required" data-preselected="${student.guardian.nrc.stateNumber}">
+						    		<option value="" selected="selected">Select stateNumber</option>
+								</select>
+					</s:div>
+					<s:div class="form-group">
+						<tr>
+							<td>
+							<td> 
+								<select name="guardianNrcTownship" class="nrcTownship" required="required" data-preselected="${student.guardian.nrc.township}">
+								   	<option value="" selected="selected">Please select stateNumber first</option>
+							 	</select>
+					</s:div>
+					
 		            <s:div class="form-group">
-		                <s:select label= "NRC" name="guardianNrcStateNumber" list="data[7].getDataMap()" value="data[7].getIdByValue(student.guardian.nrc.stateNumber)"
-        		        		listKey="key" listValue="value" required="true"/>
-		                <s:select name="guardianNrcTownship" list="data[6].getDataMap()" value="data[6].getIdByValue(student.guardian.nrc.township)"
-        		        		listKey="key" listValue="value" required="true"/>
-		                <s:select name="guardianNrcNationality" list="data[13].getDataMap()" value="data[13].getIdByValue(student.guardian.nrc.nationality)"
+		                <s:select name="guardianNrcNationality" list="data[13].getDataMap()" value="data[13].calculateValueField(student.guardian.nrc.nationality)"
         		        		listKey="key" listValue="value" required="true"/>
 		                <s:textfield name="guardianNrcNumber" value="%{student.guardian.nrc.number}" required="true"></s:textfield>
 		            </s:div>
 		
-		            <s:div class="form-group">
-		                <s:select name="guardianState" label="State" list="data[10].getDataMap()" value="data[10].getIdByValue(student.guardian.state)"
-        		        		listKey="key" listValue="value" required="true"/>
-		            </s:div>
-		
-		            <s:div class="form-group">
-		                <s:select name="guardianTownship" label="Township" list="data[12].getDataMap()" value="data[12].getIdByValue(student.guardian.township)"
-        		        		listKey="key" listValue="value" required="true"/>
-		            </s:div>
+
+					<s:div class="form-group">
+						<tr>
+							<td>State*:</td>
+							<td> 
+								<select name="guardianState" class="state" required="required" data-preselected="${student.guardian.state}">
+   									 <option value="" selected="selected">Select state</option>
+  								</select>
+  							</td>
+  						</tr>
+  					</s:div>
+  					<s:div class="form-group">
+  						<tr>
+  							<td>Township*:</td>
+  							<td>
+								 <select name="guardianTownship" class="township" required="required" data-preselected="${student.guardian.township}">
+    								<option value="" selected="selected">Please select state first</option>
+								  </select>  							
+  							</td>
+  						</tr>
+  					</s:div>
 		            
 		
 		            <s:div class="form-group">
@@ -516,12 +584,12 @@ window.onload = function() {
          		   	</s:div>
          		   	
          		   	<s:div class="form-group">
-		                <s:select name="guardianReligion" label="Religion" list="data[9].getDataMap()" value="data[9].getIdByValue(student.guardian.religion)"
+		                <s:select name="guardianReligion" label="Religion" list="data[9].getDataMap()" value="data[9].calculateValueField(student.guardian.religion)"
         		        		listKey="key" listValue="value" required="true"/>
 		            </s:div>
 		
 		            <s:div class="form-group">
-		                <s:select name="guardianNationality" label="Nationality" list="data[5].getDataMap()" value="data[5].getIdByValue(student.guardian.nationality)"
+		                <s:select name="guardianNationality" label="Nationality" list="data[5].getDataMap()" value="data[5].calculateValueField(student.guardian.nationality)"
         		        		listKey="key" listValue="value" required="true"/>
 		            </s:div>
 		
