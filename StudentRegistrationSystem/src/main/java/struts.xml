@@ -57,7 +57,7 @@
 			<interceptor-ref name="defaultStack">
         		<param name="validation.excludeMethods">execute</param>
     		</interceptor-ref>
-            <result name="success" type="tiles">student_enroll_finalize</result>
+            <result name="success" type="tiles">student_home</result>
             <result name="input" type="tiles">student_enroll</result>
 		</action>
 		

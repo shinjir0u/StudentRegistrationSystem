@@ -43,6 +43,10 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 			addFieldError("studentAddress", "Invalid Address");
 			return INPUT;
 		}
+		if(null == student.getGender()) {
+			addFieldError("studentGender", "Invalid Gender");
+			return INPUT;
+		}
 		if(student.getPhoneNumber().isBlank() || Pattern.compile(phonenumberPattern).matcher(student.getPhoneNumber()).matches() == false) {
 			addFieldError("studentPhoneNumber", "Invalid Phone Number");
 			return INPUT;
