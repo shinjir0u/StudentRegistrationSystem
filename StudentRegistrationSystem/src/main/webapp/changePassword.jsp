@@ -10,12 +10,13 @@
 </head>
 <body>
 	<div class="container">
-		<s:form>
+		<s:form action="changePasswordFinalize">
 			<s:label>Change your password</s:label>
-			<s:textfield name="new_password" label="New password"/>
-			<s:textfield name="retype_new_password" label="Retype new password"/>
-			<s:submit value="Confirm" id="btn"/>
-			<s:submit value="Back" id="back-btn"/>
+			<s:hidden name="studentCardId" value="%{studentCardId}" />
+			<s:password name="newPassword" label="New password"/>
+			<s:password name="retypeNewPassword" label="Retype new password"/>
+			<s:submit name="action" value="Confirm" id="btn"/>
+			<s:submit name="action" value="Back" id="back-btn"/>
 		</s:form>
 	</div>
 </body>

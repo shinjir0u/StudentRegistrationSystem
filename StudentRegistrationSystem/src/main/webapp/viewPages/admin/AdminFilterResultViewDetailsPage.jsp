@@ -20,7 +20,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
-        }
+            margin-left: auto; margin-right: auto
+         }
         
         .form-group td {
         	padding-top: 10px;
@@ -101,7 +102,8 @@
 <body>
      <div class="container">
         <div class="panel">
-            <div class="content">
+            <div class="content" style="width: 400px; margin-left: auto; margin-right: auto">
+            	<s:form>
                 <!-- This is where the content for each action would be displayed -->
                 	<s:set value="student.dateOfBirth" var="studentDate"/>
                 	<s:set value="student.guardian" var="guardian"/>
@@ -278,7 +280,8 @@
 		          				<input readonly="readonly" type="text" name="matriculationSubject6" value="${student.matriculation.subjects[5].mark}">
 		          			</td>
 		          		</tr>
-		           	</table>	       
+		           	</table>	
+		         </s:form>       
             </div>
         </div>
     </div>

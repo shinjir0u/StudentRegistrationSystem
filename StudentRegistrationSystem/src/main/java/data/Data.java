@@ -40,6 +40,14 @@ public abstract class Data {
         return dataMap;
 	}
 	
+	public int calculateValueField(String value) {
+		try {
+			return Integer.parseInt(value);
+		} catch (NumberFormatException e) {
+			return Integer.parseInt(getIdByValue(value));
+		}
+	}
+	
 	public String getValueById(String id) {
 		return dataMap.get(id);
 	}

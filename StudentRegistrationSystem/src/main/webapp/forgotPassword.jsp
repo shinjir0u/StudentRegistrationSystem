@@ -13,9 +13,9 @@
 		<s:form action="changePassword">
 			<s:label>Enter your email and student card ID</s:label>
 			<s:textfield name="email" label="Email"/>
-			<s:textfield name="email" label="Student card id"/>
-			<s:submit value="Confirm" id="btn"/>
-			<s:submit value="Back" id="back-btn"/>
+			<s:textfield name="studentCardId" label="Student card id"/>
+			<s:submit name="action" value="Confirm" id="btn"/>
+			<s:submit name="action" value="Back" id="back-btn"/>
 		</s:form>
 	</div>
 </body>

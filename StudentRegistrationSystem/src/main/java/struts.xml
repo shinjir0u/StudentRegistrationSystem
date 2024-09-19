@@ -73,16 +73,24 @@
             <result name="admin_success" type="tiles">admin_home</result>
             <result name="input">/index.jsp</result>
         </action>
-        <action name="logout" class="student.controller.LoginAction" method="logout">
+        <action name="logout" class="student.controller.LoginAction" method="execute">
         	<result name="success">/index.jsp</result>
         </action>
         
-        <action name="forgotPassword" class="student.controller.TestAction" method="execute">
-            <result name="success">forgotPassword.jsp</result>
+        <action name="forgotPassword" class="student.controller.LoginAction" method="execute">
+            <result name="success">/forgotPassword.jsp</result>
         </action>
         
-        <action name="changePassword" class="student.controller.TestAction" method="execute">
-        	<result name="success">changePassword.jsp</result>
+        <action name="changePassword" class="student.controller.LoginAction" method="changePassword">
+        	<result name="success">/changePassword.jsp</result>
+        	<result name="back">/index.jsp</result>
+        	<result name="input">/forgotPassword.jsp</result>
+        </action>
+        
+        <action name="changePasswordFinalize" class="student.controller.LoginAction" method="changePasswordFinalize">
+        	<result name="success">/index.jsp</result>
+        	<result name="back">/forgotPassword.jsp</result>
+        	<result name="input">/changePassword.jsp</result>
         </action>
         
     </package>
