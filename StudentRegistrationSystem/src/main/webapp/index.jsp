@@ -36,13 +36,6 @@
 					</div>				
 		</div>
 		</div>
-		<div class="small-container">
-					<p>Don't have an account? 
-						<a href= "#" class="register-link"> 
-							Register
-						</a>
-					</p>
-		</div>
 
 </body>
 </html>
