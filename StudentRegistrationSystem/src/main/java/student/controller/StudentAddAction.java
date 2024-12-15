@@ -106,7 +106,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		String namePattern = "^([A-Z][a-z]+)(\\s[A-Z][a-z]+)*$";
 		String emailPattern = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 		String phonenumberPattern = "^(\\+?959|09)\\d{7,10}$";
-		String rollnoPattern = "^[IVXLCDM]+\\.[A-Z]{1,4}-(?:[1-9]\\d?)$";
+		String rollnoPattern = "^[IVXLCDM]+\\.[A-Za-z]{1,4}-(?:[1-9]\\d?)$";
 		String markPattern = "^(100|[1-9]?[0-9])$";
 		String cardidPattern = "^\\d{2}/\\d{5}$";
 		String nrcnumberPattern = "^\\d{6}$";
@@ -290,7 +290,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 		String sql = "WITH new_nrc AS ("
 					+ "  INSERT INTO nrc (state, nationality, number)  "
 					+ "  VALUES ( " 
-					+ "" + studentNrc.getTownship() + ", " 
+					+ "" + new NrcState().calculateValueField(studentNrc.getTownship()) + ", " 
 					+ "" + studentNrc.getNationality() + ", " 
 					+ "'" + studentNrc.getNumber() + "' "
 					+ ") RETURNING nrc_id ), "
@@ -302,7 +302,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 					+ "" + student.getGender() + ", "
 					+ "" + student.getNationality() + ", "
 					+ "" + student.getReligion() + ", "
-					+ "" + student.getTownship() + ", "
+					+ "" + new Township().calculateValueField(student.getTownship()) + ", "
 					+ "" + student.getMajor() + ", "
 					+ "" + student.getType() + ", "
 					+ "'" + student.getName() + "', "
@@ -321,10 +321,15 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 				+ " new_matriculation_marks AS ("
 					+ " INSERT INTO matriculation_marks(matriculation_id, subject_id, mark) VALUES "
 					+ subject
+				+ " new_academic_record AS ("
+					+ " INSERT INTO academic_record VALUES ("
+					+ "(SELECT student_id FROM new_student), "
+					+ student.getAcademicYear() + ", "
+					+ "'" + student.getRollNo() + "')),"
 				+ " guardian_nrc AS ("
 					+ " INSERT INTO nrc (state, nationality, number)"
 					+ " VALUES ("
-					+ "" + guardianNrc.getTownship() + ", "
+					+ "" + new NrcState().calculateValueField(guardianNrc.getTownship()) + ", "
 					+ "" + guardianNrc.getNationality() + ", "
 					+ "'" + guardianNrc.getNumber() + "' "
 					+ ") RETURNING nrc_id ),"
@@ -336,7 +341,7 @@ public class StudentAddAction extends ActionSupport implements ServletRequestAwa
 					+ " (SELECT nrc_id FROM guardian_nrc), "
 					+ "" + guardian.getNationality() + ", "
 					+ "" + guardian.getReligion() + ", "
-					+ "" + guardian.getTownship() + ", "
+					+ "" + new Township().calculateValueField(guardian.getTownship()) + ", "
 					+ " (SELECT student_id FROM new_student), "
 					+ "'" + guardian.getName() + "', "
 					+ "'" + guardian.getPhoneNumber() + "', "

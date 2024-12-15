@@ -211,6 +211,7 @@ var stateObject = {
   ]
 };
 
+
 window.onload = function() {
 	  var stateSelects = document.querySelectorAll(".state");
 	  var townshipSelects = document.querySelectorAll(".township");
@@ -220,17 +221,39 @@ window.onload = function() {
 	      stateSel.options[stateSel.options.length] = new Option(x, x);
 	    }
 
+	    // Preselect the state number if provided
+	    var preselectedState = stateSel.getAttribute('data-preselected');
+	    if (preselectedState) {
+	      stateSel.value = preselectedState;
+	      // Populate the township dropdown based on the preselected state
+	      populateTownships(stateSel, townshipSelects[index], preselectedState);
+	    }
+
 	    stateSel.onchange = function() {
-	      // Empty the corresponding township dropdown
-	      townshipSelects[index].length = 1;
-	      // Display correct values
-	      var z = stateObject[this.value];
-	      for (var i = 0; i < z.length; i++) {
-	        townshipSelects[index].options[townshipSelects[index].options.length] = new Option(z[i], z[i]);
-	      }
+	      populateTownships(this, townshipSelects[index], this.value);
 	    }
 	  });
-	  
+
+	  function populateTownships(stateSel, townshipSelect, stateValue) {
+	    // Empty the corresponding township dropdown
+	    townshipSelect.length = 1;
+
+	    // If there is a valid state, populate townships
+	    if (stateValue && stateObject[stateValue]) {
+	      var townships = stateObject[stateValue];
+	      for (var i = 0; i < townships.length; i++) {
+	        townshipSelect.options[townshipSelect.options.length] = new Option(townships[i], townships[i]);
+	      }
+
+	      // Preselect the township if provided after population
+	      var preselectedTownship = townshipSelect.getAttribute('data-preselected');
+	      if (preselectedTownship) {
+	        townshipSelect.value = preselectedTownship;
+	      }
+	    }
+	  };
+
+
 	  var stateNumberSelects = document.querySelectorAll(".stateNumber");
 	  var nrcTownshipSelects = document.querySelectorAll(".nrcTownship");
 
@@ -239,16 +262,37 @@ window.onload = function() {
 	      stateNumberSel.options[stateNumberSel.options.length] = new Option(x, x);
 	    }
 
+	    // Preselect the state number if provided
+	    var preselectedStateNumber = stateNumberSel.getAttribute('data-preselected');
+	    if (preselectedStateNumber) {
+	      stateNumberSel.value = preselectedStateNumber;
+	      // Populate the township dropdown based on the preselected state
+	      populateNrcTownships(stateNumberSel, nrcTownshipSelects[index], preselectedStateNumber);
+	    }
+
 	    stateNumberSel.onchange = function() {
-	      // Empty the corresponding nrcTownship dropdown
-	      nrcTownshipSelects[index].length = 1;
-	      // Display correct values
-	      var z = stateNumberObject[this.value];
-	      for (var i = 0; i < z.length; i++) {
-	        nrcTownshipSelects[index].options[nrcTownshipSelects[index].options.length] = new Option(z[i], z[i]);
-	      }
+	      populateNrcTownships(this, nrcTownshipSelects[index], this.value);
 	    }
 	  });
+
+	  function populateNrcTownships(stateNumberSel, nrcTownshipSelect, stateNumberValue) {
+	    // Empty the corresponding township dropdown
+	    nrcTownshipSelect.length = 1;
+
+	    // If there is a valid state, populate townships
+	    if (stateNumberValue && stateNumberObject[stateNumberValue]) {
+	      var nrcTownships = stateNumberObject[stateNumberValue];
+	      for (var i = 0; i < nrcTownships.length; i++) {
+	        nrcTownshipSelect.options[nrcTownshipSelect.options.length] = new Option(nrcTownships[i], nrcTownships[i]);
+	      }
+
+	      // Preselect the township if provided after population
+	      var preselectedNrcTownship = nrcTownshipSelect.getAttribute('data-preselected');
+	      if (preselectedNrcTownship) {
+	        nrcTownshipSelect.value = preselectedNrcTownship;
+	      }
+	    }
+	  };
 	}
 </script>
 
@@ -398,7 +442,7 @@ window.onload = function() {
 						<tr>
 							<td>Nrc*:
 							<td> 
-								<select name="studentNrcStateNumber" class="stateNumber" required="required">
+								<select name="studentNrcStateNumber" class="stateNumber" required="required" data-preselected="${student.nrc.stateNumber}">
 						    		<option value="" selected="selected">Select stateNumber</option>
 								</select>
 					</s:div>
@@ -406,21 +450,21 @@ window.onload = function() {
 						<tr>
 							<td>
 							<td> 
-								<select name="studentNrcTownship" class="nrcTownship" required="required">
+								<select name="studentNrcTownship" class="nrcTownship" required="required" data-preselected="${student.nrc.township}">
 								   	<option value="" selected="selected">Please select stateNumber first</option>
 							 	</select>
 					</s:div>
 					<s:div class="form-group">
-        		        <s:select name="studentNrcNationality" list="data[13].getDataMap()"        		 
-        		        		listKey="key" listValue="value" headerKey="0" headerValue="" required="true"/>
-		                <s:textfield name="studentNrcNumber" ></s:textfield>
+        		        <s:select name="studentNrcNationality" list="data[13].getDataMap()" value="%{student.nrc.nationality}"    		 
+        		        		listKey="key" headerKey="0" headerValue="" listValue="value" required="true" />
+		                <s:textfield name="studentNrcNumber" value="%{student.nrc.number}"></s:textfield>
        			    </s:div>
 
 					<s:div class="form-group">
 						<tr>
 							<td>State*:</td>
 							<td> 
-								<select name="studentState" class="state" required="required">
+								<select name="studentState" class="state" required="required" data-preselected="${student.state}">
    									 <option value="0" selected="selected">Select state</option>
   								</select>
   							</td>
@@ -430,7 +474,7 @@ window.onload = function() {
   						<tr>
   							<td>Township*:</td>
   							<td>
-								 <select name="studentTownship" class="township" required="required">
+								 <select name="studentTownship" class="township" required="required" data-preselected="${student.township}">
     								<option value="0" selected="selected">Please select state first</option>
 								  </select>  							
   							</td>
@@ -490,7 +534,7 @@ window.onload = function() {
 						<tr>
 							<td>Nrc*:
 							<td> 
-								<select name="guardianNrcStateNumber" class="stateNumber" required="required">
+								<select name="guardianNrcStateNumber" class="stateNumber" required="required" data-preselected="${student.guardian.nrc.stateNumber}">
 						    		<option value="" selected="selected">Select stateNumber</option>
 								</select>
 					</s:div>
@@ -498,7 +542,7 @@ window.onload = function() {
 						<tr>
 							<td>
 							<td> 
-								<select name="guardianNrcTownship" class="nrcTownship" required="required">
+								<select name="guardianNrcTownship" class="nrcTownship" required="required" data-preselected="${student.guardian.nrc.township}">
 								   	<option value="" selected="selected">Please select stateNumber first</option>
 							 	</select>
 					</s:div>
@@ -513,7 +557,7 @@ window.onload = function() {
 						<tr>
 							<td>State:</td>
 							<td> 
-								<select name="guardianState" class="state" required="required">
+								<select name="guardianState" class="state" required="required" data-preselected="${student.guardian.state}">
    									 <option value="" selected="selected">Select state</option>
   								</select>
   							</td>
@@ -523,7 +567,7 @@ window.onload = function() {
   						<tr>
   							<td>Township:</td>
   							<td>
-								 <select name="guardianTownship" class="township" required="required">
+								 <select name="guardianTownship" class="township" required="required" data-preselected="${student.guardian.township}">
     								<option value="" selected="selected">Please select state first</option>
 								  </select>  							
   							</td>
@@ -579,11 +623,11 @@ window.onload = function() {
 		          		<tr>
 		          			<td>
 		          				<select name="subject6" required value="${student.matriculation.subjects[5].id}">
-		          					<option value="0">Subject 6</option>
-		          					<option value="6">Biology</option>
-		          					<option value="7">Economics</option>
-		          					<option value="8">History</option>
-		          					<option value="9">Geography</option>
+		          					<option value="0"></option>
+		          					<option value="6" ${student.matriculation.subjects[5].id == '6' ? 'selected="selected"' : ''}>Biology</option>
+		          					<option value="7" ${student.matriculation.subjects[5].id == '7' ? 'selected="selected"' : ''}>Economics</option>
+		          					<option value="8" ${student.matriculation.subjects[5].id == '8' ? 'selected="selected"' : ''}>History</option>
+		          					<option value="9" ${student.matriculation.subjects[5].id == '9' ? 'selected="selected"' : ''}>Geography</option>
 		          				</select>
 		          			</td>
 		          			<td>

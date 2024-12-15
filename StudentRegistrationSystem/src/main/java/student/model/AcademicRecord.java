@@ -1,6 +1,8 @@
 package student.model;
 
-public class AcademicRecord {
+import java.io.Serializable;
+
+public class AcademicRecord implements Serializable {
 	private String academicYear;
 	private String rollNo;
 	
